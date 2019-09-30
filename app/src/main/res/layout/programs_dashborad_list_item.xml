@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="200dp"
+    android:translationZ="2dp"
+    android:layout_margin="@dimen/layout_small_margin"
+    app:cardCornerRadius="8dp"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/backLayout"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="130dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/image"
+            android:src="@drawable/program_test"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/name"
+            android:lines="2"
+            android:padding="@dimen/small_padding"
+            android:fontFamily="@font/defaultfont"
+            android:textColor="@color/textColorLight"
+            android:text="This is a test program name with some fucking text"
+            android:textSize="@dimen/text_small"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "232689982491",
+    "firebase_url": "https://quanutrition-f5d3f.firebaseio.com",
+    "project_id": "quanutrition-f5d3f",
+    "storage_bucket": "quanutrition-f5d3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232689982491:android:175bab3912cf96b353acbe",
+        "android_client_info": {
+          "package_name": "com.quanutrition.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232689982491-rrmitov1t70k494vjjnb4pb7j20svm6d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.quanutrition.app",
+            "certificate_hash": "15bc6609443316c1b62b02ada8ea1a4c7577cdc6"
+          }
+        },
+        {
+          "client_id": "232689982491-3c1h33ta80juqrjiu929g822c852jdo5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB137jIFQADAoYBPGTGcj-diK-5ITmHQ4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232689982491-3c1h33ta80juqrjiu929g822c852jdo5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

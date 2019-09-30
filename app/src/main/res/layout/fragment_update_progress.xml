@@ -1,0 +1,59 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/medium_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Progress"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/sourcesansproregular"
+            android:textSize="@dimen/text_large" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/medium_padding"
+            android:layout_marginBottom="@dimen/layout_medium_margin"
+            android:layout_marginTop="@dimen/layout_medium_margin">
+
+            <TextView
+                android:id="@+id/txtWeightUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your weight  "
+                android:fontFamily="@font/sourcesansproregular"
+                android:textSize="@dimen/text_medium" />
+
+            <EditText
+                android:id="@+id/editWeightUpdate"
+                android:layout_weight="0.5"
+                android:background="@drawable/edittext_background"
+                android:layout_width="0dp"
+                android:padding="@dimen/small_padding"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:fontFamily="@font/sourcesansproregular"
+                android:textColorHint="@color/overlay_dark_90"
+                android:textSize="@dimen/text_medium" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/submit"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/curvededge_button"
+            android:textColor="@color/textColorLight"
+            android:text="Save" />
+    </LinearLayout>
+
+</ScrollView>

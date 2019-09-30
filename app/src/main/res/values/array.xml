@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Food Specification Data -->
+
+    <string-array name="foodSpecidata">
+        <item>@string/veg</item>
+        <item>@string/non_veg</item>
+        <item>Eggitarian</item>
+        <item>Fishitarian</item>
+    </string-array>
+
+    <string-array name="helpAvailable">
+        <item>No</item>
+        <item>Cook</item>
+    </string-array>
+
+    <string-array name="culture">
+        <item>Indian</item>
+        <item>Islamic</item>
+        <item>Arab</item>
+        <item>American</item>
+        <item>Chinese</item>
+    </string-array>
+    <!--Weight Data -->
+
+    <string-array name="weightdata">
+        <item>@string/Kgs</item>
+        <item>@string/Pounds</item>
+    </string-array>
+    <!--Height Data -->
+
+    <string-array name="heightdata">
+        <item>@string/feets</item>
+        <item>@string/centimeter</item>
+    </string-array>
+    <!--Active Data -->
+
+    <string-array name="active">
+        <item>Sedentary\n(Little or no exercise)</item>
+        <item>Lightly Active\n(Little exercise / Sports 1&#8211;3 days a week)</item>
+        <item>Moderately Active\n(Moderate exercise / Sports 3&#8211;5 days a week)</item>
+        <item>Very Active\n(Hard exercise / Sports 6&#8211;7 days a week)</item>
+    </string-array>
+    <!--Active Data -->
+
+    <string-array name="eatout">
+        <item>@string/a1</item>
+        <item>@string/a2</item>
+        <item>@string/a3</item>
+        <item>@string/a4</item>
+        <item>@string/a5</item>
+        <item>@string/a6</item>
+        <item>@string/a7</item>
+        <item>@string/a8</item>
+        <item>@string/a9</item>
+        <item>@string/a10</item>
+    </string-array>
+    <!--Diet stats Data-->
+<string-array name="duration">
+    <item>@string/weekly</item>
+    <item>@string/monthly</item>
+</string-array>
+
+
+    <string-array name="BloodGroups">
+        <item>@string/APos</item>
+        <item>@string/ANeg</item>
+        <item>@string/BNeg</item>
+        <item>@string/BPos</item>
+        <item>@string/ABNeg</item>
+        <item>@string/ABPos</item>
+        <item>@string/ONeg</item>
+        <item>@string/oPos</item>
+    </string-array>
+
+    <string-array name="Howdidyou">
+        <item>@string/Google</item>
+        <item>@string/facebook</item>
+        <item>@string/Newspaper</item>
+        <item>@string/Friend</item>
+        <item>@string/Other</item>
+
+    </string-array>
+
+    <string-array name="appointmentType">
+        <item>@string/call</item>
+        <item>@string/inperson</item>
+    </string-array>
+
+    <string-array name="mealType">
+        <item>@string/earlymorning</item>
+        <item>@string/breakfast</item>
+        <item>@string/midmorning</item>
+        <item>@string/lunch</item>
+        <item>@string/evening</item>
+        <item>@string/lateevening</item>
+        <item>@string/dinner</item>
+        <item>@string/postdinner</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="goal">
+        <item>Weight Loss</item>
+        <item>Weight Gain</item>
+        <item>Weight Maintenance</item>
+    </string-array>
+
+    <string-array name="weightUnit">
+        <item>Kgs</item>
+        <item>Lbs</item>
+
+    </string-array>
+
+    <string-array name="height">
+        <item>2\'0\"</item>
+        <item>2\'1\"</item>
+        <item>2\'2\"</item>
+        <item>2\'3\"</item>
+        <item>2\'4\"</item>
+        <item>2\'5\"</item>
+        <item>2\'6\"</item>
+        <item>2\'7\"</item>
+        <item>2\'8\"</item>
+        <item>2\'9\"</item>
+        <item>2\'10\"</item>
+        <item>2\'11\"</item>
+        <item>3\'0\"</item>
+        <item>3\'1\"</item>
+        <item>3\'2\"</item>
+        <item>3\'3\"</item>
+        <item>3\'4\"</item>
+        <item>3\'5\"</item>
+        <item>3\'6\"</item>
+        <item>3\'7\"</item>
+        <item>3\'8\"</item>
+        <item>3\'9\"</item>
+        <item>3\'10\"</item>
+        <item>3\'11\"</item>
+        <item>4\'0\"</item>
+        <item>4\'1\"</item>
+        <item>4\'2\"</item>
+        <item>4\'3\"</item>
+        <item>4\'4\"</item>
+        <item>4\'5\"</item>
+        <item>4\'6\"</item>
+        <item>4\'7\"</item>
+        <item>4\'8\"</item>
+        <item>4\'9\"</item>
+        <item>4\'10\"</item>
+        <item>4\'11\"</item>
+        <item>5\'0\"</item>
+        <item>5\'1\"</item>
+        <item>5\'2\"</item>
+        <item>5\'3\"</item>
+        <item>5\'4\"</item>
+        <item>5\'5\"</item>
+        <item>5\'6\"</item>
+        <item>5\'7\"</item>
+        <item>5\'8\"</item>
+        <item>5\'9\"</item>
+        <item>5\'10\"</item>
+        <item>5\'11\"</item>
+        <item>6\'0\"</item>
+        <item>6\'1\"</item>
+        <item>6\'2\"</item>
+        <item>6\'3\"</item>
+        <item>6\'4\"</item>
+        <item>6\'5\"</item>
+        <item>6\'6\"</item>
+        <item>6\'7\"</item>
+        <item>6\'8\"</item>
+        <item>6\'9\"</item>
+        <item>6\'10\"</item>
+        <item>6\'11\"</item>
+        <item>7\'0\"</item>
+        <item>7\'1\"</item>
+        <item>7\'2\"</item>
+        <item>7\'3\"</item>
+        <item>7\'4\"</item>
+        <item>7\'5\"</item>
+        <item>7\'6\"</item>
+        <item>7\'7\"</item>
+        <item>7\'8\"</item>
+        <item>7\'9\"</item>
+        <item>7\'10\"</item>
+        <item>7\'11\"</item>
+        <item>8\'0\"</item>
+    </string-array>
+
+    <string-array name="diseases">
+        <item>Diabetes</item>
+        <item>Thyroid</item>
+        <item>PCOS</item>
+        <item>Cholesterol</item>
+        <item>Physical Injury</item>
+        <item>Hypertension</item>
+    </string-array>
+
+    <string-array name="nonVeg">
+        <item>Chicken</item>
+        <item>Beef</item>
+        <item>Lamb/Mutton</item>
+        <item>Seafood</item>
+        <item>Pork</item>
+    </string-array>
+
+    <string-array name="disease_duration">
+        <item>Less tha 1 month</item>
+        <item>1&#8211;3 months</item>
+        <item>3&#8211;6 months</item>
+        <item>6&#8211;12 months</item>
+        <item>1&#8211;3 years</item>
+        <item>More than 3 years</item>
+    </string-array>
+
+    <string-array name="hypertension">
+        <item>Elevated (BP 120&#8211;129/&lt;80)</item>
+        <item>Stage 1 (BP 130&#8211;139/&lt;80&#8211;89)</item>
+        <item>Stage 1 (BP &gt;140/&gt;90)</item>
+    </string-array>
+
+    <string-array name="diabetes">
+        <item>Pre Diabetic (HBA1C 5.7%&#8211;6.4%)</item>
+        <item>Stage 1 (HBA1C 6.5%&#8211;8.4%)</item>
+        <item>Stage 1 (HBA1C 8.5%&#8211;9.4%)</item>
+        <item>Stage 1 (HBA1C 9.5%+)</item>
+    </string-array>
+
+    <string-array name="thyroid">
+        <item>Normal (Serum TSH 0.45&#8211;4.12 mlU/L)</item>
+        <item>Normal (Serum TSH 4.12 mlU/L+)</item>
+    </string-array>
+
+    <string-array name="cholesterol">
+        <item>Normal (Total Cholesterol/LDL Below 200/100)</item>
+        <item>Borderline (Total Cholesterol/LDL Below 200&#8211;239/130&#8211;159)</item>
+        <item>High (Total Cholesterol/LD 240+/160+)</item>
+    </string-array>
+</resources>

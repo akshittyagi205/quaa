@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/layout_very_small_margin"
+    android:padding="@dimen/small_padding"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/activityLayout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_small"
+            android:padding="@dimen/small_padding"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/defaultfont"
+            android:text="Activity : "/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/small_padding"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_small"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/defaultfont"
+            android:id="@+id/activity"
+            android:text="-"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_small"
+            android:padding="@dimen/small_padding"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/defaultfont"
+            android:text="From : "/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/small_padding"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_small"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:fontFamily="@font/defaultfont"
+            android:id="@+id/fromTime"
+            android:text="10:00 AM"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/text_small"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/defaultfont"
+            android:text="To : "/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_small"
+            android:textColor="@color/colorPrimary"
+            android:padding="@dimen/small_padding"
+            android:textStyle="bold"
+            android:fontFamily="@font/defaultfont"
+            android:id="@+id/toTime"
+            android:text="12:00 AM"/>
+
+    </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/close"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_close_chip"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/divider"
+        android:background="@color/grey_200"
+        android:layout_marginRight="@dimen/layout_small_margin"
+        android:layout_marginLeft="@dimen/layout_small_margin"
+        />
+
+</LinearLayout>

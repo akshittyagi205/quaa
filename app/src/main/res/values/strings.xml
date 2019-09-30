@@ -1,0 +1,98 @@
+<resources>
+    <string name="app_name">Qua Nutrition</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Static data-->
+
+    <string name="veg">Vegetarian</string>
+    <string name="non_veg">Non Vegetarian</string>
+    <string name="Kgs">Kgs</string>
+    <string name="Pounds">Pounds</string>
+    <string name="feets">ft.In</string>
+    <string name="centimeter">centi</string>
+
+    <string name="a1">1 Times</string>
+    <string name="a2">2 Times</string>
+    <string name="a3">3 Times</string>
+    <string name="a4">4 Times</string>
+    <string name="a5">5 Times</string>
+    <string name="a6">6 Times</string>
+    <string name="a7">7 Times</string>
+    <string name="a8">8 Times</string>
+    <string name="a9">9 Times</string>
+    <string name="a10">10 Times</string>
+    <string name="_60_days">60 Days</string>
+
+    <string name="daily">DAILY</string>
+    <string name="monthly">MONTHLY</string>
+    <string name="weekly">WEEKLY</string>
+    <string name="yearly">YEARLY</string>
+    <string name="random_phrase">Keeping one’s self going is a difficult thing to do. There are a million distractions that occur
+        every day and that can mean that we do not stay on track with what we should be doing. Self-motivation is something that does not come easy to a lot of people and that means that there are some steps that need to be taken before you can become motivated to the fullest extent.</string>
+    <string name="leadership">Leadership</string>
+
+    <!--intor slider-->
+    <string name="skip">SKIP</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="achieved">ACHIEVED</string>
+    <string name="date">Date</string>
+    <string name="steps">Steps</string>
+    <string name="dob">D.O.B.</string>
+    <string name="integrate_with_googlefit">Integrate google fit</string>
+    <string name="SKIP">SKIP</string>
+    <string name="signin">SignIn</string>
+    <string name="signup">signup</string>
+    <string name="recipe">recipe</string>
+
+
+    <!-- Blood Group Data -->
+    <string name="oPos">O+</string>
+    <string name="ONeg">O-</string>
+    <string name="BPos">B+</string>
+    <string name="BNeg">B-</string>
+    <string name="APos">A+</string>
+    <string name="ANeg">A-</string>
+    <string name="ABNeg">AB-</string>
+    <string name="ABPos">AB+</string>
+
+    <!-- How did you data -->
+    <string name="facebook">Facebook</string>
+    <string name="Google">Google</string>
+    <string name="Friend">Friend</string>
+    <string name="Newspaper">Newspaper</string>
+    <string name="Other">Other</string>
+
+    <string name="earlymorning">Early Morning</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="midmorning">Mid Morning</string>
+    <string name="lunch">Lunch</string>
+    <string name="evening">Evening</string>
+    <string name="lateevening">Late Evening</string>
+    <string name="dinner">Dinner</string>
+    <string name="postdinner">Post Dinner</string>
+
+    <string name="call">Call</string>
+    <string name="inperson">In Person</string>
+
+    <string name="very_active">Active</string>
+    <string name="semi_active">Semi Active</string>
+    <string name="none">None</string>
+    <string name="rupee">\u20B9</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
+    </string>
+
+    <string name="title_activity_youtube_play">YoutubePlayActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    tools:context=".general.AboutDietitianActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:fitsSystemWindows="false"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
+
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_no_image"
+                app:layout_collapseMode="parallax" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/overlay_dark_10" />
+
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:scrollingCache="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/layout_small_margin"
+            android:layout_marginRight="@dimen/layout_small_margin"
+            android:layout_marginTop="@dimen/layout_small_margin"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorPrimaryDark"
+                app:titleTextColor="@color/grey_200"
+                app:title="Demo Dietitian"
+                app:popupTheme="@style/AppTheme" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:tint="@color/grey_200"
+                android:layout_height="30dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_basic_info"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Basic Details"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/layout_very_small_margin"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/grey_200"
+                android:fontFamily="@font/defaultfont"/>
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                android:layout_marginTop="@dimen/layout_very_small_margin"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:tint="@color/grey_200"
+                    android:layout_height="30dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_globe"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Speaks : -"
+                android:textSize="@dimen/text_very_small"
+                android:id="@+id/languages"
+                android:layout_marginStart="@dimen/layout_very_small_margin"
+                android:layout_gravity="center"
+                android:textColor="@color/grey_200"
+                android:fontFamily="@font/defaultfont"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:tint="@color/grey_200"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_time"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Works : -"
+                    android:textSize="@dimen/text_very_small"
+                    android:id="@+id/workHours"
+                    android:layout_marginStart="@dimen/layout_very_small_margin"
+                    android:layout_gravity="center"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2dp"
+                android:text="-"
+                android:textSize="@dimen/text_very_small"
+                android:id="@+id/bio"
+                android:padding="@dimen/small_padding"
+                android:fontFamily="@font/defaultfont"
+                android:textColor="@color/grey_200" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:tint="@color/grey_200"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_qualification"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Qualification"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/layout_very_small_margin"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:layout_marginStart="30dp"
+                android:padding="@dimen/small_padding"
+                android:textSize="@dimen/text_very_small"
+                android:id="@+id/qualifications"
+                android:textColor="@color/grey_200"
+                android:fontFamily="@font/defaultfont"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/clinic_layout"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/small_padding"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:tint="@color/grey_200"
+                        android:layout_height="30dp"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_clinic"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="XYZ Clinic"
+                        android:id="@+id/clinic_name"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/layout_very_small_margin"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="@color/grey_200"
+                        android:fontFamily="@font/defaultfont"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/small_padding"
+                    android:layout_marginTop="@dimen/layout_very_small_margin"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:tint="@color/grey_200"
+                        android:layout_height="30dp"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_phone"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Number : -"
+                        android:textSize="@dimen/text_very_small"
+                        android:id="@+id/phone"
+                        android:layout_marginStart="@dimen/layout_very_small_margin"
+                        android:layout_gravity="center"
+                        android:textColor="@color/grey_200"
+                        android:fontFamily="@font/defaultfont"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/small_padding"
+                    android:layout_marginTop="@dimen/layout_very_small_margin"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:tint="@color/grey_200"
+                        android:layout_height="30dp"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_location"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Address: "
+                        android:textSize="@dimen/text_very_small"
+                        android:id="@+id/address"
+                        android:layout_marginStart="@dimen/layout_very_small_margin"
+                        android:layout_gravity="center"
+                        android:textColor="@color/grey_200"
+                        android:fontFamily="@font/defaultfont"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

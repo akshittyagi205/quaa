@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/layout_very_small_margin"
+    app:cardCornerRadius="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/large_padding"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="right"
+        android:id="@+id/close"
+        android:src="@drawable/ic_close_btn"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Verify +91 9990105832"
+        android:gravity="center"
+        android:id="@+id/phone"
+        android:fontFamily="@font/sourcesansproregular"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_medium"
+        android:textColor="@color/colorPrimary"
+        />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/text_large"
+        android:fontFamily="@font/sourcesansproregular"
+        android:padding="@dimen/medium_padding"
+        android:textColor="@color/grey_200"
+        android:maxLength="6"
+        android:letterSpacing="0.5"
+        android:id="@+id/otp"
+        android:inputType="number"
+        android:hint="------"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="@dimen/medium_padding"
+        android:textSize="@dimen/text_tiny"
+        android:textColor="@color/colorPrimary"
+        android:fontFamily="@font/sourcesansproregular"
+        android:text="Enter the 6 digit otp sent to your phone number"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/layout_small_margin"
+        android:layout_marginStart="@dimen/layout_very_small_margin"
+        android:layout_marginEnd="@dimen/layout_small_margin"
+        android:gravity="center"
+        android:id="@+id/checkAgree"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:id="@+id/agree"
+            android:textColor="@color/grey_300"
+            android:textSize="@dimen/text_small"
+            android:text="I Agree to the"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_very_small_margin"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_small"
+            android:textStyle="bold"
+            android:id="@+id/terms"
+            android:text="Terms and Conditions"/>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnVerify"
+        android:layout_gravity="center"
+        android:fontFamily="@font/sourcesansproregular"
+        android:background="@drawable/curvededge_button"
+        android:layout_margin="@dimen/medium_padding"
+        android:textColor="@color/textColorLight"
+        android:textSize="@dimen/text_medium"
+        android:text="Verify"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_padding"
+        android:layout_marginBottom="@dimen/layout_small_margin">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_very_small"
+            android:textColor="@color/grey_300"
+            android:fontFamily="@font/sourcesansproregular"
+            android:text="Resend In : "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_very_small"
+            android:textColor="@color/grey_300"
+            android:id="@+id/timer_time"
+            android:fontFamily="@font/sourcesansproregular"
+            android:text="30"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_very_small"
+            android:textColor="@color/grey_300"
+            android:layout_weight="1"
+            android:fontFamily="@font/sourcesansproregular"
+            android:text=" seconds"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_small"
+            android:textStyle="bold"
+            android:textColor="@color/grey_200"
+            android:id="@+id/resend_code"
+            android:fontFamily="@font/sourcesansproregular"
+            android:text="Resend OTP"/>
+    </LinearLayout>
+</LinearLayout>
+</androidx.cardview.widget.CardView>

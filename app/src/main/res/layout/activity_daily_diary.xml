@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    tools:context=".general.DailyDiaryActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:id="@+id/appbar"
+        android:layout_alignParentTop="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_diary"
+            app:titleTextColor="@color/colorAccent"
+            android:layout_width="match_parent"
+            app:title=""
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/text_large"
+                android:text="Diet Diary (Today)"
+                android:fontFamily="@font/defaultfont"
+                android:id="@+id/toolbar_text_diary"
+                android:drawableRight="@drawable/ic_arrow_drop_down"
+                android:drawableTint="@color/colorAccent"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <devs.mulham.horizontalcalendar.HorizontalCalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:textColorNormal="@color/textColorLight"
+        app:textColorSelected="@color/colorAccent"
+        app:sizeTopText="10dp"
+        android:background="@color/colorPrimaryDark"
+        app:sizeMiddleText="12dp"
+        app:sizeBottomText="12dp"
+        app:selectorColor="@color/transparent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layEM"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:id="@+id/checkboxEarly"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="4"
+                        android:id="@+id/earlyMorningTxt"
+                        android:layout_height="wrap_content"
+                        android:text="Early Morning"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="06:00 AM"
+                        android:layout_weight="1"
+                        android:id="@+id/EMtimetxt"
+                        android:textAlignment="textEnd"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+
+                <EditText
+                    android:layout_marginLeft="@dimen/layout_medium_margin"
+                    android:layout_marginRight="@dimen/layout_medium_margin"
+                    android:padding="@dimen/medium_padding"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/text_small"
+                    android:id="@+id/meal_early"
+                    android:visibility="gone"
+                    android:background="@drawable/textarea_border"
+                    android:hint="Enter meal here"
+                    android:layout_height="wrap_content" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layB"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:id="@+id/checkboxBreak"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="4"
+                        android:id="@+id/breakfastTxt"
+                        android:layout_height="wrap_content"
+                        android:text="Breakfast"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="09:00 AM"
+                        android:id="@+id/BtimeTxt"
+                        android:layout_weight="1"
+                        android:textAlignment="textEnd"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+                <EditText
+                    android:layout_marginLeft="@dimen/layout_medium_margin"
+                    android:layout_marginRight="@dimen/layout_medium_margin"
+                    android:padding="@dimen/medium_padding"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/text_small"
+                    android:id="@+id/meal_breakfast"
+                    android:visibility="gone"
+                    android:background="@drawable/textarea_border"
+                    android:hint="Enter meal here"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layMM"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:id="@+id/checkboxMidMorning"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="4"
+                        android:id="@+id/MidMorningText"
+                        android:layout_height="wrap_content"
+                        android:text="Mid Morning"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="12:00 PM"
+                        android:layout_weight="1"
+                        android:id="@+id/MMtimeTxt"
+                        android:textAlignment="textEnd"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+                <EditText
+                    android:layout_marginLeft="@dimen/layout_medium_margin"
+                    android:layout_marginRight="@dimen/layout_medium_margin"
+                    android:padding="@dimen/medium_padding"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/text_small"
+                    android:id="@+id/meal_midMor"
+                    android:visibility="gone"
+                    android:background="@drawable/textarea_border"
+                    android:hint="Enter meal here"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layL"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:id="@+id/checkboxLunch"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="4"
+                        android:id="@+id/lunchTxt"
+                        android:layout_height="wrap_content"
+                        android:text="Lunch"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="02:00 PM"
+                        android:layout_weight="1"
+                        android:id="@+id/LtimeTxt"
+                        android:textAlignment="textEnd"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+                <EditText
+                    android:layout_marginLeft="@dimen/layout_medium_margin"
+                    android:layout_marginRight="@dimen/layout_medium_margin"
+                    android:padding="@dimen/medium_padding"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/text_small"
+                    android:id="@+id/meal_lunch"
+                    android:visibility="gone"
+                    android:background="@drawable/textarea_border"
+                    android:hint="Enter meal here"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layE"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:id="@+id/checkboxEvening"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="4"
+                        android:id="@+id/EveningTxt"
+                        android:layout_height="wrap_content"
+                        android:text="Evening"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="04:00 PM"
+                        android:layout_weight="1"
+                        android:id="@+id/EtimeTxt"
+                        android:textAlignment="textEnd"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+
+                <EditText
+                    android:layout_marginLeft="@dimen/layout_medium_margin"
+                    android:layout_marginRight="@dimen/layout_medium_margin"
+                    android:padding="@dimen/medium_padding"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/text_small"
+                    android:id="@+id/meal_evening"
+                    android:visibility="gone"
+                    android:background="@drawable/textarea_border"
+                    android:hint="Enter meal here"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layD"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:id="@+id/checkboxDinner"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="4"
+                        android:id="@+id/DinnerTxt"
+                        android:layout_height="wrap_content"
+                        android:text="Dinner"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="08:00 PM"
+                        android:layout_weight="1"
+                        android:textAlignment="textEnd"
+                        android:id="@+id/DtimeTxt"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+
+                <EditText
+                    android:layout_marginLeft="@dimen/layout_medium_margin"
+                    android:layout_marginRight="@dimen/layout_medium_margin"
+                    android:padding="@dimen/medium_padding"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/text_small"
+                    android:id="@+id/meal_dinner"
+                    android:background="@drawable/textarea_border"
+                    android:visibility="gone"
+                    android:hint="Enter meal here"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layPD"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:id="@+id/checkboxPostDinner"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="4"
+                        android:id="@+id/postDinnerTxt"
+                        android:layout_height="wrap_content"
+                        android:text="Post Dinner"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="10:00 PM"
+                        android:layout_weight="1"
+                        android:textAlignment="textEnd"
+                        android:id="@+id/PDtimeTxt"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+                <EditText
+                    android:layout_marginLeft="@dimen/layout_medium_margin"
+                    android:layout_marginRight="@dimen/layout_medium_margin"
+                    android:padding="@dimen/medium_padding"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/text_small"
+                    android:id="@+id/meal_postDinner"
+                    android:visibility="gone"
+                    android:background="@drawable/textarea_border"
+                    android:hint="Enter meal here"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="@dimen/layout_small_margin"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_marginBottom="@dimen/layout_very_small_margin"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="@dimen/medium_padding"
+                            android:src="@drawable/ic_steps"/>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:padding="@dimen/small_padding"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/text_very_small"
+                                android:id="@+id/steps_diary"
+                                android:textColor="@color/grey_200"
+                                android:fontFamily="@font/defaultfont"
+                                android:textAllCaps="true"
+                                android:text="You have taken - steps today!"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:layout_marginRight="@dimen/layout_small_margin"
+                android:layout_marginBottom="@dimen/layout_very_small_margin"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="@dimen/medium_padding"
+                    android:src="@drawable/ic_calories"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_very_small"
+                        android:textColor="@color/grey_200"
+                        android:fontFamily="@font/defaultfont"
+                        android:id="@+id/cal_diary"
+                        android:textAllCaps="true"
+                        android:text="You have burnt - calories today!"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:layout_marginRight="@dimen/layout_small_margin"
+                android:layout_marginBottom="@dimen/layout_very_small_margin"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="@dimen/medium_padding"
+                    android:src="@drawable/ic_water_bottle"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_very_small"
+                        android:id="@+id/waterText"
+                        android:textColor="@color/grey_200"
+                        android:fontFamily="@font/defaultfont"
+                        android:textAllCaps="true"
+                        android:text="You drank - glasses water today!"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding"
+        android:textSize="@dimen/text_large"
+        android:id="@+id/save_diary"
+        android:textColor="@color/textColorLight"
+        android:background="@color/colorAccent"
+        android:text="Save"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:fontFamily="@font/defaultfont"/>
+
+</LinearLayout>

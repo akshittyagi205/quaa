@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".profile.GeneralDataActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="General Activity"
+            app:titleTextColor="@color/colorPrimary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/large_padding"
+                android:paddingTop="@dimen/spacing_large"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Help Available? "
+                    />
+                <EditText
+                    android:id="@+id/help"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_large_padding"
+                    android:background="@drawable/textarea_border"
+                    android:fontFamily="@font/defaultfont"
+                    android:hint="Click to Select"
+                    android:inputType="text"
+                    android:drawableRight="@drawable/ic_arrow_drop_down"
+                    android:padding="@dimen/medium_padding"
+                    android:textColorHint="@color/grey_400"
+                    android:textSize="@dimen/text_small" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="How many people are you cooking for? "
+                    />
+                <EditText
+                    android:id="@+id/numberCooking"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_large_padding"
+                    android:background="@drawable/textarea_border"
+                    android:fontFamily="@font/defaultfont"
+                    android:hint="Click to Select"
+                    android:inputType="number"
+                    android:drawableRight="@drawable/ic_arrow_drop_down"
+                    android:padding="@dimen/medium_padding"
+                    android:textColorHint="@color/grey_400"
+                    android:textSize="@dimen/text_small" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Eat out frequency :"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/numberEat"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_large_padding"
+                    android:background="@drawable/textarea_border"
+                    android:fontFamily="@font/defaultfont"
+                    android:hint="Click to Select"
+                    android:inputType="number"
+                    android:drawableRight="@drawable/ic_arrow_drop_down"
+                    android:padding="@dimen/medium_padding"
+                    android:textColorHint="@color/grey_400"
+                    android:textSize="@dimen/text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/grey_200"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="Per"
+                        />
+                    <EditText
+                        android:id="@+id/unitEat"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Click to Select"
+                        android:inputType="number"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Water (Per Day) :"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/numberWater"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Click to Select"
+                        android:inputType="number"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_small"
+                        android:visibility="invisible"
+                        android:textColor="@color/grey_200"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="Per"
+                        />
+                    <EditText
+                        android:id="@+id/unitWater"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Click to Select"
+                        android:inputType="number"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/smokeLayout"
+                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Smoking frequency :"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/numberSmoke"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Click to Select"
+                        android:inputType="number"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/grey_200"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="Per"
+                        />
+                    <EditText
+                        android:id="@+id/unitSmoke"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Click to Select"
+                        android:inputType="number"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+                </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alcoholLayout"
+                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Alcohol frequency :"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/numberAlcohol"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Click to Select"
+                        android:inputType="number"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/grey_200"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="Per"
+                        />
+                    <EditText
+                        android:id="@+id/unitAlcohol"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Click to Select"
+                        android:inputType="number"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+                </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/birthLayout"
+                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Birth Control Pills"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/numberBirth"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Click to Select"
+                        android:inputType="number"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/grey_200"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="Per"
+                        />
+                    <EditText
+                        android:id="@+id/unitBirth"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Click to Select"
+                        android:inputType="number"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+                </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_very_small_margin"
+                    android:layout_marginBottom="@dimen/layout_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/grey_200"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="Off Days :"
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+                        <TextView
+                            android:id="@+id/addOffDays"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_small"
+                            android:textColor="@color/textColorLight"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingLeft="@dimen/medium_padding"
+                            android:gravity="center_vertical"
+                            android:drawableLeft="@drawable/ic_add_circle"
+                            android:drawablePadding="@dimen/small_padding"
+                            android:paddingTop="2dp"
+                            android:layout_marginRight="@dimen/spacing_mlarge"
+                            android:paddingBottom="2dp"
+                            android:paddingRight="@dimen/medium_padding"
+                            android:background="@drawable/curvededge_button"
+                            android:fontFamily="@font/defaultfont"
+                            android:text="ADD"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textarea_border_light"
+                    android:minHeight="70dp"
+                    android:layout_marginBottom="@dimen/layout_small_margin"
+                    android:nestedScrollingEnabled="false"
+                    android:id="@+id/offDays_re"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding"
+        android:textSize="@dimen/text_large"
+        android:id="@+id/save"
+        android:textColor="@color/textColorLight"
+        android:background="@color/colorAccent"
+        android:text="Save"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:fontFamily="@font/defaultfont"/>
+
+</LinearLayout>

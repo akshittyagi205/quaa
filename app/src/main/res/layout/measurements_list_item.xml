@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_small_margin"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/medium_padding"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:textSize="@dimen/text_medium"
+                android:id="@+id/date"
+                android:text="24-07-1998"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Chest"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:padding="@dimen/small_padding"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:gravity="center"
+                    android:fontFamily="@font/defaultfont"
+                    android:text=":"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/chest"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Chest"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Arms"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:padding="@dimen/small_padding"
+                    android:gravity="center"
+                    android:fontFamily="@font/defaultfont"
+                    android:text=":"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="@dimen/small_padding"
+                    android:id="@+id/arms"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Chest"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Waist"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:padding="@dimen/small_padding"
+                    android:textColor="@color/grey_200"
+                    android:gravity="center"
+                    android:fontFamily="@font/defaultfont"
+                    android:text=":"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/waist"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:padding="@dimen/small_padding"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Chest"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Abd."/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:padding="@dimen/small_padding"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:gravity="center"
+                    android:fontFamily="@font/defaultfont"
+                    android:text=":"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="@dimen/small_padding"
+                    android:id="@+id/abd"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Chest"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Hips"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:gravity="center"
+                    android:fontFamily="@font/defaultfont"
+                    android:text=":"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/hips"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Chest"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:layout_marginBottom="@dimen/layout_small_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:padding="@dimen/small_padding"
+                    android:layout_weight="0.7"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Thighs"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:padding="@dimen/small_padding"
+                    android:textColor="@color/grey_200"
+                    android:gravity="center"
+                    android:fontFamily="@font/defaultfont"
+                    android:text=":"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/thigh"
+                    android:padding="@dimen/small_padding"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Chest"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        app:cardElevation="@dimen/elevation_header"
+        app:cardCornerRadius="@dimen/card_album_radius">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/headLayout">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:id="@+id/day"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_large"
+                            android:paddingTop="@dimen/small_padding"
+                            android:paddingBottom="@dimen/small_padding"
+                            android:paddingLeft="@dimen/small_padding"
+                            android:textColor="@color/colorPrimary"
+                            android:fontFamily="@font/defaultfont"
+                            android:text="Monday"/>
+
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_gravity="center"
+                        android:id="@+id/indicator"
+                        android:padding="2dp"
+                        android:tint="@color/grey_300"
+                        android:src="@drawable/ic_expand"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:id="@+id/item_re"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".payments.PaymentHistory">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:id="@+id/appbar"
+        android:layout_alignParentTop="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:titleTextColor="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/layout_very_small_margin"
+        android:layout_marginRight="@dimen/layout_very_small_margin"
+        android:layout_marginTop="@dimen/layout_small_margin"
+        android:layout_marginBottom="@dimen/layout_small_margin"
+        android:orientation="horizontal"
+        android:id="@+id/browsePlans"
+        android:animateLayoutChanges="true"
+        android:padding="@dimen/small_padding"
+        android:background="@drawable/tip_background"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:tint="@color/textColorLight"
+            android:padding="7dp"
+            android:visibility="gone"
+            android:src="@drawable/ic_browse_plans"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/textColorLight"
+                android:fontFamily="@font/defaultfont"
+                android:textStyle="bold"
+                android:text="Browse Plans"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/text_very_small"
+                android:textColor="@color/textColorLight"
+                android:fontFamily="@font/defaultfont"
+                android:text="Click to browse all the diet plans that we offer"/>
+
+        </LinearLayout>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/close"
+            android:tint="@color/textColorLight"
+            android:src="@drawable/ic_close_chip"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="false"
+        android:id="@+id/payment_history_rv_id"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/noData"
+            android:background="@color/colorPrimaryDark">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/illustration_no_data" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:padding="@dimen/small_padding"
+                    android:textColor="@color/grey_20"
+                    android:textSize="@dimen/text_medium"
+                    android:gravity="center_horizontal"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="No Payment History yet!"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:padding="@dimen/medium_padding"
+                    android:textColor="@color/textColorLight"
+                    android:gravity="center"
+                    android:id="@+id/basicBtn"
+                    android:textSize="@dimen/text_medium"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/defaultfont"
+                    android:background="@drawable/curve_back"
+                    android:text="Click to browse plans"
+                    />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:behavior_hideable="true"
+    android:id="@+id/bottom_sheet"
+    android:layout_margin="@dimen/layout_very_small_margin"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/textColorLight"
+        app:cardElevation="2dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/txtTodaysDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:visibility="gone"
+                    android:textSize="@dimen/text_medium"
+                    android:background="@drawable/gradient_curved"
+                    android:padding="@dimen/medium_padding"
+                    android:gravity="center"
+                    android:textColor="@color/colorAccent" />
+
+
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recAppointment"
+                    android:paddingTop="@dimen/layout_very_small_margin"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:nestedScrollingEnabled="false"
+                    android:background="@color/textColorLight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/loadingLayout"
+                    android:minHeight="200dp"
+                    android:visibility="gone"
+                    android:background="@color/textColorLight"
+                    android:layout_height="wrap_content">
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pb"
+                        android:layout_centerInParent="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fetching Slots..."
+                        android:layout_below="@id/pb"
+                        android:layout_centerHorizontal="true"
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <!--<TextView
+                android:id="@+id/select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select"
+                android:textSize="@dimen/text_medium"
+                android:background="@drawable/gradient_curved"
+                android:padding="@dimen/medium_padding"
+                android:gravity="end"
+                android:drawableEnd="@drawable/ic_go"
+                android:textColor="@color/colorAccent" />-->
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</ScrollView>

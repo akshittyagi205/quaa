@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".profile.MedicalHistory">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Medical Information"
+            app:titleTextColor="@color/colorPrimary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".profile.MedicalHistory">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/large_padding"
+            android:paddingRight="@dimen/large_padding"
+            android:paddingBottom="@dimen/large_padding"
+            android:paddingTop="@dimen/spacing_xmlarge"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Blood Group :"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:layout_marginLeft="@dimen/layout_small_margin"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Physical Activity :"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_very_small_margin"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/bloodGroup"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/layout_small_margin"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:background="@drawable/textarea_border"
+                    android:drawablePadding="@dimen/medium_padding"
+                    android:drawableEnd="@drawable/ic_arrow_drop_down"
+                    android:fontFamily="@font/defaultfont"
+                    android:hint="Blood Group"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/medium_padding"
+                    android:textColorHint="@color/grey_400"
+                    android:textSize="@dimen/text_small" />
+
+                <EditText
+                    android:id="@+id/physicalActivity"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/layout_small_margin"
+                    android:layout_marginLeft="@dimen/layout_small_margin"
+                    android:drawableEnd="@drawable/ic_arrow_drop_down"
+                    android:background="@drawable/textarea_border"
+                    android:fontFamily="@font/defaultfont"
+                    android:hint="Physical Activity"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/medium_padding"
+                    android:textColorHint="@color/grey_400"
+                    android:textSize="@dimen/text_small" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/small_padding"
+                android:layout_marginRight="@dimen/layout_small_margin"
+                android:paddingBottom="@dimen/small_padding"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Any Medical History :"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/anyMedicalHistory"
+                    android:layout_width="wrap_content"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:textColor="@color/grey_200"
+                        android:textSize="@dimen/text_small"
+                        android:fontFamily="@font/defaultfont"
+                        android:id="@+id/yesMH"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:textColor="@color/grey_200"
+                        android:textSize="@dimen/text_small"
+                        android:fontFamily="@font/defaultfont"
+                        android:id="@+id/noMH"/>
+                </RadioGroup>
+            </LinearLayout>
+            <EditText
+                android:id="@+id/editAnyHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_small_margin"
+                android:layout_marginRight="@dimen/layout_small_margin"
+                android:background="@drawable/textarea_border"
+                android:fontFamily="@font/defaultfont"
+                android:hint="Enter details here..."
+                android:inputType="text"
+                android:maxLines="2"
+                android:padding="@dimen/medium_padding"
+                android:textColorHint="@color/grey_400"
+                android:textSize="@dimen/text_small" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/femaleDetails">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:textColor="@color/grey_200"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Pregnant :"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:layout_marginLeft="@dimen/layout_small_margin"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Lactating :"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/small_padding"
+                android:paddingBottom="@dimen/small_padding"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/pregnant"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:textColor="@color/grey_200"
+                        android:textSize="@dimen/text_small"
+                        android:fontFamily="@font/defaultfont"
+                        android:id="@+id/yesPregnant"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:textColor="@color/grey_200"
+                        android:textSize="@dimen/text_small"
+                        android:fontFamily="@font/defaultfont"
+                        android:id="@+id/noPregnant"/>
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/lactating"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:textColor="@color/grey_200"
+                        android:textSize="@dimen/text_small"
+                        android:fontFamily="@font/defaultfont"
+                        android:id="@+id/yesLactating"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:textColor="@color/grey_200"
+                        android:textSize="@dimen/text_small"
+                        android:fontFamily="@font/defaultfont"
+                        android:id="@+id/noLactating"/>
+                </RadioGroup>
+            </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/grey_200"
+                android:fontFamily="@font/defaultfont"
+                android:text="Diseases:"
+                />
+            <EditText
+                android:id="@+id/diseases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/medium_large_padding"
+                android:background="@drawable/textarea_border"
+                android:fontFamily="@font/defaultfont"
+                android:hint="Diseases"
+                android:drawableRight="@drawable/ic_arrow_drop_down"
+                android:inputType="textWebEmailAddress"
+                android:padding="@dimen/medium_padding"
+                android:textColorHint="@color/grey_400"
+                android:textSize="@dimen/text_small" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_small_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Reports :"
+                    />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                <TextView
+                    android:id="@+id/upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/textColorLight"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/medium_padding"
+                    android:paddingRight="@dimen/medium_padding"
+                    android:background="@drawable/sent_message"
+                    android:layout_marginLeft="@dimen/layout_small_margin"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Upload"
+                    />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/medium_padding"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/layout_small_margin"
+                android:layout_marginBottom="@dimen/layout_small_margin"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:id="@+id/imageLayout1"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:padding="2dp"
+                        android:id="@+id/image1"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_no_image"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/close1"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_close_btn"/>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:id="@+id/imageLayout2"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:padding="2dp"
+                        android:id="@+id/image2"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_no_image"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/close2"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_close_btn"/>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:id="@+id/imageLayout3"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:padding="2dp"
+                        android:id="@+id/image3"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_no_image"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/close3"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_close_btn"/>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:id="@+id/imageLayout4"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:padding="2dp"
+                        android:id="@+id/image4"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_no_image"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/close4"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_close_btn"/>
+                </FrameLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:paddingTop="@dimen/medium_padding"
+                android:layout_marginBottom="@dimen/layout_small_margin"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:id="@+id/imageLayout5"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:padding="2dp"
+                        android:id="@+id/image5"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_no_image"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/close5"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_close_btn"/>
+                </FrameLayout>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:id="@+id/reports_re"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding"
+        android:textSize="@dimen/text_large"
+        android:textColor="@color/textColorLight"
+        android:background="@color/colorAccent"
+        android:text="Save"
+        android:id="@+id/save"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:fontFamily="@font/defaultfont"/>
+</LinearLayout>

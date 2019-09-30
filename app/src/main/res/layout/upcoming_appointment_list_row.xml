@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:maxWidth="10dp"
+    android:translationZ="10dp"
+    android:layout_gravity="center"
+    android:background="@color/grey_800"
+    android:layout_margin="@dimen/layout_medium_margin"
+    android:paddingLeft="@dimen/medium_padding"
+    android:paddingRight="@dimen/medium_padding"
+    android:paddingTop="@dimen/large_padding"
+    android:paddingBottom="@dimen/large_padding"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/calendar_image"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_small_margin"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_large"
+        android:fontFamily="@font/defaultfont"
+        android:id="@+id/title"
+        android:layout_marginLeft="@dimen/layout_small_margin"
+        android:padding="@dimen/small_padding"
+        android:text="Appointment with Akshit Tyagi"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_small_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        android:paddingRight="@dimen/spacing_large">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@color/transparent"
+            android:tint="@color/colorPrimary"
+            android:alpha="0.8"
+            android:layout_gravity="center"
+            android:padding="@dimen/small_padding"
+            app:srcCompat="@drawable/ic_appointment" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/date"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:text="Appointment date"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/colorPrimary"
+                app:fontFamily="@font/defaultfont"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/editDate"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:paddingStart="@dimen/medium_padding"
+                android:paddingEnd="@dimen/medium_padding"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/grey_40"
+                app:fontFamily="@font/defaultfont"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        android:paddingRight="@dimen/spacing_large">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@color/transparent"
+            android:tint="@color/colorPrimary"
+            android:alpha="0.8"
+            android:layout_gravity="center"
+            android:padding="@dimen/small_padding"
+            app:srcCompat="@drawable/ic_time" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:text="Appointment time"
+                android:id="@+id/time"
+                android:hint="Select time slot"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/colorPrimary"
+                app:fontFamily="@font/defaultfont"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/editTime"
+                android:paddingStart="@dimen/medium_padding"
+                android:paddingEnd="@dimen/medium_padding"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/grey_40"
+                app:fontFamily="@font/defaultfont"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        android:paddingRight="@dimen/spacing_large">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@color/transparent"
+            android:tint="@color/colorPrimary"
+            android:alpha="0.8"
+            android:layout_gravity="center"
+            android:padding="@dimen/small_padding"
+            app:srcCompat="@drawable/ic_status" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:text="Appointment Status"
+                android:id="@+id/status"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/colorPrimary"
+                app:fontFamily="@font/defaultfont"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        android:paddingRight="@dimen/spacing_large">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@color/transparent"
+            android:tint="@color/colorPrimary"
+            android:alpha="0.8"
+            android:layout_gravity="center"
+            android:padding="@dimen/small_padding"
+            app:srcCompat="@drawable/ic_appt_type" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:text="Appointment Type"
+                android:id="@+id/type"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/colorPrimary"
+                app:fontFamily="@font/defaultfont"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:id="@+id/layNotes"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        android:paddingRight="@dimen/spacing_large">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@color/transparent"
+            android:tint="@color/colorPrimary"
+            android:alpha="0.8"
+            android:layout_gravity="top"
+            android:padding="@dimen/small_padding"
+            app:srcCompat="@drawable/ic_note" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:text="Appointment Notes"
+                android:textSize="@dimen/text_medium"
+                android:id="@+id/notes"
+                android:maxLines="2"
+                android:minLines="2"
+                android:textColor="@color/colorPrimary"
+                app:fontFamily="@font/defaultfont"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing_large"
+        android:paddingRight="@dimen/spacing_large">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:text="Reschedule"
+                android:id="@+id/reschedule"
+                android:background="@drawable/curve_back"
+                android:padding="@dimen/medium_padding"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/textColorLight"
+                app:fontFamily="@font/defaultfont"
+                />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:text="Cancel"
+            android:id="@+id/cencel"
+            android:padding="@dimen/medium_padding"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@color/colorAccent"
+            app:fontFamily="@font/defaultfont"
+            />
+    </LinearLayout>
+
+</LinearLayout>

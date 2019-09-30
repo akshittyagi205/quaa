@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="15dp"
+        />
+    <View
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        android:layout_marginRight="@dimen/activityPadding"
+        android:layout_marginTop="@dimen/padding_10"
+        android:background="@color/background"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/thumbnail"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/padding_10"
+        android:orientation="vertical"
+        >
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/spacing_mlarge"
+            android:layout_height="12dp"
+            android:background="@color/background" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/spacing_xlarge"
+            android:layout_height="12dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/background" />
+    </LinearLayout>
+</LinearLayout>

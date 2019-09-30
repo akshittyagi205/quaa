@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    tools:context=".general.SettingsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:id="@+id/appbar"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:titleTextColor="@color/colorPrimary"
+            app:title="Settings"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_small_margin"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="@dimen/layout_small_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/defaultfont"
+                android:textSize="@dimen/text_large"
+                android:text="Notifications"
+                android:textColor="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_very_small_margin"
+                android:padding="@dimen/small_padding">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <TextView
+                    android:id="@+id/general"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/defaultfont"
+                    android:textSize="@dimen/text_small"
+                    android:text="General Notifications"
+                    android:textColor="@color/grey_200"
+                    android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_very_small"
+                        android:text="Notifications about offers, announcements, blog posts and diary"
+                        android:textColor="@color/grey_300" />
+                    
+                </LinearLayout>
+                <Switch
+                    android:id="@+id/generalSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/mealReminders"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/meal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_small"
+                        android:text="Meal Reminders"
+                        android:textColor="@color/grey_200"
+                    android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_very_small"
+                        android:text="Notification about meal reminders and diet plan creation"
+                        android:textColor="@color/grey_300" />
+
+                </LinearLayout>
+                <Switch
+                    android:id="@+id/mealSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/water"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_small"
+                        android:text="Water Reminders"
+                        android:textColor="@color/grey_200"
+                    android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_very_small"
+                        android:text="Notification to drink water and track progress"
+                        android:textColor="@color/grey_300" />
+
+                </LinearLayout>
+                <Switch
+                    android:id="@+id/waterSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/meditation"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_small"
+                        android:text="Meditation Reminders"
+                        android:textColor="@color/grey_200"
+                    android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_very_small"
+                        android:text="Notification to meditate once a day"
+                        android:textColor="@color/grey_300" />
+
+                </LinearLayout>
+                <Switch
+                    android:id="@+id/meditationSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/layout_medium_margin"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/defaultfont"
+                android:textSize="@dimen/text_large"
+                android:text="Units"
+                android:textColor="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/heightUnit"
+                android:paddingLeft="@dimen/small_padding"
+                android:layout_marginTop="@dimen/layout_small_margin"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/defaultfont"
+                    android:textSize="@dimen/text_small"
+                    android:text="Height"
+                    android:textColor="@color/grey_200"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/defaultfont"
+                    android:textSize="@dimen/text_very_small"
+                    android:id="@+id/height"
+                    android:text="Feet and Inches"
+                    android:textColor="@color/grey_300" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/weightUnit"
+                android:paddingLeft="@dimen/small_padding"
+                android:layout_marginTop="@dimen/layout_small_margin"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/defaultfont"
+                    android:textSize="@dimen/text_small"
+                    android:text="Weight"
+                    android:textColor="@color/grey_200"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/defaultfont"
+                    android:textSize="@dimen/text_very_small"
+                    android:id="@+id/weight"
+                    android:text="Kilograms"
+                    android:textColor="@color/grey_300" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/volumeUnit"
+                android:paddingLeft="@dimen/small_padding"
+                android:layout_marginTop="@dimen/layout_small_margin"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/defaultfont"
+                    android:textSize="@dimen/text_small"
+                    android:text="Volume"
+                    android:textColor="@color/grey_200"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/defaultfont"
+                    android:textSize="@dimen/text_very_small"
+                    android:id="@+id/volume"
+                    android:text="Liters"
+                    android:textColor="@color/grey_300" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/energyUnit"
+                android:paddingLeft="@dimen/small_padding"
+                android:layout_marginTop="@dimen/layout_small_margin"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/defaultfont"
+                    android:textSize="@dimen/text_small"
+                    android:text="Energy"
+                    android:textColor="@color/grey_200"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/defaultfont"
+                    android:textSize="@dimen/text_very_small"
+                    android:id="@+id/energy"
+                    android:text="Kilo Calories"
+                    android:textColor="@color/grey_300" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/medium_padding"
+        android:textSize="@dimen/text_medium"
+        android:text="Save"
+        android:id="@+id/save"
+        android:fontFamily="@font/defaultfont"
+        android:textStyle="bold"
+        android:textColor="@color/textColorLight"
+        android:textAllCaps="true"
+        android:gravity="center"
+        />
+</LinearLayout>

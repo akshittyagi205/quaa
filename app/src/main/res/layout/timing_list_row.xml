@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/txtTiming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_very_small_margin"
+        android:padding="@dimen/small_padding"
+        android:hint="hello"
+        android:fontFamily="@font/sourcesansproregular"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_small"/>
+</LinearLayout>

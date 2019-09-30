@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".general.SignInActivity"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:src="@drawable/qua_logo"
+                />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/grey_200"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/layout_medium_margin"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:layout_marginStart="@dimen/layout_small_margin"
+                        android:layout_marginEnd="@dimen/layout_small_margin"
+                        android:layout_gravity="center"
+                        android:text="We just need some of your information to go ahead"
+                        />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/editText"
+                    android:layout_marginTop="@dimen/spacing_large"
+
+                    android:layout_marginLeft="@dimen/spacing_mlarge"
+                    android:layout_marginRight="@dimen/spacing_mlarge"
+                    android:layout_height="wrap_content">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/layout_very_small_margin"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/editFirstName"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/layout_small_margin"
+                            android:layout_marginRight="@dimen/layout_small_margin"
+                            android:background="@drawable/textarea_border"
+                            android:drawablePadding="@dimen/medium_padding"
+                            android:fontFamily="@font/defaultfont"
+                            android:hint="First Name"
+                            android:drawableTint="@color/colorAccent"
+                            android:maxLength="30"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                            android:inputType="textPersonName"
+                            android:padding="@dimen/medium_padding"
+                            android:textColorHint="@color/grey_200"
+                            android:textSize="@dimen/text_small" />
+
+                        <EditText
+                            android:id="@+id/editLastName"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/layout_small_margin"
+                            android:layout_marginLeft="@dimen/layout_small_margin"
+                            android:background="@drawable/textarea_border"
+                            android:fontFamily="@font/defaultfont"
+                            android:hint="Last Name"
+                            android:maxLength="30"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                            android:inputType="textPersonName"
+                            android:padding="@dimen/medium_padding"
+                            android:textColorHint="@color/grey_200"
+                            android:textSize="@dimen/text_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/layout_very_small_margin"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:id="@+id/male"
+                                android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/male_icon"
+                            android:tint="@color/colorPrimary"
+                            android:src="@drawable/ic_noun_male"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:text="Male"
+                                android:textSize="@dimen/text_large"
+                                android:id="@+id/male_text"
+                                android:layout_marginLeft="@dimen/small_padding"
+                                android:layout_gravity="center"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:id="@+id/female"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:id="@+id/female_icon"
+                                android:tint="@color/colorPrimary"
+                                android:src="@drawable/ic_noun_female"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:text="Female"
+                                android:textSize="@dimen/text_large"
+                                android:id="@+id/female_text"
+                                android:layout_marginLeft="@dimen/small_padding"
+                                android:layout_gravity="center"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/goal_choose"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:layout_marginTop="@dimen/layout_very_small_margin"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Choose your Goal"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:inputType="numberDecimal"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_200"
+                        android:textSize="@dimen/text_small" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/referCode"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_medium"
+                            android:textColor="@color/grey_200"
+                            android:layout_marginLeft="@dimen/layout_small_margin"
+                            android:fontFamily="@font/defaultfont"
+                            android:text="Have Referral Code? "
+                            />
+                    <RadioGroup
+                        android:id="@+id/refRG"
+                        android:layout_width="wrap_content"
+                        android:gravity="left"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:padding="@dimen/medium_padding">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:textColor="@color/grey_200"
+                            android:textSize="@dimen/text_small"
+                            android:fontFamily="@font/defaultfont"
+                            android:id="@+id/yes"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:layout_marginLeft="@dimen/layout_small_margin"
+                            android:textColor="@color/grey_200"
+                            android:textSize="@dimen/text_small"
+                            android:fontFamily="@font/defaultfont"
+                            android:id="@+id/no"/>
+                    </RadioGroup>
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/layout_small_margin"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:background="@drawable/textarea_border"
+                        android:drawablePadding="@dimen/medium_padding"
+                        android:fontFamily="@font/defaultfont"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:hint="Select your Date of Birth"
+                        android:inputType="date"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_200"
+                        android:textSize="@dimen/text_small" />
+
+                    <EditText
+                        android:id="@+id/dietitian_code"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:layout_marginTop="@dimen/layout_small_margin"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:visibility="gone"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Enter Dietitian Code"
+                        android:inputType="text"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_200"
+                        android:textSize="@dimen/text_small" />
+                    <EditText
+                        android:id="@+id/ref_code"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:layout_marginTop="@dimen/layout_small_margin" android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Enter Referral Code"
+                        android:inputType="text"
+                        android:padding="@dimen/medium_padding"
+                        android:visibility="gone"
+                        android:textColorHint="@color/grey_200"
+                        android:textSize="@dimen/text_small" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding"
+        android:id="@+id/save_signUpInfo_button"
+        android:textSize="@dimen/text_large"
+        android:textColor="@color/textColorLight"
+        android:background="@color/colorAccent"
+        android:text="Save"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:fontFamily="@font/defaultfont"/>
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".appointment.AppointmentHistory">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:nestedScrollingEnabled="false"
+        android:layout_height="wrap_content"
+        android:id="@+id/re"/>
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/noData"
+        android:visibility="gone"
+        android:layout_marginTop="-40dp"
+        android:background="@color/textColorLight">
+        <include
+            layout="@layout/layout_no_data_found"
+            />
+    </LinearLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/noData"
+        android:background="@color/colorPrimaryDark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/illustration_no_appointment" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_small_margin"
+                android:padding="@dimen/small_padding"
+                android:textColor="@color/grey_20"
+                android:textSize="@dimen/text_medium"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/defaultfont"
+                android:text="No Data Found"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_small_margin"
+                android:padding="@dimen/medium_padding"
+                android:textColor="@color/textColorLight"
+                android:gravity="center"
+                android:id="@+id/basicBtn"
+                android:textSize="@dimen/text_medium"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/defaultfont"
+                android:background="@drawable/curve_back"
+                android:text="Click to book appointment"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    tools:context=".HandleTheFuckingLink">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_xmlarge"
+                android:padding="@dimen/medium_padding"
+                android:src="@drawable/dietitio_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="15dp"
+                android:fontFamily="@font/defaultfont"
+                android:text="Welcome"
+                android:textAllCaps="true"
+                android:textColor="@color/textColorLight"
+                android:textSize="@dimen/text_very_very_large"
+                android:textStyle="bold"
+                android:translationZ="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/spacing_mlarge"
+                android:elevation="15dp"
+                android:fontFamily="@font/defaultfont"
+                android:text="To A Healthier Lifestyle"
+                android:textColor="@color/textColorLight"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold"
+                android:translationZ="10dp" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="dietitio_refer.json"
+                app:lottie_repeatCount="100" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                android:elevation="15dp"
+                android:fontFamily="@font/defaultfont"
+                android:gravity="center"
+                android:text="ABC just refered you to Dt. Test"
+                android:textColor="@color/textColorLight"
+                android:textSize="@dimen/text_large"
+                android:translationZ="10dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/data_link_id"
+        android:visibility="gone"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Started"
+        android:fontFamily="@font/defaultfont"
+        android:elevation="2dp"
+        android:id="@+id/start"
+        android:gravity="center"
+        android:padding="@dimen/medium_padding"
+        android:background="@drawable/curve_back_white"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/layout_big_margin"
+        android:layout_marginLeft="@dimen/layout_big_margin"
+        android:layout_marginRight="@dimen/layout_big_margin"
+        android:translationZ="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_large"
+        />
+
+</LinearLayout>

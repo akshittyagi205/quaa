@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".profile.TravelTimeFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/medium_large_padding"
+                android:paddingRight="@dimen/medium_large_padding"
+                android:paddingBottom="@dimen/medium_large_padding"
+                android:paddingTop="@dimen/spacing_large"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/days"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_large_padding"
+                    android:background="@drawable/textarea_border"
+                    android:fontFamily="@font/defaultfont"
+                    android:hint="Click to Select Days"
+                    android:inputType="number"
+                    android:drawableRight="@drawable/ic_arrow_drop_down"
+                    android:padding="@dimen/medium_padding"
+                    android:textColorHint="@color/grey_400"
+                    android:textSize="@dimen/text_small" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/grey_200"
+                    android:layout_marginRight="@dimen/layout_small_margin"
+                    android:fontFamily="@font/defaultfont"
+                    android:text="Activity :"
+                    />
+                <EditText
+                    android:id="@+id/activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_large_padding"
+                    android:background="@drawable/textarea_border"
+                    android:fontFamily="@font/defaultfont"
+                    android:hint="Enter here..."
+                    android:inputType="text"
+                    android:minLines="1"
+                    android:padding="@dimen/medium_padding"
+                    android:textColorHint="@color/grey_400"
+                    android:textSize="@dimen/text_small" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/grey_200"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="From :"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/grey_200"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="To :"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/layout_very_small_margin"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/fromTime"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:layout_marginRight="@dimen/layout_small_margin"
+                        android:background="@drawable/textarea_border"
+                        android:drawablePadding="@dimen/medium_padding"
+                        android:fontFamily="@font/defaultfont"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:hint="Select Time"
+                        android:inputType="date"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+
+                    <EditText
+                        android:id="@+id/toTime"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:layout_marginLeft="@dimen/layout_small_margin"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Select Time"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:inputType="numberDecimal"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingLeft="@dimen/large_padding"
+                    android:paddingRight="@dimen/large_padding"
+                    android:paddingTop="@dimen/medium_padding"
+                    android:paddingBottom="@dimen/medium_padding"
+                    android:textSize="@dimen/text_medium"
+                    android:id="@+id/add"
+                    android:textColor="@color/colorPrimary"
+                    android:text="ADD"
+                    android:background="@drawable/curvededge_button"/>
+
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_margin="@dimen/layout_very_small_margin"
+                android:layout_marginTop="@dimen/layout_small_margin"
+                android:id="@+id/re"/>
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding"
+        android:textSize="@dimen/text_large"
+        android:textColor="@color/textColorLight"
+        android:background="@color/colorAccent"
+        android:text="Save"
+        android:id="@+id/save"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:fontFamily="@font/defaultfont"/>
+
+</LinearLayout>

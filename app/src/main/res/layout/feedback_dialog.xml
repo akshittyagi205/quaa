@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    >
+<LinearLayout  android:orientation="vertical"
+    android:padding="@dimen/medium_padding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_padding"
+        android:textSize="@dimen/text_large"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:fontFamily="@font/defaultfont"
+        android:text="Give Us Your Feedback"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/small_padding"
+        android:paddingRight="@dimen/small_padding"
+        android:textColor="@color/grey_400"
+        android:textSize="@dimen/text_very_small"
+        android:text="Tell us about your experience, things your liked, and areas of improvement. Your feedback is valuable to us."
+        android:gravity="center"/>
+
+    <com.hsalf.smilerating.SmileRating
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBar"
+        app:textSelectionColor="@color/colorAccent"
+        app:textNonSelectionColor="@color/grey_200"
+        android:layout_marginTop="@dimen/spacing_mlarge"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding"
+        android:layout_marginLeft="@dimen/layout_small_margin"
+        android:layout_marginRight="@dimen/layout_small_margin"
+        android:background="@drawable/textarea_border"
+        android:minLines="4"
+        android:id="@+id/editText"
+        android:textSize="@dimen/text_small"
+        android:layout_marginBottom="@dimen/layout_small_margin"
+        android:layout_marginTop="@dimen/spacing_mlarge"
+        android:gravity="left|top"
+        android:hint="Write something here..."
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:background="@drawable/curvededge_button"
+        android:textColor="@color/textColorLight"
+        android:text="Done"
+        android:id="@+id/button"
+        android:layout_margin="@dimen/layout_small_margin"
+        />
+</LinearLayout>
+</androidx.cardview.widget.CardView>
