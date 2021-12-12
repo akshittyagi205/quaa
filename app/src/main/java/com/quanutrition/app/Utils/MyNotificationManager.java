@@ -66,7 +66,7 @@ public class MyNotificationManager {
             mBuilder.setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.chat));
             resultIntent.putExtra("tag", "1");
         }else if(tag.equals("3")){
-            resultIntent = new Intent(mCtx, DietPlanViewActivity.class);
+            resultIntent = new Intent(mCtx, MainActivity.class);
             mBuilder.setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.dinner));
             resultIntent.putExtra("tag", "3");
         }else if(tag.equals("2")){

@@ -1,14 +1,19 @@
 package com.quanutrition.app.googlefit;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.Scopes;
@@ -19,6 +24,7 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.FitnessActivities;
+import com.google.android.gms.fitness.FitnessOptions;
 import com.google.android.gms.fitness.FitnessStatusCodes;
 import com.google.android.gms.fitness.data.Bucket;
 import com.google.android.gms.fitness.data.DataPoint;
@@ -28,30 +34,41 @@ import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.data.Subscription;
 import com.google.android.gms.fitness.request.DataReadRequest;
 import com.google.android.gms.fitness.result.DailyTotalResult;
+import com.google.android.gms.fitness.result.DataReadResponse;
 import com.google.android.gms.fitness.result.DataReadResult;
 import com.google.android.gms.fitness.result.ListSubscriptionsResult;
+
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+import com.quanutrition.app.Utils.Tools;
+import com.quanutrition.app.firebaseUtils.FirebaseUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class GoogleFitUtils {
-    GoogleApiClient mClient;
+
     String TAG = "Google Fit Activity";
     String STEPS="0",CALORIES="0";
     Float expendedCalories=0f;
+    Float expendedCaloriesAr[] = {0f,0f,0f,0f,0f,0f,0f};
     float walking=0f,running=0f,other=0f;
-    private int REQUEST_OAUTH = 1;
-    private ResultCallback<Status> mSubscribeResultCallback;
-    private ResultCallback<Status> mCancelSubscriptionResultCallback;
-    private ResultCallback<ListSubscriptionsResult> mListSubscriptionsResultCallback;
-    private boolean authInProgress = false;
-    private static final String AUTH_PENDING = "auth_state_pending";
+
     public interface OnDataReady{
         void onStepsReady(String steps);
         void onCaloriesReady(String totalCal, String walking, String running, String other);
@@ -61,6 +78,8 @@ public class GoogleFitUtils {
     private Context context;
     private boolean flag = true;
     AppCompatActivity activity;
+    FitnessOptions fitnessOptions;
+    private boolean weekly = false;
 
     public GoogleFitUtils(Context context, OnDataReady onDataReady){
         this.context = context;
@@ -72,284 +91,218 @@ public class GoogleFitUtils {
         this.flag = flag;
     }
 
+    public void setWeekly(boolean weekly) {
+        this.weekly = weekly;
+    }
+
     public void init(){
-        googleFitCode();
-        initCallbacks();
-    }
 
-    void googleFitCode(){
-//        ad = Tools.getDialog("Loading...",this);
-        mClient = new GoogleApiClient.Builder(context)
-                .addApi(Fitness.HISTORY_API)
-                .addApi(Fitness.RECORDING_API)
-                .addApi(Fitness.CONFIG_API)
-                .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ))
-                .useDefaultAccount()
-                .addConnectionCallbacks(
-                        new GoogleApiClient.ConnectionCallbacks() {
 
-                            @Override
-                            public void onConnected(Bundle bundle) {
-                                Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_CALORIES_EXPENDED)
-                                        .setResultCallback(mSubscribeResultCallback);
-                                Fitness.RecordingApi.subscribe(mClient, DataType.AGGREGATE_STEP_COUNT_DELTA)
-                                        .setResultCallback(mSubscribeResultCallback);
+        if(Build.VERSION.SDK_INT> Build.VERSION_CODES.P) {
 
-                                //Async To fetch steps
-                                new GoogleFitUtils.FetchStepsAsync().execute();
-                                Calendar c = Calendar.getInstance();
-                                DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-                                String selecteddate = dateformat.format(c.getTime());
-                                //Log.d("Selected date",selecteddate);
-                                fetchUserGoogleFitData(selecteddate);
-                                fetchWeeklyProgressData();
-                                new GoogleFitUtils.FetchCalorieAsync().execute();
-
-                            }
-
-                            @Override
-                            public void onConnectionSuspended(int i) {
-                                // If your connection to the sensor gets lost at some point,
-                                // you'll be able to determine the reason and react to it here.
-                                if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST) {
-                                    //Log.i(TAG, "Connection lost.  Cause: Network Lost.");
-                                } else if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
-                                    //Log.i(TAG, "Connection lost.  Reason: Service Disconnected");
+            PackageManager pm = context.getPackageManager();
+            int hasPerm = pm.checkPermission(
+                    Manifest.permission.ACTIVITY_RECOGNITION,
+                    context.getPackageName());
+            if (hasPerm != PackageManager.PERMISSION_GRANTED) {
+                if(flag) {
+                    Dexter.withActivity((AppCompatActivity) context)
+                            .withPermission(Manifest.permission.ACTIVITY_RECOGNITION)
+                            .withListener(new PermissionListener() {
+                                @Override
+                                public void onPermissionGranted(PermissionGrantedResponse response) {
+                                    startCode();
                                 }
-                            }
-                        }
-                ).addOnConnectionFailedListener(
-                        new GoogleApiClient.OnConnectionFailedListener() {
-                            // Called whenever the API client fails to connect.
-                            @Override
-                            public void onConnectionFailed(ConnectionResult result) {
 
-                                if(flag) {
-                                    //Log.i(TAG, "Connection failed. Cause: " + result.toString());
-                                    if (!result.hasResolution()) {
-                                        // Show the localized error dialog
-                                        GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(),
-                                                activity, 0).show();
-                                        return;
-                                    }
-                                    // The failure has a resolution. Resolve it.
-                                    // Called typically when the app is not yet authorized, and an
-                                    // authorization dialog is displayed to the user.
-                                    if (!authInProgress) {
-                                        try {
-                                            //Log.i(TAG, "Attempting to resolve failed connection");
-                                            authInProgress = true;
-                                            result.startResolutionForResult(activity, REQUEST_OAUTH);
-                                        } catch (IntentSender.SendIntentException e) {
-                                            //Log.e(TAG,
-//                                                "Exception while starting resolution activity", e);
-                                        }
-                                    }
-                                }else{
-                                    onDataReady.onStepsReady("0");
-                                    onDataReady.onCaloriesReady("0","","","");
+                                @Override
+                                public void onPermissionDenied(PermissionDeniedResponse response) {
+                                    Tools.initCustomToast(context, "Need permission to access activity");
                                 }
-                            }
-                        }
-                ).build();
-        mClient.connect();
-    }
 
-    private void initCallbacks() {
-        mSubscribeResultCallback = new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if (status.isSuccess()) {
-                    if (status.getStatusCode() == FitnessStatusCodes.SUCCESS_ALREADY_SUBSCRIBED) {
-                        //Log.e( "RecordingAPI", "Already subscribed to the Recording API");
-                    } else {
-                        //Log.e("RecordingAPI", "Subscribed to the Recording API");
-                    }
+                                @Override
+                                public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
+                                }
+                            }).check();
+                }else{
+                    onDataReady.onStepsReady("-1");
+                    onDataReady.onCaloriesReady("-1","","","");
                 }
+            }else{
+                startCode();
             }
-        };
-
-        mCancelSubscriptionResultCallback = new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if (status.isSuccess()) {
-                    //Log.e( "RecordingAPI", "Canceled subscriptions!");
-                } else {
-                    // Subscription not removed
-                    //Log.e("RecordingAPI", "Failed to cancel subscriptions");
-                }
-            }
-        };
-
-        mListSubscriptionsResultCallback = new ResultCallback<ListSubscriptionsResult>() {
-            @Override
-            public void onResult(@NonNull ListSubscriptionsResult listSubscriptionsResult) {
-                for (Subscription subscription : listSubscriptionsResult.getSubscriptions()) {
-                    DataType dataType = subscription.getDataType();
-                    //Log.e( "RecordingAPI", dataType.getName() );
-                    for (Field field : dataType.getFields() ) {
-                        //Log.e( "RecordingAPI", field.toString() );
-                    }
-                }
-            }
-        };
-    }
-
-    private class FetchStepsAsync extends AsyncTask<Object, Object, Long> {
-        protected Long doInBackground(Object... params) {
-            long total = 0;
-            PendingResult<DailyTotalResult> result = Fitness.HistoryApi.readDailyTotal(mClient, DataType.AGGREGATE_STEP_COUNT_DELTA);
-            DailyTotalResult totalResult = result.await(30, TimeUnit.SECONDS);
-            if (totalResult.getStatus().isSuccess()) {
-                DataSet totalSet = totalResult.getTotal();
-                if (totalSet != null) {
-                    total = totalSet.isEmpty()
-                            ? 0
-                            : totalSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
-//                    //Log.d("Step",totalSet.getDataPoints().get(0)+"");
-                }
-            } else {
-                //Log.w(TAG, "There was a problem getting the step count.");
-            }
-            return total;
-        }
-
-
-        @Override
-        protected void onPostExecute(Long aLong) {
-            super.onPostExecute(aLong);
-
-            //Total steps covered for that day
-//            Toast.makeText(getApplicationContext(), "Total steps: " + aLong, Toast.LENGTH_SHORT).show();
-            STEPS = aLong+"";
-//            ((TextView)findViewById(R.id.steps)).setText(STEPS + "");
-            onDataReady.onStepsReady(STEPS);
-            //Log.i(TAG, "Total steps: " + aLong);
-
+        }else{
+            startCode();
         }
     }
 
-    private class FetchCalorieAsync extends AsyncTask<Object, Object, Float> {
-        protected Float doInBackground(Object... params) {
-            Float total = 0.0f;
-            PendingResult<DailyTotalResult> result = Fitness.HistoryApi.readDailyTotal(mClient, DataType. TYPE_CALORIES_EXPENDED);
-            DailyTotalResult totalResult = result.await(30, TimeUnit.SECONDS);
-            if (totalResult.getStatus().isSuccess()) {
-                DataSet totalSet = totalResult.getTotal();
-                if (totalSet != null) {
-                    total = totalSet.isEmpty()
-                            ? 0
-                            : totalSet.getDataPoints().get(0).getValue(Field.FIELD_CALORIES).asFloat();
-                }
-            } else {
-                //Log.w(TAG, "There was a problem getting the calories.");
-            }
-            return total;
-        }
-
-
-        @Override
-        protected void onPostExecute(Float aLong) {
-            super.onPostExecute(aLong);
-
-            //Total calories burned for that day
-            //Log.i(TAG, "Total calories: " + aLong);
-
-        }
-    }
-
-
-    public void fetchUserGoogleFitData(String date) {
-        if (mClient != null && mClient.isConnected()) {
-
-            Date d1 = null;
-            try {
-                d1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-            } catch (Exception e) {
-
-            }
-            Calendar calendar = Calendar.getInstance();
-
-            try {
-                calendar.setTime(d1);
-            } catch (Exception e) {
-                calendar.setTime(new Date());
-            }
-            DataReadRequest readRequest = queryDateFitnessData(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-            new GoogleFitUtils.GetCaloriesAsyncTask(readRequest, mClient).execute();
-
-        }
-    }
-
-    private DataReadRequest queryDateFitnessData(int year, int month, int day_of_Month) {
-
-        Calendar startCalendar = Calendar.getInstance(Locale.getDefault());
-        startCalendar.set(Calendar.YEAR, year);
-        startCalendar.set(Calendar.MONTH, month);
-        startCalendar.set(Calendar.DAY_OF_MONTH, day_of_Month);
-        startCalendar.set(Calendar.HOUR_OF_DAY, 23);
-        startCalendar.set(Calendar.MINUTE, 59);
-        startCalendar.set(Calendar.SECOND, 59);
-        startCalendar.set(Calendar.MILLISECOND, 999);
-        long endTime = startCalendar.getTimeInMillis();
-
-
-        startCalendar.set(Calendar.HOUR_OF_DAY, 0);
-        startCalendar.set(Calendar.MINUTE, 0);
-        startCalendar.set(Calendar.SECOND, 0);
-        startCalendar.set(Calendar.MILLISECOND, 0);
-        long startTime = startCalendar.getTimeInMillis();
-
-        return new DataReadRequest.Builder()
-                // The data request can specify multiple data types to return, effectively
-                // combining multiple data queries into one call.
-                // In this example, it's very unlikely that the request is for several hundred
-                // datapoints each consisting of a few steps and a timestamp.  The more likely
-                // scenario is wanting to see how many steps were walked per day, for 7 days.
-                //.aggregate(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA)
-                //.aggregate(DataType.TYPE_CALORIES_EXPENDED,DataType.AGGREGATE_CALORIES_EXPENDED)
-                .aggregate(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED)
-                // .read(DataType.TYPE_CALORIES_EXPENDED)
-                // Analogous to a "Group By" in SQL, defines how data should be aggregated.
-                // bucketByTime allows for a time span, whereas bucketBySession would allow
-                // bucketing by "sessions", which would need to be defined in code.
-                //.bucketByTime(1, TimeUnit.DAYS)
-                .bucketByActivitySegment(1, TimeUnit.MILLISECONDS)
-                .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+    void startCode() {
+        fitnessOptions = FitnessOptions.builder()
+                .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.TYPE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.AGGREGATE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
                 .build();
 
-    }
+        GoogleSignInAccount account = GoogleSignIn.getAccountForExtension(activity, fitnessOptions);
 
-    public class GetCaloriesAsyncTask extends AsyncTask<Void, Void, DataReadResult> {
-        DataReadRequest readRequest;
-        String TAG = "GoogleFitUtils";
-        GoogleApiClient mClient = null;
-
-        public GetCaloriesAsyncTask(DataReadRequest dataReadRequest_, GoogleApiClient googleApiClient) {
-            this.readRequest = dataReadRequest_;
-            this.mClient = googleApiClient;
-        }
-
-        @Override
-        protected DataReadResult doInBackground(Void... params) {
-            return Fitness.HistoryApi.readData(mClient, readRequest).await(1, TimeUnit.MINUTES);
-        }
-
-        @Override
-        protected void onPostExecute(DataReadResult dataReadResult) {
-            super.onPostExecute(dataReadResult);
-            printData(dataReadResult);
+        if (!GoogleSignIn.hasPermissions(account, fitnessOptions)) {
+            if(flag)
+                GoogleSignIn.requestPermissions(activity, 0, account, fitnessOptions);
+            else {
+                onDataReady.onStepsReady("-1");
+                onDataReady.onCaloriesReady("-1","","","");
+            }
+        } else {
+            getDailySteps();
+            getDailyCalories();
+            if(weekly) {
+                getWeeklySteps(); //sync data on firebase
+                getWeeklyCalories();
+            }
         }
 
     }
 
-    private void printData(DataReadResult dataReadResult) {
+    private void getWeeklyCalories() {
+
+        for(int i=0;i<7;i++) {
+
+            final long endTime,startTime;
+            final int pos = i;
+            if(i==0) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(new Date());
+                endTime = cal.getTimeInMillis();
+                cal.set(Calendar.HOUR_OF_DAY, 0);
+                cal.set(Calendar.MINUTE, 0);
+                cal.set(Calendar.SECOND, 0);
+                cal.set(Calendar.MILLISECOND, 0);
+                startTime = cal.getTimeInMillis();
+            }else{
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.DATE,-1*i);
+                cal.set(Calendar.HOUR_OF_DAY, 0);
+                cal.set(Calendar.MINUTE, 0);
+                cal.set(Calendar.SECOND, 0);
+                cal.set(Calendar.MILLISECOND, 0);
+                startTime = cal.getTimeInMillis();
+
+
+                cal.set(Calendar.HOUR_OF_DAY,23);
+                cal.set(Calendar.MINUTE, 59);
+                cal.set(Calendar.SECOND, 59);
+                cal.set(Calendar.MILLISECOND, 0);
+                endTime = cal.getTimeInMillis();
+            }
+
+            DataReadRequest readRequest = new DataReadRequest.Builder()
+                    .aggregate(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED)
+                    .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+                    .bucketByActivityType(1, TimeUnit.SECONDS)
+                    .build();
+
+            GoogleSignInAccount account = GoogleSignIn
+                    .getAccountForExtension(activity, fitnessOptions);
+
+            Fitness.getHistoryClient(activity, account)
+                    .readData(readRequest)
+                    .addOnSuccessListener(new OnSuccessListener<DataReadResponse>() {
+                        @Override
+                        public void onSuccess(DataReadResponse dataReadResult) {
+
+                            if (dataReadResult.getBuckets().size() > 0) {
+                                for (Bucket bucket : dataReadResult.getBuckets()) {
+                                    String bucketActivity = bucket.getActivity();
+                                    Log.d("Activity",bucketActivity);
+                                    if (!(bucketActivity.contains(FitnessActivities.IN_VEHICLE)||bucketActivity.contains(FitnessActivities.STILL))) {
+                                        List<DataSet> dataSets = bucket.getDataSets();
+                                        for (DataSet dataSet : dataSets) {
+                                            for (DataPoint dp : dataSet.getDataPoints()) {
+                                                if (dp.getEndTime(TimeUnit.MILLISECONDS) > dp.getStartTime(TimeUnit.MILLISECONDS)) {
+                                                    for (Field field : dp.getDataType().getFields()) {
+                                                        expendedCaloriesAr[pos] = expendedCaloriesAr[pos] + dp.getValue(field).asFloat();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                float calFloat = expendedCaloriesAr[pos];
+                                int calInt = (int)calFloat;
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                                new FirebaseUtils(context).syncCaloriesData(sdf.format(startTime),String.valueOf(calInt));
+
+
+
+                            } else if (dataReadResult.getDataSets().size() > 0) {
+
+                                for (DataSet dataSet : dataReadResult.getDataSets()) {
+                                    for (DataPoint dp : dataSet.getDataPoints()) {
+                                        if (dp.getEndTime(TimeUnit.MILLISECONDS) > dp.getStartTime(TimeUnit.MILLISECONDS)) {
+                                            for (Field field : dp.getDataType().getFields()) {
+                                                expendedCaloriesAr[pos] = expendedCaloriesAr[pos] + dp.getValue(field).asFloat();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+        }
+    }
+
+
+    private void getDailyCalories() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        long endTime = cal.getTimeInMillis();
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MILLISECOND,0);
+        long startTime = cal.getTimeInMillis();
+
+        DataReadRequest readRequest = new DataReadRequest.Builder()
+                .aggregate(DataType.TYPE_CALORIES_EXPENDED, DataType.AGGREGATE_CALORIES_EXPENDED)
+                .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+                .bucketByActivityType(1, TimeUnit.SECONDS)
+                .build();
+
+        GoogleSignInAccount account = GoogleSignIn
+                .getAccountForExtension(activity, fitnessOptions);
+
+        Fitness.getHistoryClient(activity, account)
+                .readData(readRequest)
+                .addOnSuccessListener(new OnSuccessListener<DataReadResponse>() {
+                    @Override
+                    public void onSuccess(DataReadResponse dataReadResponse) {
+                        printDataCal(dataReadResponse);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+    }
+
+    private void printDataCal(DataReadResponse dataReadResult) {
 
 
         if (dataReadResult.getBuckets().size() > 0) {
             for (Bucket bucket : dataReadResult.getBuckets()) {
                 String bucketActivity = bucket.getActivity();
-                if (!(bucketActivity.contains(FitnessActivities.UNKNOWN)||bucketActivity.contains(FitnessActivities.IN_VEHICLE)||bucketActivity.contains(FitnessActivities.STILL))) {
+                Log.d("Activity",bucketActivity);
+                if (!(bucketActivity.contains(FitnessActivities.IN_VEHICLE)||bucketActivity.contains(FitnessActivities.STILL))) {
                     List<DataSet> dataSets = bucket.getDataSets();
                     for (DataSet dataSet : dataSets) {
                         dumpDataSet(dataSet,bucket.getActivity());
@@ -360,8 +313,9 @@ public class GoogleFitUtils {
             float calFloat = expendedCalories;
             int calInt = (int)calFloat;
             CALORIES = String.valueOf(calInt);
-            Log.d("Akshit cal",CALORIES);
+            Log.e("Akshit cal Fitness",CALORIES);
             onDataReady.onCaloriesReady(CALORIES,walking+"",running+"",other+"");
+//            onDataReady.onCaloriesReady(CALORIES,walking+"",running+"",other+"");
 
 
 
@@ -381,119 +335,166 @@ public class GoogleFitUtils {
         for (DataPoint dp : dataSet.getDataPoints()) {
             if (dp.getEndTime(TimeUnit.MILLISECONDS) > dp.getStartTime(TimeUnit.MILLISECONDS)) {
                 for (Field field : dp.getDataType().getFields()) {
-                    if(activity.equalsIgnoreCase("walking")){
+                    /*if(activity.equalsIgnoreCase("walking")){
                         walking+=dp.getValue(field).asFloat();
                     }else if(activity.equalsIgnoreCase("running")){
                         running+=dp.getValue(field).asFloat();
                     }else{
                         other+=dp.getValue(field).asFloat();
-                    }
+                    }*/
                     expendedCalories = expendedCalories + dp.getValue(field).asFloat();
                 }
             }
         }
     }
 
-    private void fetchWeeklyProgressData() {
+    private void getDailySteps() {
         Calendar cal = Calendar.getInstance();
-        Date now = new Date();
-        cal.setTime(now);
-        cal.set(Calendar.HOUR_OF_DAY,23);
-        cal.set(Calendar.MINUTE,59);
-        cal.set(Calendar.SECOND,59);
-        cal.set(Calendar.MILLISECOND,999);
+        cal.setTime(new Date());
         long endTime = cal.getTimeInMillis();
-        cal.add(Calendar.WEEK_OF_YEAR, -1);
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MILLISECOND,0);
         long startTime = cal.getTimeInMillis();
 
-        java.text.DateFormat dateFormat = DateFormat.getDateInstance();
-
-
-//Check how many steps were walked and recorded in the last 7 days
         DataReadRequest readRequest = new DataReadRequest.Builder()
-                .aggregate(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA)
-                .bucketByTime(1, TimeUnit.DAYS)
+                .read(DataType.AGGREGATE_STEP_COUNT_DELTA)
                 .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+                .bucketByTime(1, TimeUnit.DAYS)
                 .build();
-//                DataReadRequest readRequest = queryWeeklyStepsData(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        new GoogleFitUtils.GetWeeklyStepsAsyncTask(readRequest, mClient,0).execute();
 
+        GoogleSignInAccount account = GoogleSignIn
+                .getAccountForExtension(activity, fitnessOptions);
+
+        Fitness.getHistoryClient(activity, account)
+                .readDailyTotal(DataType.AGGREGATE_STEP_COUNT_DELTA)
+                .addOnSuccessListener(new OnSuccessListener<DataSet>() {
+                    @Override
+                    public void onSuccess(DataSet dataSet) {
+                        long total = 0;
+                        if (dataSet != null) {
+                            total = dataSet.isEmpty()
+                                    ? 0
+                                    : dataSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
+//                    //Log.d("Step",totalSet.getDataPoints().get(0)+"");
+                        }
+
+                        Log.d("Total Steps",total+"");
+                        onDataReady.onStepsReady(total+"");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     private int count;
     ArrayList<String> days;
     ArrayList<String> steps;
 
-    public class GetWeeklyStepsAsyncTask extends AsyncTask<Void, Void, DataReadResult> {
-        DataReadRequest readRequest;
-        String TAG = GoogleFitUtils.GetCaloriesAsyncTask.class.getName();
-        GoogleApiClient mClient = null;
-        int position;
+    private void getWeeklySteps() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.set(Calendar.HOUR_OF_DAY,23);
+        cal.set(Calendar.MINUTE,59);
+        cal.set(Calendar.SECOND,59);
+        cal.set(Calendar.MILLISECOND,0);
+        long endTime = cal.getTimeInMillis();
+        cal.add(Calendar.WEEK_OF_MONTH,-1);
+        /*cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.set(Calendar.MINUTE,1);
+        cal.set(Calendar.SECOND,1);
+        cal.set(Calendar.MILLISECOND,0);*/
+        long startTime = cal.getTimeInMillis();
 
-        public GetWeeklyStepsAsyncTask(DataReadRequest dataReadRequest_, GoogleApiClient googleApiClient, int position) {
-            this.readRequest = dataReadRequest_;
-            this.mClient = googleApiClient;
-            this.position = position;
-        }
+        days = new ArrayList<>();
+        steps = new ArrayList<>();
 
-        @Override
-        protected DataReadResult doInBackground(Void... params) {
-            return Fitness.HistoryApi.readData(mClient, readRequest).await(1, TimeUnit.MINUTES);
-        }
+        DataReadRequest readRequest = new DataReadRequest.Builder()
+                .read(DataType.AGGREGATE_STEP_COUNT_DELTA)
+                .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+                .bucketByTime(1, TimeUnit.DAYS)
+                .build();
 
-        @Override
-        protected void onPostExecute(DataReadResult dataReadResult) {
-            super.onPostExecute(dataReadResult);
-//            printDataWeekly(dataReadResult,position);
-            count=6;
-            days= new ArrayList<>();
-            steps = new ArrayList<>();
-            displayLastWeeksData(dataReadResult,position);
-        }
+        GoogleSignInAccount account = GoogleSignIn
+                .getAccountForExtension(activity, fitnessOptions);
 
+        Fitness.getHistoryClient(activity, account)
+                .readData(readRequest)
+                .addOnSuccessListener(new OnSuccessListener<DataReadResponse>() {
+                    @Override
+                    public void onSuccess(DataReadResponse dataReadResponse) {
+                        printData(dataReadResponse);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
-    void displayLastWeeksData(DataReadResult dataReadResult, int position){
-        //Used for aggregated data
+    private void printData(DataReadResponse dataReadResult) {
+
+
         if (dataReadResult.getBuckets().size() > 0) {
             for (Bucket bucket : dataReadResult.getBuckets()) {
+                Log.d("Activity",bucket.getActivity());
+//                if (!(bucketActivity.contains(FitnessActivities.UNKNOWN)||bucketActivity.contains(FitnessActivities.IN_VEHICLE)||bucketActivity.contains(FitnessActivities.STILL))) {
                 List<DataSet> dataSets = bucket.getDataSets();
                 for (DataSet dataSet : dataSets) {
-                    showDataSet(dataSet);
+                    Log.d("Data",dataSet.getDataSource().getStreamName());
+//                        Log.d("Data",dataSet.getDataPoints().toString());
+                    dumpDataSet(dataSet);
                 }
+//                }
             }
-        }
-//Used for non-aggregated data
-        else if (dataReadResult.getDataSets().size() > 0) {
-            //Log.e("History", "Number of returned DataSets: " + dataReadResult.getDataSets().size());
+
+         /*   float calFloat = expendedCalories;
+            int calInt = (int)calFloat;
+            CALORIES = String.valueOf(calInt);
+            Log.d("Akshit cal",CALORIES);
+            onDataReady.onCaloriesReady(CALORIES,walking+"",running+"",other+"");*/
+
+
+
+        } else if (dataReadResult.getDataSets().size() > 0) {
+
             for (DataSet dataSet : dataReadResult.getDataSets()) {
-//                showDataSet(dataSet);
+                dumpDataSet(dataSet);
             }
         }
+
+        // [END parse_read_data_result]
     }
 
+    private void dumpDataSet(DataSet dataSet) {
 
-    private void showDataSet(DataSet dataSet) {
-        //Log.e("History", "Data returned for Data type: " + dataSet.getDataType().getName());
-        DateFormat dateFormat = DateFormat.getDateInstance();
-        DateFormat timeFormat = DateFormat.getTimeInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE dd-MM-yyyy");
-
+        int step = 0;
+        String day = "";
         for (DataPoint dp : dataSet.getDataPoints()) {
-            //Log.e("History", "Data point:");
-            //Log.e("History", "\tType: " + dp.getDataType().getName());
-            //Log.e("History", "\tStart: " + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-            //Log.e("History", "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-            days.add(sdf.format(dp.getEndTime(TimeUnit.MILLISECONDS)).split(" ")[0]);
-            for (Field field : dp.getDataType().getFields()) {
-                //Log.e("History", "\tField: " + field.getName() +
-//                        " Value: " + dp.getValue(field));
-//                ((ProgressBar)findViewById(progressBars[count])).setProgress((dp.getValue(field).asInt())/100);
-                steps.add(dp.getValue(field).asInt()+"");
-                //Log.d("Progress Value",((dp.getValue(field).asInt())/10000)+"");
-            }
-            count--;
+            step+=dp.getValue(Field.FIELD_STEPS).asInt();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE dd-MM-yyyy");
+            day= simpleDateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)).split(" ")[1];
+//            if (dp.getEndTime(TimeUnit.MILLISECONDS) > dp.getStartTime(TimeUnit.MILLISECONDS)) {
+                /*for (Field field : dp.getDataType().getFields()) {
+                    Log.e("Steps",dp.getValue(field)+"");
+                }*/
+//            }
         }
-        onDataReady.onWeeklyDataReady(days,steps);
+
+        new FirebaseUtils(context).syncStepsData(day,String.valueOf(step));
+        steps.add(step+"");
+        days.add(day);
+
+//        if(steps.size()==7)
+//            onDataReady.onWeeklyDataReady(days,steps);
+
+        Log.e("Steps "+day,step+"");
     }
 }

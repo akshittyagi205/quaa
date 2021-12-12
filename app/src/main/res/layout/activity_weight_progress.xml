@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".bottomtabs.WeightProgressActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:id="@+id/appbar"
+        android:layout_alignParentTop="true"
+        android:theme="@style/AppTheme">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:titleTextColor="@color/textColorLight"
+            app:title="Weight Progress"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/layout_small_margin"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".bottomtabs.ProgressFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_medium_margin"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="@dimen/layout_small_margin"
+                app:cardElevation="0dp"
+                android:layout_marginLeft="@dimen/layout_very_small_margin"
+                android:layout_marginRight="@dimen/layout_very_small_margin"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/medium_padding"
+                    android:paddingBottom="@dimen/medium_padding"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_small"
+                            android:textColor="@color/textColorLight"
+                            android:text="Duration  :"
+                            android:padding="@dimen/small_padding"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/defaultfont"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/defaultfont"
+                            android:text="Last 30 Days"
+                            android:padding="@dimen/small_padding"
+                            android:id="@+id/daysSelect"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/layout_small_margin"
+                            android:drawablePadding="@dimen/small_padding"
+                            android:drawableTint="@color/textColorLight"
+                            android:drawableRight="@drawable/ic_arrow_drop_down"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_height="250dp">
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/small_padding"
+                            android:paddingRight="@dimen/small_padding"
+                            android:id="@+id/chart"
+                            />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_very_small"
+                        android:textColor="@color/textColorLight"
+                        android:text="No. Of Days"
+                        android:layout_marginTop="@dimen/layout_small_margin"
+                        android:layout_gravity="center"
+                        android:paddingLeft="@dimen/large_padding"
+                        android:paddingRight="@dimen/large_padding"
+                        android:fontFamily="@font/defaultfont"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_margin="@dimen/layout_small_margin"
+                android:layout_height="50dp"
+                android:translationZ="5dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:background="@drawable/circle_white"
+                android:layout_gravity="center">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/share"
+                    android:src="@drawable/ic_menu_share"
+                    android:tint="@color/colorPrimary"
+                    android:padding="@dimen/medium_padding"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_margin="@dimen/layout_small_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/text_medium"
+                android:visibility="gone"
+                android:textColor="@color/textColorLight"
+                android:background="@drawable/button_back"
+                android:paddingTop="@dimen/small_padding"
+                android:id="@+id/log"
+                android:paddingBottom="@dimen/small_padding"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:text="View Weight Log"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="horizontal">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="1dp"
+                    android:translationZ="5dp"
+                    app:cardCornerRadius="5dp"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/medium_padding"
+                        android:paddingBottom="@dimen/medium_padding"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/small_padding"
+                            android:textSize="@dimen/text_small"
+                            android:textColor="@color/grey_700"
+                            android:text="Current Weight"/>
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:paddingTop="@dimen/medium_padding"
+                            android:paddingBottom="@dimen/medium_padding"
+                            android:layout_height="wrap_content">
+                            <!--<com.budiyev.android.circularprogressbar.CircularProgressBar
+                                android:id="@+id/progress_bar"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                app:animateProgress="true"
+                                app:backgroundStrokeColor="@color/grey_10"
+                                app:backgroundStrokeWidth="8dp"
+                                app:drawBackgroundStroke="true"
+                                app:foregroundStrokeCap="round"
+                                app:foregroundStrokeColor="@color/green_400"
+                                app:foregroundStrokeWidth="10dp"
+                                app:indeterminate="false"
+                                app:indeterminateRotationAnimationDuration="1200"
+                                app:indeterminateSweepAnimationDuration="600"
+                                app:indeterminateMinimumAngle="45"
+                                app:maximum="100"
+                                app:progress="0"
+                                app:progressAnimationDuration="1000"
+                                app:startAngle="270"/>-->
+
+                            <TextView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:gravity="center"
+                                android:padding="@dimen/small_padding"
+                                android:id="@+id/currentWeight"
+                                android:textSize="@dimen/text_very_large"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/colorPrimary"
+                                android:text="-"/>
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_margin="@dimen/layout_small_margin"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="1dp"
+                    android:translationZ="5dp"
+                    app:cardCornerRadius="5dp"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/medium_padding"
+                        android:paddingBottom="@dimen/medium_padding"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/small_padding"
+                            android:textSize="@dimen/text_small"
+                            android:textColor="@color/grey_700"
+                            android:text="Current BMI"/>
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/medium_padding"
+                            android:paddingBottom="@dimen/medium_padding">
+                            <!--<com.budiyev.android.circularprogressbar.CircularProgressBar
+                                android:id="@+id/progress_bar_bmi"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                app:animateProgress="true"
+                                app:backgroundStrokeColor="@color/grey_10"
+                                app:backgroundStrokeWidth="8dp"
+                                app:drawBackgroundStroke="true"
+                                app:foregroundStrokeCap="round"
+                                app:foregroundStrokeColor="@color/yellow_500"
+                                app:foregroundStrokeWidth="10dp"
+                                app:indeterminate="false"
+                                app:indeterminateRotationAnimationDuration="1200"
+                                app:indeterminateSweepAnimationDuration="600"
+                                app:indeterminateMinimumAngle="45"
+                                app:maximum="100"
+                                app:progress="0"
+                                app:progressAnimationDuration="1000"
+                                app:startAngle="270"/>-->
+
+                            <TextView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:gravity="center"
+                                android:padding="@dimen/small_padding"
+                                android:textSize="@dimen/text_very_large"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/colorPrimary"
+                                android:text="-"/>
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/textColorLight"
+                android:elevation="2dp"
+                android:visibility="gone"
+                app:cardCornerRadius="5dp"
+                android:translationZ="5dp"
+                android:layout_margin="@dimen/layout_small_margin"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/medium_padding"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="@dimen/text_medium"
+                        android:padding="@dimen/small_padding"
+                        android:textColor="@color/grey_800"
+                        android:text="Update Todays Weight"
+                        android:fontFamily="@font/defaultfont"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:id="@+id/goalText"
+                        android:textSize="@dimen/text_small"
+                        android:padding="@dimen/small_padding"
+                        android:textColor="@color/grey_700"
+                        android:drawableRight="@drawable/ic_edit"
+                        android:drawablePadding="@dimen/medium_padding"
+                        android:drawableTint="@color/grey_400"
+                        android:text="Last updated on 24-04-2019"
+                        android:fontFamily="@font/defaultfont"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/update"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/layout_very_small_margin"
+                android:layout_marginBottom="@dimen/layout_very_small_margin"
+                android:layout_marginStart="@dimen/layout_small_margin"
+                android:layout_marginEnd="@dimen/layout_small_margin"
+                android:background="@drawable/curve_back_sharp"
+                android:padding="@dimen/medium_padding"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/textColorLight"
+                    android:text="Update Weight"
+                    android:layout_gravity="center"
+                    android:paddingLeft="@dimen/large_padding"
+                    android:paddingRight="@dimen/large_padding"
+                    android:fontFamily="@font/defaultfont"/>
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="@dimen/layout_small_margin"
+                android:layout_marginBottom="@dimen/layout_very_small_margin"
+                android:background="@color/grey_800"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:text="Weight Logs"
+                android:visibility="gone"
+                android:textColor="@color/textColorLight"
+                android:textSize="@dimen/text_large"/>
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:id="@+id/re"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/noProgress"
+        android:visibility="gone"
+        android:background="@color/colorPrimaryDark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/illustration_progress" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_small_margin"
+                android:padding="@dimen/small_padding"
+                android:textColor="@color/textColorLight"
+                android:textSize="@dimen/text_medium"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/defaultfont"
+                android:text="No Data Found"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_small_margin"
+                android:padding="@dimen/medium_padding"
+                android:textColor="@color/textColorLight"
+                android:gravity="center"
+                android:id="@+id/basicBtn"
+                android:textSize="@dimen/text_medium"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/defaultfont"
+                android:background="@drawable/curve_back"
+                android:text="Click To Update Weight"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

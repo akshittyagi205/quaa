@@ -73,7 +73,7 @@ public class ProgramsActivity extends AppCompatActivity {
                         JSONArray data = ob.getJSONArray("data");
                         for(int i=0;i<data.length();i++) {
                             JSONObject ob1 = data.getJSONObject(i);
-                            ProgramModel model = new ProgramModel(ob1.getInt("id")+"",ob1.getString("name"),ob1.optString("image","https://quanutrition.com/images/package/1.jpg"),false);
+                            ProgramModel model = new ProgramModel(ob1.getInt("id")+"",ob1.getString("name"),ob1.optString("image"),false);
                             plans.add(model);
                         }
                         adapter.notifyDataSetChanged();

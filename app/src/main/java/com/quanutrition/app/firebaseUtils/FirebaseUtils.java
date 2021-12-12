@@ -106,6 +106,34 @@ public class FirebaseUtils {
         });
     }
 
+    public void syncStepsData(final String date,final String value){
+        mMessagesDatabaseReference.child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                mMessagesDatabaseReference.child(date).child("steps").setValue(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void syncCaloriesData(final String date,final String value){
+        mMessagesDatabaseReference.child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                mMessagesDatabaseReference.child(date).child("calories").setValue(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public void syncCaloriesData(final String value){
         mMessagesDatabaseReference.child(Tools.getFormattedDateToday()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

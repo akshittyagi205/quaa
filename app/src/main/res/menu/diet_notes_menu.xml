@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/notes"
-        android:orderInCategory="100"
         android:title="Notes"
-        android:icon="@drawable/ic_note"
+        android:icon="@drawable/ic_text_document"
         app:showAsAction="always" />
 </menu>

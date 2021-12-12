@@ -34,9 +34,9 @@
         android:layout_gravity="center"
         app:np_dividerColor="@color/colorPrimary"
         app:np_selectedTextColor="@color/colorPrimary"
-        app:np_selectedTextSize="@dimen/text_large"
+        app:np_selectedTextSize="@dimen/text_small"
         app:np_textColor="@color/colorPrimary"
-        app:np_textSize="@dimen/text_medium"
+        app:np_textSize="@dimen/text_small"
         />
 
 

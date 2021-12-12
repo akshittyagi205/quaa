@@ -28,7 +28,7 @@
         android:paddingRight="@dimen/small_padding"
         android:textColor="@color/grey_400"
         android:textSize="@dimen/text_very_small"
-        android:text="Tell us about your experience, things your liked, and areas of improvement. Your feedback is valuable to us."
+        android:text="Tell us about your experience, things you liked, and areas of improvement. Your feedback is valuable to us."
         android:gravity="center"/>
 
     <com.hsalf.smilerating.SmileRating

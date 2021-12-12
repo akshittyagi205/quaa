@@ -253,10 +253,19 @@ public class FoodSpecificationsActivity extends AppCompatActivity implements Vie
                 public void onMultipleItemsSelected(ArrayList<MultipleSelectionModel> items) {
                     cuisinesBase = items;
                     cuisines.clear();
+                    int flag = -1;
                     for(int i=0;i<cuisinesBase.size();i++){
                         if(cuisinesBase.get(i).isSelected()){
+                            if(cuisines.size()<5)
                             cuisines.add(new ChipsModel(cuisinesBase.get(i).getId(),cuisinesBase.get(i).getLabel()));
+                            else {
+                                flag=0;
+                                cuisinesBase.get(i).setSelected(false);
+                            }
                         }
+                    }
+                    if(flag==0){
+                        Tools.initCustomToast(FoodSpecificationsActivity.this,"Please select upto 5 cuisines");
                     }
                     cuisinesAdapter.notifyDataSetChanged();
                 }
@@ -411,6 +420,7 @@ public class FoodSpecificationsActivity extends AppCompatActivity implements Vie
                             nv_exempt_re.setVisibility(View.VISIBLE);
                         }
 
+                        if(!foodPrefData.getString("culture").equalsIgnoreCase("null"))
                         culture.setText(foodPrefData.getString("culture"));
 
 

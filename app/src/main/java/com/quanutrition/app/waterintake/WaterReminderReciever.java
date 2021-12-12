@@ -87,8 +87,11 @@ public class WaterReminderReciever extends BroadcastReceiver {
         end.set(Calendar.SECOND, 0);
         end.set(Calendar.MILLISECOND, 0);
 
+        boolean waterFlag = Tools.getGeneralSharedPref(context).getBoolean(Constants.NOTIFICATION_WATER,true);
+
         if(now.getTimeInMillis()>start.getTimeInMillis()&&now.getTimeInMillis()<end.getTimeInMillis())
-        WaterNotificationManager.getInstance(context).displayNotification(Title, Body, "11", Constants.WATER_CHANNEL);
+            if(waterFlag)
+                WaterNotificationManager.getInstance(context).displayNotification(Title, Body, "11", Constants.WATER_CHANNEL);
 
 
     }

@@ -14,7 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.quanutrition.app.R;
+import com.quanutrition.app.databinding.DialogTimepickerBinding;
 import com.shawnlin.numberpicker.NumberPicker;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -89,6 +92,45 @@ public class DialogUtils {
         final View inflator = linf.inflate(R.layout.multiple_selection_dialog, null);
         alertDialog.setView(inflator);
         alertDialog.setCancelable(true);
+        TextView titleTV = inflator.findViewById(R.id.title);
+        titleTV.setVisibility(View.GONE);
+        RecyclerView recyclerView = inflator.findViewById(R.id.selection_re);
+        final ArrayList<MultipleSelectionModel> modelList = list;
+        MultipleSelectionAdapter adapter = new MultipleSelectionAdapter(modelList, context);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        (inflator.findViewById(R.id.done)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<MultipleSelectionModel> selected = new ArrayList<>();
+                for(int j=0;j<modelList.size();j++){
+                    if(modelList.get(j).isSelected()){
+                        selected.add(modelList.get(j));
+                    }
+                }
+                onMultipleItemsSelected.onMultipleItemsSelected(modelList);
+                alertDialog1.dismiss();
+            }
+        });
+
+        alertDialog1 = null;
+        alertDialog1 = alertDialog.show();
+        alertDialog1.getWindow().setBackgroundDrawable(context.getResources().getDrawable(R.drawable.dialog_background_drawable));
+    }
+
+    public static void getMultipleSelectionDialogWithTitle(Context context,String title,final ArrayList<MultipleSelectionModel> list, final OnMultipleItemsSelected onMultipleItemsSelected){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        LayoutInflater linf = LayoutInflater.from(context);
+        final View inflator = linf.inflate(R.layout.multiple_selection_dialog, null);
+        alertDialog.setView(inflator);
+        alertDialog.setCancelable(true);
+
+        TextView titleTV = inflator.findViewById(R.id.title);
+        titleTV.setVisibility(View.VISIBLE);
+        titleTV.setText(title);
+
         RecyclerView recyclerView = inflator.findViewById(R.id.selection_re);
         final ArrayList<MultipleSelectionModel> modelList = list;
         MultipleSelectionAdapter adapter = new MultipleSelectionAdapter(modelList, context);
@@ -400,7 +442,7 @@ public class DialogUtils {
             numberPicker.setMinValue(1);
             numberPicker.setDisplayedValues(array);
             numberPicker.setMaxValue(array.length);
-            numberPicker.setValue(10);
+            numberPicker.setValue(40);
         }
         numberPickerUnit.setFadingEdgeEnabled(true);
         numberPickerUnit.setScrollerEnabled(true);
@@ -488,6 +530,48 @@ public class DialogUtils {
                 selected = data[newVal-1];
             }
         });
+        alertDialog1 = null;
+        alertDialog1 = alertDialog.show();
+        alertDialog1.getWindow().setBackgroundDrawable(context.getResources().getDrawable(R.drawable.dialog_background_drawable));
+    }
+
+    public static void getTimePicker(final Context context,boolean isCancelable,final OnCustomItemPicked onCustomItemPicked){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        LayoutInflater linf = LayoutInflater.from(context);
+        DialogTimepickerBinding binding = DialogTimepickerBinding.inflate(linf);
+        final View inflator = binding.getRoot();
+        alertDialog.setView(inflator);
+        alertDialog.setCancelable(isCancelable);
+
+        final android.widget.NumberPicker hour = binding.hour;
+        final String[] hourValues = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12"};
+        hour.setMinValue(0);
+        hour.setMaxValue(11);
+        hour.setDisplayedValues(hourValues);
+//        hour.setWrapSelectorWheel(true);
+
+        final android.widget.NumberPicker min = binding.min;
+        final String[] minValues = new String[]{"00","15","30","45"};
+        min.setMaxValue(3);
+        min.setMinValue(0);
+        min.setDisplayedValues(minValues);
+//        min.setWrapSelectorWheel(true);
+
+        final android.widget.NumberPicker ampm = binding.ampm;
+        final String[] ampmValues = {"AM","PM"};
+        ampm.setMaxValue(1);
+        ampm.setMinValue(0);
+        ampm.setDisplayedValues(ampmValues);
+
+        inflator.findViewById(R.id.done).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String time = hourValues[hour.getValue()]+":"+minValues[min.getValue()]+" "+ampmValues[ampm.getValue()];
+                onCustomItemPicked.onNumberPicked(time);
+                alertDialog1.dismiss();
+            }
+        });
+
         alertDialog1 = null;
         alertDialog1 = alertDialog.show();
         alertDialog1.getWindow().setBackgroundDrawable(context.getResources().getDrawable(R.drawable.dialog_background_drawable));

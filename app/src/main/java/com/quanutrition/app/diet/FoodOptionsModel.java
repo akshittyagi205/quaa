@@ -3,6 +3,7 @@ package com.quanutrition.app.diet;
 public class FoodOptionsModel {
     private String foodId,foodName,foodCalories,foodQuant,foodNotes;
     private boolean foodCalorieFlag;
+    private String url = "";
 
     public FoodOptionsModel(String foodId, String foodName, String foodCalories, String foodQuant, String foodNotes, boolean foodCalorieFlag) {
         this.foodId = foodId;
@@ -61,4 +62,11 @@ public class FoodOptionsModel {
         this.foodCalorieFlag = foodCalorieFlag;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

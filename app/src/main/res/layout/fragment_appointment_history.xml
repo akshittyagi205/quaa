@@ -53,19 +53,19 @@
                 android:text="No Data Found"/>
 
             <TextView
+                android:id="@+id/basicBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/layout_small_margin"
-                android:padding="@dimen/medium_padding"
-                android:textColor="@color/textColorLight"
-                android:gravity="center"
-                android:id="@+id/basicBtn"
-                android:textSize="@dimen/text_medium"
                 android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/defaultfont"
+                android:layout_margin="@dimen/layout_small_margin"
                 android:background="@drawable/curve_back"
+                android:fontFamily="@font/defaultfont"
+                android:gravity="center"
+                android:padding="@dimen/medium_padding"
                 android:text="Click to book appointment"
-                />
+                android:textColor="@color/textColorLight"
+                android:textSize="@dimen/text_medium"
+                tools:visibility="gone" />
 
         </LinearLayout>
     </RelativeLayout>

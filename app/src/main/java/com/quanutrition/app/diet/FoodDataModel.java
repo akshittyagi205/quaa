@@ -6,6 +6,7 @@ public class FoodDataModel {
     private String foodId,foodName,foodCalories,foodQuant,foodNotes;
     private boolean foodCalorieFlag;
     private ArrayList<FoodOptionsModel> optionsList;
+    private String url = "";
 
     public FoodDataModel(String foodId, String foodName, String foodCalories, String foodQuant, String foodNotes, boolean foodCalorieFlag, ArrayList<FoodOptionsModel> optionsList) {
         this.foodId = foodId;
@@ -71,5 +72,13 @@ public class FoodDataModel {
 
     public void setOptionsList(ArrayList<FoodOptionsModel> optionsList) {
         this.optionsList = optionsList;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

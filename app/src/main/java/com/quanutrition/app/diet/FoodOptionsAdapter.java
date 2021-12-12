@@ -3,6 +3,7 @@ package com.quanutrition.app.diet;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
@@ -46,6 +48,7 @@ public class FoodOptionsAdapter extends RecyclerView.Adapter<FoodOptionsAdapter.
 
         TextView foodName,foodQuant,foodCal,foodNotes;
         LinearLayout foodLayout;
+        AppCompatImageView cart;
         public MyViewHolder(View view) {
             super(view);
             foodName = view.findViewById(R.id.foodName);
@@ -53,6 +56,7 @@ public class FoodOptionsAdapter extends RecyclerView.Adapter<FoodOptionsAdapter.
             foodCal = view.findViewById(R.id.foodCal);
             foodNotes = view.findViewById(R.id.foodNotes);
             foodLayout = view.findViewById(R.id.foodLayout);
+            cart = view.findViewById(R.id.cart);
         }
     }
 
@@ -91,6 +95,26 @@ public class FoodOptionsAdapter extends RecyclerView.Adapter<FoodOptionsAdapter.
                 }
             });
         }
+
+        if(meal.getUrl().trim().isEmpty()){
+            holder.cart.setVisibility(View.GONE);
+        }else{
+            holder.cart.setVisibility(View.VISIBLE);
+        }
+
+        holder.cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String link = meal.getUrl();
+                if (!link.contains("https://"))
+                    link = "https://"+link;
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(link));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mCtx.startActivity(intent);
+            }
+        });
     }
 
     @Override

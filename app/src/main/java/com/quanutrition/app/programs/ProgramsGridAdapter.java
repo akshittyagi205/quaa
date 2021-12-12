@@ -65,6 +65,7 @@ public class ProgramsGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ProgramModel model = items.get(position);
             view.title.setText(model.getName());
 //            view.image.setImageDrawable(model.imageLink);
+            if(!model.getImageLink().isEmpty())
             Tools.loadImageIntoImageView(model.getImageLink(),view.image);
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override

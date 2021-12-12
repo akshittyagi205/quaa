@@ -47,4 +47,7 @@ public class Constants {
     public static final String WATER_CHANNEL = "water_channel";
     public static final String WATER_CHANNEL_NAME = "Water Reminders";
     public static final String CUSTOM_ID = "custom_id";
+    public static final String NOTIFICATION_GENERAL = "notification_general";
+    public static final String NOTIFICATION_MEAL = "notification_meal";
+    public static final String NOTIFICATION_WATER = "notification_water";
 }

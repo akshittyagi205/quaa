@@ -54,11 +54,18 @@ public class AppointmentsActivity extends AppCompatActivity implements View.OnCl
         fab.setOnClickListener(this);
 
 
+        /*FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = AppointmentHistory.newInstance(resData);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        transaction.replace(R.id.main_fragment_frame, fragment).commit();*/
+
+        fetchData();
     }
 
     @Override
     protected void onResume() {
-        fetchData();
+
         super.onResume();
     }
 
@@ -117,7 +124,7 @@ public class AppointmentsActivity extends AppCompatActivity implements View.OnCl
                     history.setTextColor(getResources().getColor(R.color.colorAccent));
                     resData = response;
                     FragmentManager fragmentManager = getSupportFragmentManager();
-                    Fragment fragment = UpcomingAppointmentFragment.newInstance(resData);
+                    Fragment fragment = AppointmentHistory.newInstance(resData);
                     FragmentTransaction transaction = fragmentManager.beginTransaction();
                     transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                     transaction.replace(R.id.main_fragment_frame, fragment).commit();

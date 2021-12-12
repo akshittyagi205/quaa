@@ -27,7 +27,7 @@
             android:layout_height="130dp"
             android:scaleType="centerCrop"
             android:id="@+id/image"
-            android:src="@drawable/program_test"/>
+            android:src="@drawable/ic_no_image"/>
 
 
             <TextView

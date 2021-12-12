@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    app:cardCornerRadius="5dp"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_padding"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:id="@+id/title"
+            android:padding="@dimen/medium_padding"
+            android:textSize="@dimen/text_large"
+            android:text="Select Time"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/layout_small_margin"
+            android:orientation="horizontal">
+
+            <NumberPicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/hour"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_medium"
+                android:layout_marginLeft="@dimen/layout_very_small_margin"
+                android:layout_marginRight="@dimen/layout_very_small_margin"
+                android:text=":"
+                />
+
+            <NumberPicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/min"
+                android:layout_marginRight="@dimen/layout_small_margin"
+                />
+
+            <NumberPicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ampm"
+                android:layout_marginLeft="@dimen/layout_big_margin"
+                />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="DONE"
+            android:id="@+id/done"
+            android:layout_marginRight="@dimen/layout_medium_margin"
+            android:layout_marginTop="@dimen/layout_small_margin"
+            android:layout_marginBottom="@dimen/layout_medium_margin"
+            android:textSize="@dimen/text_small"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:padding="@dimen/small_padding"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

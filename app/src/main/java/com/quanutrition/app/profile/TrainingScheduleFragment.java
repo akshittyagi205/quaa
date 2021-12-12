@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,7 +82,7 @@ public class TrainingScheduleFragment extends Fragment {
             public void onClick(View view) {
 
 
-                DialogUtils.getMultipleSearchDialog(getActivity(), days_base, new DialogUtils.OnMultipleItemsSelected() {
+                DialogUtils.getMultipleSelectionDialogWithTitle(getActivity(),"Select Days", days_base, new DialogUtils.OnMultipleItemsSelected() {
 
                     @Override
                     public void onMultipleItemsSelected(ArrayList<MultipleSelectionModel> items) {
@@ -154,7 +155,7 @@ public class TrainingScheduleFragment extends Fragment {
                                 }
                             }
                         }
-
+                        Collections.sort(list);
                         adapter.notifyDataSetChanged();
 
                         days_base = new ArrayList<>();
@@ -247,8 +248,8 @@ public class TrainingScheduleFragment extends Fragment {
                 JSONObject ob = new JSONObject();
 
                     ob.put("Activity",list.get(i).getList().get(j).getActivity());
-                    ob.put("From",Tools.getUnformattedTime(list.get(i).getList().get(j).getFrom()));
-                    ob.put("To",Tools.getUnformattedTime(list.get(i).getList().get(j).getTo()));
+                    ob.put("From",list.get(i).getList().get(j).getFrom());
+                    ob.put("To",list.get(i).getList().get(j).getTo());
 
                     array.put(ob);
 
@@ -335,8 +336,7 @@ public class TrainingScheduleFragment extends Fragment {
                         if(trainingArray.has("sunday"))
                             loadDataFromList(trainingArray.getJSONArray("sunday"),"Sunday","6");
 
-
-
+                        Collections.sort(list);
                         adapter.notifyDataSetChanged();
 
 //                        list = Tools.sortDayWise(list);
@@ -372,7 +372,7 @@ public class TrainingScheduleFragment extends Fragment {
         ArrayList<TimeInputChildModel> childList = new ArrayList<>();
         for(int i=0;i<array.length();i++){
             JSONObject ob = array.getJSONObject(i);
-            TimeInputChildModel childModel = new TimeInputChildModel(Tools.getformattedTime(ob.getString("From")),Tools.getformattedTime(ob.getString("To")));
+            TimeInputChildModel childModel = new TimeInputChildModel(ob.getString("From"),ob.getString("To"));
             childModel.setActivity(ob.getString("Activity"));
 
             childList.add(childModel);

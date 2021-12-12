@@ -74,6 +74,7 @@ public class AppointmentHistory extends Fragment {
         noData = rootView.findViewById(R.id.noData);
         noData.setVisibility(View.GONE);
         basicBtn = rootView.findViewById(R.id.basicBtn);
+        basicBtn.setVisibility(View.GONE);
         basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,16 +98,18 @@ public class AppointmentHistory extends Fragment {
                     JSONArray data = ob.getJSONArray("data");
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject appt = data.getJSONObject(i);
-                        Calendar c = Calendar.getInstance();
+                        /*Calendar c = Calendar.getInstance();
                         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
                         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                         Date d = sdf.parse(appt.getString("date") + " " + appt.getString("time"));
                         sdf.setTimeZone(TimeZone.getDefault());
                         String localDateTime = sdf.format(d);
                         d = sdf.parse(localDateTime);
-                        if (c.getTimeInMillis() > d.getTime()) {
-                            list.add(new AppointmentHistoryModel(appt.getInt("id") + "", Tools.getLocalDate(appt.getString("date")), Tools.getLocalTimeAMPM(appt.getString("time")), appt.getString("dietitian"), appt.getString("type"), appt.getString("status"), appt.getString("note")));
-                        }
+                        if (c.getTimeInMillis() > d.getTime()) {*/
+                        AppointmentHistoryModel model = new AppointmentHistoryModel(appt.getString("appointmentId"),appt.getString("date"), appt.getString("time"), appt.getString("dietitian"), appt.getString("type"), appt.getString("status"), appt.getString("clinic"));
+                        model.setActivity(appt.getString("type_activity"));
+                        list.add(model);
+//                        }
                     }
                     if(list.size()>0){
                         noData.setVisibility(View.GONE);
@@ -117,7 +120,7 @@ public class AppointmentHistory extends Fragment {
                     noData.setVisibility(View.VISIBLE);
                 }
 
-        }catch (JSONException | ParseException e) {
+        }catch (JSONException e) {
             e.printStackTrace();
         }
 

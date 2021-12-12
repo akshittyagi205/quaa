@@ -27,6 +27,7 @@ import com.quanutrition.app.Utils.NetworkManager;
 import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.appointment.AppointmentsActivity;
 import com.quanutrition.app.blogs.HealthFeedActivity;
+import com.quanutrition.app.dietrecall.DietRecallActivity;
 import com.quanutrition.app.general.ClientProfile;
 import com.quanutrition.app.general.DailyDiaryActivity;
 import com.quanutrition.app.general.PhysicalActivity;
@@ -36,6 +37,8 @@ import com.quanutrition.app.profile.FoodSpecificationsActivity;
 import com.quanutrition.app.profile.GeneralDataActivity;
 import com.quanutrition.app.profile.MedicalHistory;
 import com.quanutrition.app.profile.TimeInputActivity;
+import com.quanutrition.app.programs.ProgramsActivity;
+import com.quanutrition.app.questionnaire.QuestionnaireActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,8 +59,8 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
     NestedScrollView nested_scroll_view;
     CircleImageView image;
     TextView user_name,user_email,user_number;
-    private LinearLayout profile_child_layout,clientProfile,general_data_layout,time_info_layout,workout_layout,assessment_layout,feed_layout,profile_layout,basic_info_layout,medical_info_layout,food_info_layout,plan_layout;
-
+    private LinearLayout profile_child_layout,clientProfile,general_data_layout,time_info_layout,workout_layout,programs,feed_layout,profile_layout,basic_info_layout,medical_info_layout,food_info_layout,plan_layout,appointment_layout;
+    private LinearLayout diet_recall_layout,questionnaire;
     public MoreFragment() {
         // Required empty public constructor
     }
@@ -78,7 +81,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
         medical_info_layout = rootView.findViewById(R.id.medical_info_layout);
         food_info_layout = rootView.findViewById(R.id.food_info_layout);
         plan_layout = rootView.findViewById(R.id.plan_layout);
-        assessment_layout = rootView.findViewById(R.id.assessment_layout);
+        programs = rootView.findViewById(R.id.programs);
         time_info_layout = rootView.findViewById(R.id.time_info_layout);
         general_data_layout = rootView.findViewById(R.id.general_data_layout);
         feed_layout = rootView.findViewById(R.id.feed_layout);
@@ -88,8 +91,10 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
         user_name = rootView.findViewById(R.id.user_name);
         user_email = rootView.findViewById(R.id.user_email);
         user_number = rootView.findViewById(R.id.user_number);
+        appointment_layout = rootView.findViewById(R.id.appointment_layout);
         nested_scroll_view = rootView.findViewById(R.id.nested_scroll_view);
-
+        diet_recall_layout = rootView.findViewById(R.id.diet_recall_layout);
+        questionnaire = rootView.findViewById(R.id.questionnaire);
 
         SharedPreferences sharedPreferences  = getActivity().getSharedPreferences(Constants.MyPreferences, Context.MODE_PRIVATE);
         user_name.setText(sharedPreferences.getString(Constants.PROFILE_NAME,"Unknown").trim());
@@ -113,9 +118,19 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
         general_data_layout.setOnClickListener(this);
         time_info_layout.setOnClickListener(this);
         clientProfile.setOnClickListener(this);
-        assessment_layout.setOnClickListener(this);
+        programs.setOnClickListener(this);
         workout_layout.setOnClickListener(this);
         image.setOnClickListener(this);
+        appointment_layout.setOnClickListener(this);
+        diet_recall_layout.setOnClickListener(this);
+        questionnaire.setOnClickListener(this);
+
+        rootView.findViewById(R.id.weight_progress_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),WeightProgressActivity.class));
+            }
+        });
 
         return rootView;
     }
@@ -168,8 +183,8 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
             startActivity(new Intent(getActivity(), PaymentHistory.class));
         }else if(id == R.id.feed_layout){
             startActivity(new Intent(getActivity(), HealthFeedActivity.class));
-        }else if(id == R.id.assessment_layout){
-//            startActivity(new Intent(getActivity(), DailyDiaryActivity.class));
+        }else if(id == R.id.programs){
+            startActivity(new Intent(getActivity(), ProgramsActivity.class));
         }else if(id == R.id.workout_layout){
             startActivity(new Intent(getActivity(), PhysicalActivity.class));
         }else if(id == R.id.image){
@@ -178,8 +193,12 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
             startActivity(new Intent(getActivity(), GeneralDataActivity.class));
         }else if(id == R.id.time_info_layout){
             startActivity(new Intent(getActivity(), TimeInputActivity.class));
-        }else if(id == R.id.clientProfile){
-            startActivity(new Intent(getActivity(), ClientProfile.class));
+        }else if(id == R.id.appointment_layout){
+            startActivity(new Intent(getActivity(), AppointmentsActivity.class));
+        }else if(id == R.id.diet_recall_layout){
+            startActivity(new Intent(getActivity(), DietRecallActivity.class));
+        }else if(id == R.id.questionnaire){
+            startActivity(new Intent(getActivity(), QuestionnaireActivity.class));
         }
     }
 

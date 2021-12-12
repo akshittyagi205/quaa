@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.quanutrition.app.BuildConfig;
 import com.quanutrition.app.MainActivity;
 import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.Constants;
@@ -137,7 +138,7 @@ public class SignInActivity extends AppCompatActivity {
 //                        user_created_status=result.getInt("status");
 //                        Tools.initCustomToast(SignInActivity.this,result.getString("otp"));
                         Tools.getGeneralEditor(SignInActivity.this).putString(Constants.USER_ID,result.getInt("id")+"").commit();
-                        showDialog(Phone,code,result.getInt("status"));
+                        showDialog(Phone,code,result.getInt("status"),result.getString("otp"),result.getString("type"));
 
                     }else{
                         Tools.initCustomToast(SignInActivity.this,"Some error occured! Try again later.");
@@ -170,7 +171,7 @@ public class SignInActivity extends AppCompatActivity {
 
     LinearLayout checkAgree;
 
-    void showDialog(final String PhoneNumber, final String code, final int status){
+    void showDialog(final String PhoneNumber, final String code, final int status, String otpText, final String type){
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         LayoutInflater linf = LayoutInflater.from(this);
@@ -194,8 +195,10 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    time = 1;
+//                    time = 1;
                     requestOTP(code, PhoneNumber);
+                    if(countDownTimer!=null)
+                        countDownTimer.cancel();
                     alertDialog1.dismiss();
 
             }
@@ -205,10 +208,16 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alertDialog1.dismiss();
+                if(countDownTimer!=null)
+                    countDownTimer.cancel();
             }
         });
         final EditText otp = inflator.findViewById(R.id.otp);
         phone.setText("Verify "+code+PhoneNumber);
+
+        /*if(BuildConfig.DEBUG)
+            otp.setText(otpText);*/
+
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,7 +228,7 @@ public class SignInActivity extends AppCompatActivity {
                         //Send Request to server
                         if(agree.isChecked()||status==0) {
                         alertDialog1.dismiss();
-                        verifyOTP(otp.getText().toString().trim());
+                        verifyOTP(otp.getText().toString().trim(),type);
                     }else{
                         Tools.initCustomToast(SignInActivity.this,"Please agree to the terms and conditions before continuing!");
                     }
@@ -258,7 +267,7 @@ public class SignInActivity extends AppCompatActivity {
         }.start();
     }
 
-    void verifyOTP(final String otp){
+    void verifyOTP(final String otp, final String type){
         final AlertDialog ad = Tools.getDialog("Verifying OTP...",this);
         ad.show();
         Response.Listener<String> listener = new Response.Listener<String>() {
@@ -269,7 +278,7 @@ public class SignInActivity extends AppCompatActivity {
                     Log.d("Response", response);
                     JSONObject result = new JSONObject(response);
                     if (result.getInt("res") == 1) {
-
+                        if(type.equalsIgnoreCase("1")){
                         SharedPreferences.Editor editor = Tools.getGeneralEditor(SignInActivity.this);
                         JSONObject data = result.getJSONObject("data");
                         editor.putString(Constants.AUTH_TOKEN,data.optString("token"));
@@ -292,13 +301,13 @@ public class SignInActivity extends AppCompatActivity {
 //                            editor.putString(Constants.CLINIC, dietitian.getString("clinic"));
 //                            editor.putString(Constants.CLINIC_ID, dietitian.optString("clinicId", "0"));
 //                            editor.putString(Constants.DIETITIAN_EXPERIENCE, dietitian.getString("exp"));
-                            editor.commit();
-                            finish();
-                            startActivity(new Intent(SignInActivity.this, MainActivity.class));
-                        }else{
+//                            editor.commit();
+//                            finish();
+//                            startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                        }
                             editor.commit();
                             //Call to temp info activity
-                            if(data.getBoolean("basicinfo")){
+
                                 Intent intent = new Intent(SignInActivity.this,MainActivity.class);
                                 finish();
                                 startActivity(intent);
@@ -310,7 +319,7 @@ public class SignInActivity extends AppCompatActivity {
                                 finish();
                                 startActivity(intent);
                             }
-                        }
+
                     }else{
                         Tools.initCustomToast(SignInActivity.this,result.getString("msg"));
                     }
@@ -334,6 +343,7 @@ public class SignInActivity extends AppCompatActivity {
         Map<String, String> params = new HashMap<>();
         params.put("userId",Tools.getGeneralSharedPref(this).getString(Constants.USER_ID,"0"));
         params.put("otp",otp);
+        params.put("type",type);
 
         NetworkManager.getInstance(this).sendPostRequest(Urls.Verify_OTP,params,listener,errorListener,this);
 

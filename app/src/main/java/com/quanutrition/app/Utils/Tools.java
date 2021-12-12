@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,12 @@ public class Tools {
             return b;
         }
     }
+
+    public static boolean isValidEmail(EditText editText) {
+        String target = editText.getText().toString().trim();
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
+
     public static boolean validatePassword(EditText ed){
         if(TextUtils.isEmpty(ed.getText().toString().trim())){
             return false;
@@ -100,7 +107,7 @@ public class Tools {
     }
 
     public static void loadProfileImage(String url, ImageView img){
-        Picasso.get().load(url).placeholder(R.drawable.ic_no_image).error(R.drawable.ic_no_image).into(img);
+        Picasso.get().load(url).resize(250,250).onlyScaleDown().centerCrop().placeholder(R.drawable.ic_no_image).error(R.drawable.ic_no_image).into(img);
     }
 
     public static void loadProgram(String url, ImageView img){

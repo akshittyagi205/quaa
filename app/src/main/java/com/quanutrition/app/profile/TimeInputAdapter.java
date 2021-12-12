@@ -117,6 +117,7 @@ public class TimeInputAdapter extends RecyclerView.Adapter<TimeInputAdapter.MyVi
             }
         });
 
+        holder.headLayout.callOnClick();
 
     }
 

@@ -41,7 +41,7 @@ public class UpcomingHistoryAdapter extends RecyclerView.Adapter<UpcomingHistory
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView title,date,time,status,type,notes,newDate,newYear;
+        TextView title,date,time,status,type,notes,newDate,newYear,activity_type;
 
         public MyViewHolder(View view) {
             super(view);
@@ -53,6 +53,7 @@ public class UpcomingHistoryAdapter extends RecyclerView.Adapter<UpcomingHistory
             notes = view.findViewById(R.id.notes);
             newDate = view.findViewById(R.id.newDate);
             newYear = view.findViewById(R.id.newYear);
+            activity_type = view.findViewById(R.id.activity_type);
         }
     }
 
@@ -74,7 +75,8 @@ public class UpcomingHistoryAdapter extends RecyclerView.Adapter<UpcomingHistory
         holder.time.setText(appointment.getTime());
         holder.status.setText("Status : "+appointment.getStatus());
         holder.type.setText("Type : "+appointment.getType());
-        holder.notes.setText("Notes : "+appointment.getNotes());
+        holder.notes.setText("Clinic : "+appointment.getNotes());
+        holder.activity_type.setText("Activity : "+appointment.getActivity());
         if(appointment.getNotes().trim().isEmpty()){
             holder.notes.setVisibility(View.GONE);
         }else{

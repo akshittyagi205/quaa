@@ -1,3 +1,4 @@
+/*
 package com.quanutrition.app.bottomtabs;
 
 import android.content.Context;
@@ -351,3 +352,4 @@ public class ProgressFragment extends Fragment implements View.OnClickListener{
     }
 
 }
+*/

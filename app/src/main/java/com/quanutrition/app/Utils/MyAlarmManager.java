@@ -95,15 +95,20 @@ public class MyAlarmManager extends BroadcastReceiver {
                         mNotificationManager.createNotificationChannel(mChannel);
 
                     }
+
+                    boolean mealFlag = Tools.getGeneralSharedPref(context).getBoolean(Constants.NOTIFICATION_MEAL,true);
+
                     Log.d("Sending Notification", Title + "   Akshit AKshit  " + Body);
                     if (mealTime < 10)
-                        if(mealTime!=9)
+                        if (mealTime != 9) {
+                            if(mealFlag)
                             MyNotificationManager.getInstance(context).displayNotification(Title, Body, "3", Constants.REMINDER_CHANNEL_ID);
-                        else
+                        } else {
                             MyNotificationManager.getInstance(context).displayNotification(Title, Body, "-6", Constants.REMINDER_CHANNEL_ID);
+                        }
 
-                    else
-                        MyNotificationManager.getInstance(context).displayNotification(Title, Body, "-3", Constants.REMINDER_CHANNEL_ID);
+                    /*else
+                        MyNotificationManager.getInstance(context).displayNotification(Title, Body, "-3", Constants.REMINDER_CHANNEL_ID);*/
                 }
             }
         }

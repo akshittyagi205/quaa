@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.quanutrition.app.R;
+import com.quanutrition.app.Utils.Constants;
 import com.quanutrition.app.Utils.MyAlarmManager;
 import com.quanutrition.app.Utils.NetworkManager;
 import com.quanutrition.app.Utils.Tools;
@@ -157,6 +158,12 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
                 try {
                     JSONObject result = new JSONObject(response);
                     Tools.initCustomToast(SettingsActivity.this, result.getString("msg"));
+
+                    SharedPreferences.Editor editor = Tools.getGeneralEditor(SettingsActivity.this);
+                    editor.putBoolean(Constants.NOTIFICATION_GENERAL,generalSwitch.isChecked());
+                    editor.putBoolean(Constants.NOTIFICATION_MEAL,mealSwitch.isChecked());
+                    editor.putBoolean(Constants.NOTIFICATION_WATER,waterSwitch.isChecked());
+                    editor.commit();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

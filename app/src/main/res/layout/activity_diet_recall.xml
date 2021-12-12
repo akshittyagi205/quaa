@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    tools:context=".dietrecall.DietRecallActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="24 Hour Diet Recall"
+            app:titleTextColor="@color/colorPrimary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/re"
+        />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:layout_marginStart="@dimen/layout_small_margin"
+                android:layout_marginTop="@dimen/layout_small_margin"
+                android:textColor="@color/grey_200"
+                android:fontFamily="@font/defaultfont"
+                android:text="Weekend :"
+                />
+    <EditText
+        android:id="@+id/weekend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textarea_border"
+        android:fontFamily="@font/defaultfont"
+        android:hint="Enter here..."
+        android:layout_marginBottom="@dimen/layout_small_margin"
+        android:layout_marginStart="@dimen/layout_small_margin"
+        android:layout_marginEnd="@dimen/layout_small_margin"
+        android:lines="3"
+        android:gravity="top"
+        android:padding="@dimen/medium_padding"
+        android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:layout_marginStart="@dimen/layout_small_margin"
+                android:layout_marginTop="@dimen/layout_small_margin"
+                android:textColor="@color/grey_200"
+                android:fontFamily="@font/defaultfont"
+                android:text="Follow Up :"
+                />
+            <EditText
+                android:id="@+id/followup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textarea_border"
+                android:fontFamily="@font/defaultfont"
+                android:hint="Enter here..."
+                android:layout_marginBottom="@dimen/layout_small_margin"
+                android:layout_marginStart="@dimen/layout_small_margin"
+                android:layout_marginEnd="@dimen/layout_small_margin"
+                android:lines="3"
+                android:gravity="top"
+                android:padding="@dimen/medium_padding"
+                android:textSize="@dimen/text_small" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding"
+        android:id="@+id/save"
+        android:textSize="@dimen/text_large"
+        android:textColor="@color/textColorLight"
+        android:background="@color/colorAccent"
+        android:text="Save"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:fontFamily="@font/defaultfont"/>
+
+</LinearLayout>

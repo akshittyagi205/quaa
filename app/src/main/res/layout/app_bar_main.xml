@@ -59,9 +59,9 @@
        android:layout_width="match_parent"
        android:layout_height="50dp"
        android:id="@+id/tabs"
-       android:background="@color/cardview_dark_background"
+       android:background="@drawable/tabs_back_dark"
        android:elevation="5dp"
-       android:translationZ="5dp"
+       android:translationZ="15dp"
        android:layout_alignParentBottom="true"
        android:orientation="vertical">
        <LinearLayout
@@ -77,12 +77,12 @@
                android:id="@+id/home"
                android:padding="@dimen/small_padding"
                android:orientation="vertical">
-               <ImageView
+               <androidx.appcompat.widget.AppCompatImageView
                    android:layout_width="20dp"
                    android:layout_height="20dp"
                    android:layout_gravity="center"
                    android:id="@+id/home_tab"
-                   android:tint="@color/colorPrimary"
+                   app:tint="@color/colorPrimary"
                    android:background="@color/transparent"
                    android:src="@drawable/ic_home"/>
                <TextView
@@ -102,12 +102,12 @@
                android:id="@+id/blog"
                android:padding="@dimen/small_padding"
                android:orientation="vertical">
-               <ImageView
+               <androidx.appcompat.widget.AppCompatImageView
                    android:layout_width="20dp"
                    android:layout_height="20dp"
                    android:layout_gravity="center"
                    android:id="@+id/blog_tab"
-                   android:tint="@color/colorPrimary"
+                   app:tint="@color/colorPrimary"
                    android:background="@color/transparent"
                    android:src="@drawable/ic_diet"/>
                <TextView
@@ -132,12 +132,12 @@
                android:id="@+id/progress"
                android:padding="@dimen/small_padding"
                android:orientation="vertical">
-           <ImageView
+           <androidx.appcompat.widget.AppCompatImageView
                android:layout_width="20dp"
                android:layout_height="20dp"
                android:layout_gravity="center"
                android:id="@+id/progress_tab"
-               android:tint="@color/colorPrimary"
+               app:tint="@color/colorPrimary"
                android:background="@color/transparent"
                android:src="@drawable/ic_recipe"/>
                <TextView
@@ -157,14 +157,14 @@
                android:id="@+id/more"
                android:padding="@dimen/small_padding"
                android:orientation="vertical">
-           <ImageView
+           <androidx.appcompat.widget.AppCompatImageView
                android:layout_width="20dp"
                android:layout_height="20dp"
                android:layout_gravity="center"
                android:id="@+id/more_tab"
-               android:tint="@color/colorPrimary"
+               app:tint="@color/colorPrimary"
                android:background="@color/transparent"
-               android:src="@drawable/ic_more"/>
+               android:src="@drawable/ic_basic_info"/>
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                    android:fontFamily="@font/defaultfont"
                    android:textColor="@color/grey_200"
                    android:textSize="@dimen/text_tiny"
-                   android:text="More"/>
+                   android:text="Profile"/>
        </LinearLayout>
            </LinearLayout>
     <LinearLayout

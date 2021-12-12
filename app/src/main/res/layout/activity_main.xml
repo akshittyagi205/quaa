@@ -25,6 +25,38 @@
         android:fitsSystemWindows="true"
         android:theme="@style/NavigationView"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/layout_very_small_margin"
+            android:layout_marginBottom="@dimen/layout_small_margin"
+            android:layout_marginLeft="@dimen/layout_small_margin"
+            android:layout_marginRight="@dimen/layout_small_margin"
+            android:background="@drawable/curve_back_dark"
+            android:layout_gravity="bottom"
+            android:padding="@dimen/small_padding"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:textColor="@color/grey_300"
+                android:textSize="@dimen/text_very_small"
+                android:layout_marginBottom="3dp"
+                android:text="Powered By "/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingTop="@dimen/medium_padding"
+                android:adjustViewBounds="true"
+                android:layout_marginBottom="2dp"
+                android:paddingLeft="@dimen/small_padding"
+                android:paddingRight="@dimen/medium_padding"
+                android:src="@drawable/qua_logo"/>
+        </LinearLayout>
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -5,8 +5,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +46,11 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
     String unitWeight="Kgs",unitHeight="ft. in.",stateName = " ",firstName="",lastName ="",countryCode_string,phone,emailId ="",countryName ="" ,cityName="",dobString="",genderString="",heightString="",weightString="",weightUnitString="";
     int country_code=101;
     EditText bloodGroup, physicalActivity;
-    String bloodGroup_String,physicalActivity_string;
+    String bloodGroup_String="",physicalActivity_string="";
     TextView saveBasicInfo;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +74,8 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
         emailId_edit = findViewById(R.id.email);
         phoneNo_edit = findViewById(R.id.phone_number);
         saveBasicInfo = findViewById(R.id.save_basic_button);
+
+
 
         dob.setFocusable(false);
         gender.setFocusable(false);
@@ -134,6 +143,7 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
                 @Override
                 public void onItemSelected(int position, SingleSelectionModel item) {
 //                Tools.initCustomToast(BasicInfoActivity.this,item.getLabel()+"   and id  "+item.getId());
+
                     gender.setText(item.getLabel());
                 }
             });
@@ -270,18 +280,25 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
             genderString = gender.getText().toString();
             Log.d("myTag",firstName+ "  "+emailId + "  "+ dobString + "  "+ genderString + "  " +heightString +"  "+ weightString);
 
-            if(firstName.equals("")|| emailId.equals("") || height.getText().toString().equals("") || weightString.equals("") || dobString.equals("") || genderString.equals("") || bloodGroup_String.equals("")||physicalActivity_string.equals(""))
+            if(firstName.equals("")|| emailId.equals("") ||cityName.equalsIgnoreCase("")|| height.getText().toString().equals("") || weightString.equals("") || dobString.equals("") || genderString.equals("") || bloodGroup_String.equals("")||physicalActivity_string.equals(""))
             {
                 Toast.makeText(getApplicationContext(),"Please fill all the data to proceed! ", Toast.LENGTH_LONG).show();
             }
-            else if(!(Tools.validateEmail(emailId_edit))) {
+            else if(!(Tools.isValidEmail(emailId_edit))) {
                 Tools.initCustomToast(BasicInfoActivity.this, "Please enter valid email!");
 //                            etEmailID.startAnimation(AnimationUtils.loadAnimation(SignUpActivity.this,R.anim.shake));
                 emailId_edit.requestFocus();
             }
             else
                 {
-                    requestSave();
+                    try {
+                        if (Float.parseFloat(weightString) > 250f)
+                            Tools.initCustomToast(BasicInfoActivity.this,"Weight cannot be more than 250 Kgs");
+                        else
+                            requestSave();
+                    }catch (NumberFormatException e){
+                        requestFetch();
+                    }
                 }
 
 
@@ -311,6 +328,9 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
                         editor.putString(Constants.PROFILE_NAME,firstName+" "+lastName);
                         editor.putString(Constants.GENDER,genderString.toLowerCase());
                         editor.commit();
+
+//                        NetworkManager.getInstance(BasicInfoActivity.this).sendNotification(BasicInfoActivity.this,"Information Updated",firstName+" just filled basic information form","-1");
+
                         finish();
                     }
                 } catch (JSONException e) {
@@ -344,6 +364,7 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
         params.put("bloodgroup",bloodGroup_String);
         params.put("physicalactivity",physicalActivity_string);
 
+
         NetworkManager.getInstance(this).sendPostRequestWithHeader(Urls.save_basic_info,params,listener,errorListener,this);
 
     }
@@ -367,23 +388,26 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
                         firstName_edit.setText(basicInfodata.getString("firstname"));
                         lastname_edit.setText(basicInfodata.getString("lastname"));
                         emailId_edit.setText(basicInfodata.getString("email"));
-                        countryCode.setText(basicInfodata.getString("countrycode"));
-                        phoneNo_edit.setText(basicInfodata.getString("phone"));
+                        countryCode.setText(basicInfodata.getString("code"));
+                        phoneNo_edit.setText(basicInfodata.optString("phone",""));
                         country.setText(basicInfodata.getString("country"));
                         city.setText(basicInfodata.getString("city"));
                         stateName = basicInfodata.getString("state");
                         gender.setText(basicInfodata.getString("gender"));
+
+
                         dob.setText(basicInfodata.getString("dob"));
-                        if(!(basicInfodata.getString("weight").equalsIgnoreCase("0")))
+                        if(!(basicInfodata.getString("weight").equalsIgnoreCase("0")||basicInfodata.getString("weight").equalsIgnoreCase("null")))
                         weight.setText(basicInfodata.getString("weight"));
+                        if(!basicInfodata.getString("height").equalsIgnoreCase("null"))
                         if(!(basicInfodata.getString("height").equalsIgnoreCase("0")||basicInfodata.getString("height").isEmpty()))
                         height.setText(getHeightToDispay(basicInfodata.getString("height")));
                         if(basicInfodata.getString("country").trim().equalsIgnoreCase(""))
-                        setupCountry(basicInfodata.getString("countrycode"));
+                        setupCountry(basicInfodata.getString("code"));
                         else
                             country.setEnabled(false);
 
-                        if(basicInfodata.getString("bloodgroup")!=null||!(basicInfodata.getString("bloodgroup").equals("null")))
+                        if(!(basicInfodata.getString("bloodgroup").equalsIgnoreCase("null")))
                         bloodGroup.setText(basicInfodata.getString("bloodgroup"));
                         physical = new ArrayList<>();
                         JSONArray pa_list = basicInfodata.getJSONArray("pa_list");

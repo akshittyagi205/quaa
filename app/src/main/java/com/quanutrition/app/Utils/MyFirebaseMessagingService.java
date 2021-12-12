@@ -40,6 +40,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             mNotificationManager2.createNotificationChannel(mChannel2);
         }
         // Check if message contains a data payload.
+
+        boolean generalFlag = Tools.getGeneralSharedPref(getApplicationContext()).getBoolean(Constants.NOTIFICATION_GENERAL,true);
+
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             try {
@@ -50,6 +53,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 }else if(tag.equals("2")){
                     MyNotificationManager.getInstance(getApplicationContext()).displayNotification(data.getString("title"),data.getString("data"),tag,Constants.APPOINTMENT_CHANNEL_ID);
                 } else{
+                    if(generalFlag)
                     MyNotificationManager.getInstance(getApplicationContext()).displayNotification(data.getString("title"),data.getString("data"),tag,Constants.GENERAL_CHANNEL_ID);
                 }
             } catch (JSONException e) {

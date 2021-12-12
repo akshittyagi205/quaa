@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="@dimen/small_padding"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/parent"
+        android:padding="@dimen/small_padding"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_no_image"
+            android:id="@+id/image"
+            android:layout_margin="@dimen/small_padding"/>
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_medium"
+            android:text="Email"
+            android:fontFamily="@font/defaultfont"
+            android:textColor="@color/textColorLight"
+            android:id="@+id/email"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_tiny"
+            android:text="Selected"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:visibility="gone"
+            android:fontFamily="@font/defaultfont"
+            android:paddingRight="@dimen/medium_padding"
+            android:paddingLeft="@dimen/medium_padding"
+            android:background="@drawable/textarea_border_light"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/current"
+            android:textColor="@color/textColorLight"
+            />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/layout_small_margin"
+        android:layout_marginRight="@dimen/layout_small_margin"
+        android:background="@color/grey_40"/>
+
+</LinearLayout>

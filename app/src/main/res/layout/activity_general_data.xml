@@ -89,6 +89,107 @@
                     android:padding="@dimen/medium_padding"
                     android:textColorHint="@color/grey_400"
                     android:textSize="@dimen/text_small" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:id="@+id/femaleDetails">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_small"
+                            android:layout_marginRight="@dimen/layout_small_margin"
+                            android:textColor="@color/grey_200"
+                            android:fontFamily="@font/defaultfont"
+                            android:text="Pregnant :"
+                            />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_small"
+                            android:textColor="@color/grey_200"
+                            android:layout_marginLeft="@dimen/layout_small_margin"
+                            android:fontFamily="@font/defaultfont"
+                            android:text="Lactating :"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/small_padding"
+                        android:paddingBottom="@dimen/small_padding"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:id="@+id/pregnant"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="@dimen/layout_small_margin"
+                            android:gravity="left"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_small"
+                                android:fontFamily="@font/defaultfont"
+                                android:id="@+id/yesPregnant"/>
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:layout_marginLeft="@dimen/layout_small_margin"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_small"
+                                android:fontFamily="@font/defaultfont"
+                                android:id="@+id/noPregnant"/>
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:id="@+id/lactating"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginBottom="@dimen/layout_small_margin"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_small"
+                                android:fontFamily="@font/defaultfont"
+                                android:id="@+id/yesLactating"/>
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:layout_marginLeft="@dimen/layout_small_margin"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_small"
+                                android:fontFamily="@font/defaultfont"
+                                android:id="@+id/noLactating"/>
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -140,7 +241,19 @@
                         android:textColorHint="@color/grey_400"
                         android:textSize="@dimen/text_small" />
                 </LinearLayout>
-
+                <EditText
+                    android:id="@+id/eatDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_large_padding"
+                    android:background="@drawable/textarea_border"
+                    android:fontFamily="@font/defaultfont"
+                    android:hint="Details of Eating Out"
+                    android:gravity="top"
+                    android:lines="2"
+                    android:padding="@dimen/medium_padding"
+                    android:textColorHint="@color/grey_400"
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -270,6 +383,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/quantAlcohol"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Click to Select"
+                        android:inputType="number"
+                        android:layout_marginRight="@dimen/layout_very_small_margin"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
                     <EditText
                         android:id="@+id/numberAlcohol"
                         android:layout_width="0dp"
@@ -279,6 +408,7 @@
                         android:background="@drawable/textarea_border"
                         android:fontFamily="@font/defaultfont"
                         android:hint="Click to Select"
+                        android:layout_marginRight="@dimen/layout_very_small_margin"
                         android:inputType="number"
                         android:drawableRight="@drawable/ic_arrow_drop_down"
                         android:padding="@dimen/medium_padding"
@@ -290,6 +420,7 @@
                         android:layout_marginRight="@dimen/layout_small_margin"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_small"
+                        android:visibility="gone"
                         android:textColor="@color/grey_200"
                         android:fontFamily="@font/defaultfont"
                         android:text="Per"
@@ -309,6 +440,19 @@
                         android:textColorHint="@color/grey_400"
                         android:textSize="@dimen/text_small" />
                 </LinearLayout>
+                    <EditText
+                        android:id="@+id/alcoholDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_large_padding"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:hint="Details of Quantity and Type"
+                        android:gravity="top"
+                        android:lines="2"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_400"
+                        android:textSize="@dimen/text_small" />
                 </LinearLayout>
 
                 <LinearLayout

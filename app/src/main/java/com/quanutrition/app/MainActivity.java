@@ -1,6 +1,7 @@
 package com.quanutrition.app;
 
 import android.app.AlarmManager;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -15,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,12 +36,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.quanutrition.app.Utils.AccountDBUtils;
+import com.quanutrition.app.Utils.AccountListModel;
 import com.quanutrition.app.Utils.Constants;
 import com.quanutrition.app.Utils.MyAlarmManager;
+import com.quanutrition.app.Utils.MyNotificationManager;
 import com.quanutrition.app.Utils.NetworkManager;
+import com.quanutrition.app.Utils.OnClickListener;
 import com.quanutrition.app.Utils.SampleBootReciever;
 import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.blogs.BlogsFragment;
@@ -47,7 +55,7 @@ import com.quanutrition.app.blogs.RecipesFragment;
 import com.quanutrition.app.blogs.SocialMediaGridActivity;
 import com.quanutrition.app.bottomtabs.DashBoardFragment;
 import com.quanutrition.app.bottomtabs.MoreFragment;
-import com.quanutrition.app.bottomtabs.ProgressFragment;
+
 import com.quanutrition.app.chat.ChatActivity;
 import com.quanutrition.app.diet.DietPlanFragment;
 import com.quanutrition.app.diet.DietPlanViewActivity;
@@ -58,7 +66,9 @@ import com.quanutrition.app.general.FeedbackUtils;
 import com.quanutrition.app.general.ReferActivity;
 import com.quanutrition.app.general.SettingsActivity;
 import com.quanutrition.app.general.SignInActivity;
+import com.quanutrition.app.general.SignUpInfo;
 import com.quanutrition.app.general.Urls;
+import com.quanutrition.app.general.UserListAdapter;
 import com.quanutrition.app.googlefit.GoogleFitUtils;
 import com.quanutrition.app.profile.MeasurementsActivity;
 import com.quanutrition.app.waterintake.WaterReminderReciever;
@@ -78,9 +88,11 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -88,7 +100,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, DashBoardFragment.OnFragmentInteractionListener, ProgressFragment.OnFragmentInteractionListener,
+        implements NavigationView.OnNavigationItemSelectedListener, DashBoardFragment.OnFragmentInteractionListener,
         MoreFragment.OnFragmentInteractionListener, RecipesFragment.OnFragmentInteractionListener, DietPlanFragment.OnFragmentInteractionListener, View.OnClickListener {
 
     TabLayout tab_layout;
@@ -103,6 +115,8 @@ public class MainActivity extends AppCompatActivity
     FirebaseRemoteConfig mFirebaseRemoteConfig;
     DatabaseReference readReference;
     TextView chatItem;
+    private AlertDialog alertDialog1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,9 +127,16 @@ public class MainActivity extends AppCompatActivity
         setViews();
         fragment = new DashBoardFragment();
         lastSelected=R.id.home_tab;
+        getSupportActionBar().setTitle("Home");
+        if(getIntent().hasExtra("tag")){
+            if(getIntent().getStringExtra("tag").equals("3")){
+                fragment = new DietPlanFragment();
+                lastSelected=R.id.blog_tab;
+                getSupportActionBar().setTitle("Diet");
+            }
+        }
         setSelected();
         fragmentManager = getSupportFragmentManager();
-        getSupportActionBar().setTitle("Home");
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out);
         transaction.replace(R.id.main_fragment_frame, fragment).commit();
@@ -142,6 +163,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         TextView dtName = header.findViewById(R.id.dtName);
+        TextView dtEmail = header.findViewById(R.id.dtMail);
         TextView clinicName = header.findViewById(R.id.clinicName);
         ImageView chat = header.findViewById(R.id.chat);
         ImageView call = header.findViewById(R.id.call);
@@ -149,8 +171,13 @@ public class MainActivity extends AppCompatActivity
         TextView clients = header.findViewById(R.id.clients);
         CircleImageView image = header.findViewById(R.id.image);
 
-        final SharedPreferences sharedPreferences = getSharedPreferences(Constants.MyPreferences, Context.MODE_PRIVATE);
-        dtName.setText(sharedPreferences.getString(Constants.DIETITIAN_NAME,"Unknown"));
+        final SharedPreferences sharedPreferences = Tools.getGeneralSharedPref(this);
+        dtName.setText(sharedPreferences.getString(Constants.PROFILE_NAME,"Unknown"));
+        if(sharedPreferences.getString(Constants.PROFILE_EMAIL,"Unknown").equalsIgnoreCase("unknown"))
+            dtEmail.setText(sharedPreferences.getString(Constants.PHONE,"Unknown Email"));
+        else
+            dtEmail.setText(sharedPreferences.getString(Constants.PROFILE_EMAIL,"Unknown Email"));
+
         clinicName.setText(sharedPreferences.getString(Constants.CLINIC,""));
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,7 +196,7 @@ public class MainActivity extends AppCompatActivity
 //        experience.setText(sharedPreferences.getString(Constants.DIETITIAN_EXPERIENCE,"-"));
 //        clients.setText(sharedPreferences.getString(Constants.Clients,"-"));
 
-        Tools.loadProfileImage(sharedPreferences.getString(Constants.DIETITIAN_PIC,"-"),image);
+        Tools.loadProfileImage(sharedPreferences.getString(Constants.PROFILE_IMAGE,"-"),image);
 
 //        Tools.loadProfileImage("https://www.ryanfernando.in/wp-content/uploads/2018/07/about-thumb.jpg",image);
 
@@ -308,6 +335,12 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
 
+        fetchReminderFlags();
+
+        fetchMultipleData();
+
+//        MyNotificationManager.getInstance(this).displayNotification("Title", "Body", "3", Constants.REMINDER_CHANNEL_ID);
+
     }
 
     private void showUpdateDialog() {
@@ -365,7 +398,7 @@ public class MainActivity extends AppCompatActivity
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
 
-            Calendar c1 = Calendar.getInstance();
+            /*Calendar c1 = Calendar.getInstance();
             c1.set(Calendar.HOUR_OF_DAY, Integer.parseInt(fromTime.split(":")[0]));
             c1.set(Calendar.MINUTE, Integer.parseInt(fromTime.split(":")[1]));
 
@@ -373,9 +406,11 @@ public class MainActivity extends AppCompatActivity
             c2.set(Calendar.HOUR_OF_DAY, Integer.parseInt(toTime.split(":")[0]));
             c2.set(Calendar.MINUTE, Integer.parseInt(toTime.split(":")[1]));
             long interval1 = (c2.getTimeInMillis()-c1.getTimeInMillis())/12;
-            interval = sharedPreferences.getLong("interval",interval1);
-            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(fromTime.split(":")[0]));
-            calendar.set(Calendar.MINUTE, Integer.parseInt(fromTime.split(":")[1]));
+            interval = sharedPreferences.getLong("interval",interval1);*/
+
+//            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(fromTime.split(":")[0]));
+            calendar.set(Calendar.MINUTE,0);
+            calendar.add(Calendar.HOUR_OF_DAY,1);
 
 
         SharedPreferences.Editor editor= sharedPreferences.edit();
@@ -539,12 +574,115 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this, SocialMediaGridActivity.class));
         } else if(id == R.id.contact){
             startActivity(new Intent(MainActivity.this, ContactUsActivity.class));
+        } else if(id == R.id.switchAccount){
+            showUserDialog(new AccountDBUtils(this).get());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void showUserDialog(final ArrayList<AccountListModel> users) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        LayoutInflater linf = LayoutInflater.from(this);
+        final View inflator = linf.inflate(R.layout.user_selection_dialog, null);
+        alertDialog.setView(inflator);
+        alertDialog.setCancelable(true);
+        RecyclerView recyclerView = inflator.findViewById(R.id.selection_re);
+        final ArrayList<AccountListModel> modelList = users;
+
+        UserListAdapter adapter = new UserListAdapter(users, this, new OnClickListener() {
+            @Override
+            public void onClick(int pos) {
+                verifyOTP(users.get(pos).getId());
+                alertDialog1.dismiss();
+            }
+        });
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        alertDialog1 = null;
+        alertDialog1 = alertDialog.show();
+        alertDialog1.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.dialog_background_drawable));
+    }
+
+    void verifyOTP(final String userId){
+        final AlertDialog ad = Tools.getDialog("Verifying OTP...",this);
+        ad.show();
+        Response.Listener<String> listener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                ad.dismiss();
+                try {
+                    Log.d("Response", response);
+                    JSONObject result = new JSONObject(response);
+                    if (result.getInt("res") == 1) {
+
+                        SharedPreferences.Editor editor1 = Tools.getGeneralEditor(MainActivity.this);
+                        saveToken("");
+                        editor1.clear();
+                        editor1.commit();
+                        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                        notificationManager.cancelAll();
+                        new AccountDBUtils(MainActivity.this).clearData();
+
+
+                            SharedPreferences.Editor editor = Tools.getGeneralEditor(MainActivity.this);
+                            JSONObject data = result.getJSONObject("data");
+                            editor.putString(Constants.AUTH_TOKEN,data.optString("token"));
+                            JSONObject user = data.getJSONObject("user");
+                            editor.putString(Constants.PROFILE_EMAIL, user.optString("email"));
+                            editor.putString(Constants.PROFILE_NAME, user.optString("name", "-"));
+                            editor.putString(Constants.USER_ID,user.getInt("userId")+"");
+                            editor.putString(Constants.PHONE, user.optString("phone"));
+                            editor.putString(Constants.PROFILE_IMAGE, user.optString("photo"));
+                            if(data.getInt("dietitian_status")==1) {
+                                editor.putString(Constants.GENDER,user.getString("gender").toLowerCase());
+
+                                JSONObject dietitian = data.optJSONObject("dietitian");
+                                editor.putString(Constants.DIETITIAN_NAME, dietitian.optString("name"));
+                                editor.putString(Constants.DIETITIAN_PIC, dietitian.getString("photo"));
+                                editor.putString(Constants.DIETITIAN_ID, dietitian.optInt("dietitianId", 0) + "");
+                                editor.putString(Constants.DIETITIAN_PHONE, dietitian.getString("phone"));
+                            }
+                            editor.commit();
+                            //Call to temp info activity
+
+                            Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            finish();
+                            startActivity(intent);
+
+
+                    }else{
+                        Tools.initCustomToast(MainActivity.this,result.getString("msg"));
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+//                Log.d("Response",response);
+                Log.d("myTag","I am here");
+            }
+        };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ad.dismiss();
+                Tools.initNetworkErrorToast(MainActivity.this);
+                Log.d("Error",error.toString());
+                Log.d("myTag","I am here");
+            }
+        };
+        Map<String, String> params = new HashMap<>();
+        params.put("userId",userId);
+        params.put("switch","1");
+
+        NetworkManager.getInstance(this).sendPostRequest(Urls.Verify_OTP,params,listener,errorListener,this);
+
+    }
+
 
     @Override
     public void onFragmentInteraction(Uri uri) {
@@ -587,7 +725,7 @@ public class MainActivity extends AppCompatActivity
                 transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                 transaction.replace(R.id.main_fragment_frame, fragment).commit();
             } else if (id == R.id.more_tab) {
-                getSupportActionBar().setTitle("More");
+                getSupportActionBar().setTitle("Profile");
                 fragment = new MoreFragment();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -711,12 +849,12 @@ public class MainActivity extends AppCompatActivity
 
 
     void saveLogoutToken(String token){
-        /*final AlertDialog ad = Tools.getDialog("Saving feedback...",this);
-        ad.show();*/
+        final AlertDialog ad = Tools.getDialog("Clearing data...",this);
+        ad.show();
         Response.Listener<String> listener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                ad.dismiss();
+                ad.dismiss();
                 Log.d("ResponseSlots",response);
                 try {
                     JSONObject ob = new JSONObject(response);
@@ -726,6 +864,7 @@ public class MainActivity extends AppCompatActivity
                     editor.commit();
                     NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
                     notificationManager.cancelAll();
+                    new AccountDBUtils(MainActivity.this).clearData();
 //                    Checkout.clearUserData(getApplicationContext());
                     finish();
                     startActivity(new Intent(MainActivity.this,SignInActivity.class));
@@ -740,7 +879,7 @@ public class MainActivity extends AppCompatActivity
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                ad.dismiss();
+                ad.dismiss();
                 Tools.initNetworkErrorToast(MainActivity.this);
                 Log.d("Error",error.toString());
                 Log.d("myTag","I am here");
@@ -781,12 +920,101 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if(requestCode==1&&resultCode==-1){
+        if(requestCode==0&&resultCode==-1){
             if(lastSelected==R.id.home_tab){
-                ((DashBoardFragment)fragment).setUpTrackers();
+                ((DashBoardFragment)fragment).setUpTrackers(false);
             }
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    void fetchReminderFlags(){
+        final AlertDialog ad = Tools.getDialog("Fetching data...", this);
+        ad.show();
+        Response.Listener<String> listener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                ad.dismiss();
+                try {
+                    JSONObject result = new JSONObject(response);
+                    if(result.getInt("res")==1){
+                        JSONObject data = result.getJSONObject("data");
+                        SharedPreferences.Editor editor = Tools.getGeneralEditor(MainActivity.this);
+
+                        editor.putBoolean(Constants.NOTIFICATION_GENERAL,data.getBoolean("general"));
+                        editor.putBoolean(Constants.NOTIFICATION_MEAL,data.getBoolean("meal"));
+                        editor.putBoolean(Constants.NOTIFICATION_WATER,data.getBoolean("water"));
+                        editor.commit();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("Response", response);
+                Log.d("myTag", "I am here");
+
+            }
+        };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ad.dismiss();
+                Log.d("Error", error.toString());
+                Log.d("myTag", "I am here");
+            }
+        };
+
+
+        NetworkManager.getInstance(this).sendGetRequest(Urls.Get_Reminders, listener, errorListener, this);
+
+    }
+
+    void fetchMultipleData(){
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final Menu nav_Menu = navigationView.getMenu();
+
+        Response.Listener<String> listener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+//                ad.dismiss();
+                try {
+                    JSONObject result = new JSONObject(response);
+                    if(result.getInt("res")==1){
+                        JSONArray data = result.getJSONArray("data");
+                        new AccountDBUtils(MainActivity.this).clearData();
+                        for(int i=0;i<data.length();i++){
+                            JSONObject ob = data.getJSONObject(i);
+                            int flag = 0;
+                            if(ob.getBoolean("login_status"))
+                                flag=1;
+                            new AccountDBUtils(MainActivity.this).insert(ob.getString("name"),ob.getString("id"),ob.getString("photo"),flag+"");
+                        }
+                        if(data.length()>1){
+                            nav_Menu.findItem(R.id.switchAccount).setVisible(true);
+                        }else{
+                            nav_Menu.findItem(R.id.switchAccount).setVisible(false);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.d("Response", response);
+
+            }
+        };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                ad.dismiss();
+                Log.d("Error", error.toString());
+                nav_Menu.findItem(R.id.switchAccount).setVisible(false);
+            }
+        };
+
+
+        NetworkManager.getInstance(this).sendGetRequest(Urls.check_multiple_login, listener, errorListener, this);
+
     }
 }

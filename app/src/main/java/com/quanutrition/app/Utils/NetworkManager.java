@@ -32,7 +32,7 @@ public class NetworkManager {
 
     public void sendPostRequest(final String url, final Map<String, String> params, final Response.Listener<String> listener, final Response.ErrorListener errorListener, final Context context){
 
-        String apiURL = "http://qua-api.herokuapp.com/"+url;
+        String apiURL = "http://api.logikcal.in/"+url;
         Log.d("Call to URL ",apiURL);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,listener,errorListener)
         {
@@ -53,7 +53,7 @@ public class NetworkManager {
 
     public void sendPostRequestWithHeader(final String url, final Map<String, String> params, final Response.Listener<String> listener, final Response.ErrorListener errorListener, final Context context){
 
-        String apiURL = "http://qua-api.herokuapp.com/"+url;
+        String apiURL = "http://api.logikcal.in/"+url;
         Log.d("Call to URL ",apiURL);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,listener,errorListener)
         {
@@ -61,6 +61,7 @@ public class NetworkManager {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization","token "+Tools.getGeneralSharedPref(context).getString(Constants.AUTH_TOKEN,""));
+//                params.put("Authorization","token b38acce1274406181d86c147420e1d0a769d23a5");
                 return params;
             }
 
@@ -78,9 +79,41 @@ public class NetworkManager {
         requestQueue.add(stringRequest);
     }
 
+    public void sendRawPOstRequest(final String url, final String params, final Response.Listener<String> listener, final Response.ErrorListener errorListener, final Context context){
+
+        String apiURL = "http://api.logikcal.in/"+url;
+        Log.d("Call to URL ",apiURL);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,listener,errorListener)
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization","token "+Tools.getGeneralSharedPref(context).getString(Constants.AUTH_TOKEN,""));
+                return params;
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                return params.getBytes();
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        int MY_SOCKET_TIMEOUT_MS = 50000;
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
     public void sendGetRequest(final String url, final Response.Listener<String> listener, final Response.ErrorListener errorListener, final Context context){
 
-        String apiURL = "http://qua-api.herokuapp.com/"+url;
+        String apiURL = "http://api.logikcal.in/"+url;
         Log.d("Call to URL ",apiURL);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,listener,errorListener)
         {
@@ -103,7 +136,7 @@ public class NetworkManager {
 
     public void sendGetWithoutHeaderRequest(final String url, final Response.Listener<String> listener, final Response.ErrorListener errorListener, final Context context){
 
-        String apiURL = "http://qua-api.herokuapp.com/"+url;
+        String apiURL = "http://api.logikcal.in/"+url;
         Log.d("Call to URL ",apiURL);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,listener,errorListener);
         int MY_SOCKET_TIMEOUT_MS = 50000;
@@ -118,7 +151,7 @@ public class NetworkManager {
 
     public void sendPutRequest(final String url, final Map<String, String> params, final Response.Listener<String> listener, final Response.ErrorListener errorListener, Context context){
 
-        String apiURL = "http://qua-api.herokuapp.com/"+url;
+        String apiURL = "http://api.logikcal.in/"+url;
         Log.d("Call to URL ",apiURL);
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, apiURL,listener,errorListener) {
             @Override
@@ -137,7 +170,7 @@ public class NetworkManager {
 
     public void sendPostRequestWithoutParams(final String url, final Response.Listener<String> listener, final Response.ErrorListener errorListener, final Context context){
 
-        String apiURL = "http://qua-api.herokuapp.com/"+url;
+        String apiURL = "http://api.logikcal.in/"+url;
         Log.d("Call to URL ",apiURL);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,listener,errorListener)
         {
@@ -159,7 +192,7 @@ public class NetworkManager {
 
     public void sendNotification(final Context context, final String title, final String body, final String tag){
 
-        String apiURL = "http://qua-api.herokuapp.com/dieter/v1/send_notification/";
+        String apiURL = "http://api.logikcal.in/dieter/v1/send_notification/";
         Log.d("Call to URL ",apiURL);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL, new Response.Listener<String>() {
             @Override

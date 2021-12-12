@@ -2,7 +2,7 @@ package com.quanutrition.app.profile;
 
 import java.util.ArrayList;
 
-public class TimeInputModel {
+public class TimeInputModel implements Comparable{
     String id,day;
     ArrayList<TimeInputChildModel> list;
 
@@ -56,5 +56,11 @@ public class TimeInputModel {
 
     public void removeItem(int pos){
         this.list.remove(pos);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+
+        return Integer.parseInt(id)-Integer.parseInt(((TimeInputModel)o).getId());
     }
 }

@@ -101,7 +101,7 @@ public class CaloriesGraphActivity extends AppCompatActivity implements View.OnC
 
 
     void setProgressText(String data){
-        current.setText(data + " KCal.");
+        current.setText(data + " Cal.");
         float curr = Float.parseFloat(data);
         float pro = (curr/ Float.parseFloat(goal))*100;
         Log.d("steps",pro+"");
@@ -114,8 +114,8 @@ public class CaloriesGraphActivity extends AppCompatActivity implements View.OnC
     }
 
     void setUpBarGraph(){
-        dailyGoal.setText(goal+" KCal.");
-        goalText.setText(goal+" KCal. per Day");
+        dailyGoal.setText(goal+" Cal.");
+        goalText.setText(goal+" Cal. per Day");
         chart.getDescription().setEnabled(false);
         chart.setPinchZoom(false);
         chart.setDrawBarShadow(false);
@@ -212,7 +212,7 @@ public class CaloriesGraphActivity extends AppCompatActivity implements View.OnC
             DialogUtils.getCustomPicker(this, "Select Calories Goal", calData, new DialogUtils.OnCustomItemPicked() {
                 @Override
                 public void onNumberPicked(String selected) {
-                    goalText.setText(selected+" KCal. Per Day");
+                    goalText.setText(selected+" Cal. Per Day");
                     goal = selected;
                     setGoal(goal);
                 }

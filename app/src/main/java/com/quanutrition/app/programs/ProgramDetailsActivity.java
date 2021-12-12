@@ -49,7 +49,7 @@ public class ProgramDetailsActivity extends AppCompatActivity {
         durationList = new ArrayList<>();
 
         durationAdapter = new DurationAdapter(durationList,this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         duration_re.setLayoutManager(layoutManager);
         duration_re.setAdapter(durationAdapter);
 
@@ -57,7 +57,7 @@ public class ProgramDetailsActivity extends AppCompatActivity {
         durationAdapter.setOnClickListener(new DurationAdapter.OnItemClick() {
             @Override
             public void onClick(int pos) {
-                DurationModel model = durationList.get(pos);
+                /*DurationModel model = durationList.get(pos);
                 Intent intent = new Intent(ProgramDetailsActivity.this, CheckoutActivity.class);
                 intent.putExtra("programId",getIntent().getStringExtra("id"));
                 intent.putExtra("name",model.getName());
@@ -68,7 +68,7 @@ public class ProgramDetailsActivity extends AppCompatActivity {
                 intent.putExtra("discount",model.getDiscount());
                 intent.putExtra("has_discount",model.isHas_discount());
                 intent.putExtra("paymentId","-1");
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
 
@@ -88,12 +88,13 @@ public class ProgramDetailsActivity extends AppCompatActivity {
                     if(ob.getInt("res")==1){
                         JSONObject data = ob.getJSONObject("data");
                         title.setText(data.getString("name"));
+                        if(!data.getString("image").trim().isEmpty())
                         Tools.loadImageIntoImageView(data.getString("image"),image);
                         Tools.setHTMLData(body,data.getString("description"));
                         JSONArray amount = data.getJSONArray("amount");
                         for(int i=0;i<amount.length();i++){
                             JSONObject duration = amount.getJSONObject(i);
-                            DurationModel model = new DurationModel(duration.getString("plan"),duration.getString("duration"),duration.getString("price")+" "+duration.getString("cur"),duration.optString("discount","0"),duration.optBoolean("has_discount",false));
+                            DurationModel model = new DurationModel(duration.getString("plan_name"),duration.getString("days"),duration.optString("price","0")+" "+duration.optString("cur","INR"),duration.optString("discount","0"),duration.optBoolean("has_discount",false));
                             model.setName(data.getString("name"));
                             durationList.add(model);
                         }

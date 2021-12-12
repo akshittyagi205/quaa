@@ -494,7 +494,7 @@ public class ChatActivity extends AppCompatActivity {
                         message.setKey(dataSnapshot.getKey());
                         chats.add(message);
                         Log.d("I'm here", message.getTimestamp());
-                        Collections.sort(chats);
+//                        Collections.sort(chats);
                         chatAdapter.notifyDataSetChanged();
                         chatmessages.scrollToPosition(chats.size() - 1);
                         /*if (message.getMessage() != null) {

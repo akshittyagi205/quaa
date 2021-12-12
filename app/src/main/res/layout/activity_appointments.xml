@@ -37,38 +37,38 @@
             android:layout_marginLeft="@dimen/layout_medium_margin"
             android:layout_marginRight="@dimen/layout_medium_margin"
             android:translationZ="5dp"
+            android:visibility="gone"
             app:cardCornerRadius="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/small_padding"
-                    android:textSize="@dimen/text_medium"
-                    android:text="Upcoming"
                     android:id="@+id/upcoming"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:fontFamily="@font/defaultfont"
-                    android:textColor="@color/colorAccent"
                     android:gravity="center"
-                    />
+                    android:padding="@dimen/small_padding"
+                    android:text="Upcoming"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_medium" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/small_padding"
-                    android:textSize="@dimen/text_medium"
-                    android:text="History"
                     android:id="@+id/history"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:fontFamily="@font/defaultfont"
-                    android:textColor="@color/colorAccent"
                     android:gravity="center"
-                    />
+                    android:padding="@dimen/small_padding"
+                    android:text="History"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_medium" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <FrameLayout
@@ -79,11 +79,12 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_add_button"
-        android:id="@+id/fab"
-        android:tint="@color/textColorLight"/>
+        android:tint="@color/textColorLight"
+        android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -19,25 +19,31 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:src="@drawable/qua_logo"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/defaultfont"
+                android:text="Hey There"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/spacing_xxlarge"
+                android:textColor="@color/textColorLight"
+                android:textSize="@dimen/text_very_large"
                 />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_small"
-                        android:textColor="@color/grey_200"
-                        android:gravity="center"
-                        android:layout_marginTop="@dimen/layout_medium_margin"
-                        android:layout_marginBottom="@dimen/layout_small_margin"
-                        android:layout_marginStart="@dimen/layout_small_margin"
-                        android:layout_marginEnd="@dimen/layout_small_margin"
-                        android:layout_gravity="center"
-                        android:text="We just need some of your information to go ahead"
-                        />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/textColorLight"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/layout_very_small_margin"
+                android:layout_marginBottom="@dimen/layout_medium_margin"
+                android:layout_marginStart="@dimen/layout_small_margin"
+                android:layout_marginEnd="@dimen/layout_small_margin"
+                android:layout_gravity="center"
+                android:text="We just need some of your information to go ahead"
+                />
 
                 <LinearLayout
                     android:layout_width="match_parent"

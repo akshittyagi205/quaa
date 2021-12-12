@@ -25,30 +25,33 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/defaultfont"
                 android:text="Calories : 230 KCal."
-                android:id="@+id/cal"
+                android:id="@+id/fiberTxt"
                 android:drawableTint="@color/textColorLight"
                 android:padding="@dimen/small_padding"
+                android:visibility="gone"
                 android:textSize="@dimen/text_very_large"
                 android:textStyle="bold"
-                android:layout_centerInParent="true"
+
                 android:gravity="center"
                 android:textColor="@color/textColorLight" />
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_centerInParent="true"
                 android:fontFamily="@font/defaultfont"
                 android:text="Nutrient Distribution"
                 android:padding="@dimen/medium_padding"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/textColorLight" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_mxlarge"
+            android:orientation="vertical">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,7 +67,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/circle_blue"
-                android:src="@drawable/ic_macro_fiber"
+                android:src="@drawable/ic_calories"
                 android:padding="@dimen/medium_padding"
                 android:tint="@color/textColorLight"/>
 
@@ -74,7 +77,7 @@
                         android:padding="@dimen/small_padding"
                         android:textColor="@color/textColorLight"
                         android:text="Fiber : 20 g"
-                        android:id="@+id/fiberTxt"
+                        android:id="@+id/cal"
                         android:textSize="@dimen/text_small"
                         />
                 </LinearLayout>

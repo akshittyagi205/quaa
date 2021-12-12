@@ -22,43 +22,57 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="230dp"
+        android:visibility="gone"
         android:src="@drawable/qua_logo"
         />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:visibility="gone"
+                android:src="@drawable/qua_logo"
+                />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="@dimen/spacing_xxxlarge"
             android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_small_margin"
-        android:gravity="center"
-        android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:layout_marginRight="@dimen/layout_small_margin"
+                android:layout_marginTop="@dimen/spacing_xmlarge"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_very_large"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:text="SignIn With Phone Number"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_small"
-            android:textColor="@color/grey_300"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/layout_small_margin"
-            android:layout_marginStart="@dimen/layout_small_margin"
-            android:layout_marginEnd="@dimen/layout_small_margin"
-            android:text="An OTP will be sent to the number you enter and will be verified to proceed."
-            />
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/qua_logo"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_very_large"
+                    android:layout_marginTop="@dimen/layout_small_margin"
+                    android:layout_marginStart="@dimen/layout_small_margin"
+                    android:textColor="@color/textColorLight"
+                    android:text="SignIn With Phone Number"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/textColorLight"
+                    android:layout_marginBottom="@dimen/layout_small_margin"
+                    android:layout_marginStart="@dimen/layout_small_margin"
+                    android:layout_marginEnd="@dimen/layout_small_margin"
+                    android:text="An OTP will be sent to the number you enter and will be verified to proceed."
+                    />
+            </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,6 +87,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/small_padding"
             android:layout_marginBottom="@dimen/layout_medium_margin"
+            android:layout_marginTop="@dimen/layout_small_margin"
             android:background="@drawable/ic_background_stroke"
             android:orientation="horizontal">
 
@@ -112,7 +127,7 @@
             android:layout_margin="3dp"
             android:elevation="5dp"
             android:id="@+id/proceed"
-            android:background="@drawable/button_back"
+            android:background="@drawable/curvededge_button"
             android:orientation="horizontal"
             >
             <TextView
@@ -126,6 +141,14 @@
                 android:padding="@dimen/small_padding"
                 android:gravity="center"/>
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="100dp"
+            android:alpha="0.8"
+            android:src="@drawable/ic_signin_illustration"
+            />
 
     </LinearLayout>
         </LinearLayout>

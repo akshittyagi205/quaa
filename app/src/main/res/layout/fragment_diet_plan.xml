@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".diet.DietPlanFragment">
 
     <LinearLayout
@@ -177,18 +179,98 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_small_margin"
+                app:cardElevation="@dimen/elevation_header"
+                android:id="@+id/notesLayout"
+                app:cardCornerRadius="@dimen/card_album_radius">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/small_padding"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:id="@+id/mealHeadLayout">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:id="@+id/mealName"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/text_large"
+                                    android:paddingTop="@dimen/small_padding"
+                                    android:paddingBottom="@dimen/small_padding"
+                                    android:paddingLeft="@dimen/small_padding"
+                                    android:textColor="@color/colorPrimary"
+                                    android:fontFamily="@font/defaultfont"
+                                    android:text="Diet Notes"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/text_small"
+                                    android:paddingTop="@dimen/small_padding"
+                                    android:paddingBottom="@dimen/small_padding"
+                                    android:paddingLeft="@dimen/small_padding"
+                                    android:textColor="@color/colorAccent"
+                                    android:fontFamily="@font/defaultfont"
+                                    android:textStyle="bold"
+                                    android:textAllCaps="true"
+                                    android:layout_marginRight="@dimen/layout_small_margin"
+                                    android:text="View"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:id="@+id/dietNotes"
+                        android:paddingLeft="@dimen/layout_small_margin"
+                        android:paddingRight="@dimen/layout_small_margin"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_small"
+                        android:autoLink="all"
+                        android:textColorLink="@color/grey_20"
+                        android:textColor="@color/grey_20"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="-"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/re"
             android:padding="@dimen/small_padding"
-            android:layout_marginTop="@dimen/layout_small_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/noData"
+            android:visibility="gone"
             android:background="@color/colorPrimaryDark">
 
             <LinearLayout
@@ -232,4 +314,53 @@
             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/actionLayout">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/textColorLight"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Supplements"
+            android:background="@color/colorAccent"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/text_small"
+            android:fontFamily="@font/defaultfont"
+            android:id="@+id/supplements"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/textColorLight"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_700"
+            android:text="Ingredients"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/text_small"
+            android:fontFamily="@font/defaultfont"
+            android:id="@+id/ingredients"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/textColorLight"/>
+    </LinearLayout>
+
 </LinearLayout>

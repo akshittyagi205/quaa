@@ -41,6 +41,20 @@
                 android:paddingLeft="@dimen/medium_padding"
                 />
         </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/cart"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_orange"
+            android:layout_marginRight="@dimen/layout_small_margin"
+            android:src="@drawable/ic_shopping_cart"
+            android:padding="8dp"
+            android:tint="@color/grey_300"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

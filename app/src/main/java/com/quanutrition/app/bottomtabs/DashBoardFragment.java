@@ -35,6 +35,7 @@ import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.blogs.BlogDetailsActivity;
 import com.quanutrition.app.blogs.BlogsAdapter;
 import com.quanutrition.app.blogs.BlogsModel;
+import com.quanutrition.app.blogs.HealthFeedActivity;
 import com.quanutrition.app.blogs.ListAdapter;
 import com.quanutrition.app.blogs.ListModel;
 import com.quanutrition.app.blogs.SocialMediaAdapter;
@@ -61,6 +62,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator2;
+
 public class DashBoardFragment extends Fragment implements View.OnClickListener{
     private OnFragmentInteractionListener mListener;
     private View rootView;
@@ -73,10 +76,15 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener{
     SocialMediaAdapter mediaAdapter;
     BlogsAdapter blogsAdapter;
     private CardView step_card,calories_card;
-    FirebaseUtils firebaseUtils;
+//    FirebaseUtils firebaseUtils;
     TextView todaySteps,todayCal,planLabel;
     String waterGoal="12",stepGoal="10000",calorieGoal="250";
     String refCode="";
+    FirebaseUtils mFirebaseUtils;
+    GoogleFitUtils googleFitUtils;
+    CardView weight_card;
+    TextView currentWeight;
+    CircleIndicator2 indicator;
 
     public DashBoardFragment() {
 
@@ -102,6 +110,9 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener{
         todaySteps = rootView.findViewById(R.id.todaySteps);
         todayCal = rootView.findViewById(R.id.todayCal);
         planLabel = rootView.findViewById(R.id.planLabel);
+        currentWeight = rootView.findViewById(R.id.currentWeight);
+        weight_card = rootView.findViewById(R.id.weight_card);
+        indicator = rootView.findViewById(R.id.indicator);
 
 
 //        planLabel.setVisibility(View.GONE);
@@ -110,13 +121,21 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener{
         step_card.setOnClickListener(this);
         calories_card.setOnClickListener(this);
 
+        rootView.findViewById(R.id.viewMore).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), HealthFeedActivity.class));
+            }
+        });
 
         //initialize
         programs = new ArrayList<>();
         mediaList = new ArrayList<>();
         blogsList = new ArrayList<>();
         bannerList = new ArrayList<>();
-        firebaseUtils = new FirebaseUtils(getActivity());
+//        firebaseUtils = new FirebaseUtils(getActivity());
+
+        mFirebaseUtils = new FirebaseUtils(getActivity());
 
         //static data
        /* ProgramModel programModel = new ProgramModel("1","Sports Nutrition","https://quanutrition.com/images/package/1.jpg",true);
@@ -211,7 +230,19 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener{
         tips_re.setLayoutManager(layoutManager3);
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(tips_re);
+        indicator.attachToRecyclerView(tips_re, snapHelper);
         tips_re.setAdapter(bannerAdapter);
+        bannerAdapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
+
+
+
+
+        weight_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),WeightProgressActivity.class));
+            }
+        });
 
         fetchData();
 
@@ -251,13 +282,23 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         int id = view.getId();
         if(id == R.id.step_card){
-            Intent i = new Intent(getActivity(), StepsGraphActivity.class);
-            i.putExtra("goal",stepGoal);
-            startActivity(i);
+            if(todaySteps.getText().toString().equalsIgnoreCase("enable")){
+//                googleFitUtils.setFlag(true);
+                setUpTrackers(true);
+            }else {
+                Intent i = new Intent(getActivity(), StepsGraphActivity.class);
+                i.putExtra("goal", stepGoal);
+                startActivity(i);
+            }
         }else if(id == R.id.calories_card){
-            Intent i = new Intent(getActivity(), CaloriesGraphActivity.class);
-            i.putExtra("goal",calorieGoal);
-            startActivity(i);
+            if(todayCal.getText().toString().equalsIgnoreCase("enable")){
+//                googleFitUtils.setFlag(true);
+                setUpTrackers(true);
+            }else {
+                Intent i = new Intent(getActivity(), CaloriesGraphActivity.class);
+                i.putExtra("goal", calorieGoal);
+                startActivity(i);
+            }
 
         }
     }
@@ -286,9 +327,8 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener{
 //                        refCode = data.optString("referral_code");
 
 
-
                         if(getActivity()!=null){
-                            setUpTrackers();
+                            setUpTrackers(false);
                         }
 
                         JSONArray bannerArray = data.getJSONArray("banner");
@@ -324,13 +364,16 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener{
                             programs.clear();
                             for(int i=0;i<program.length();i++){
                                 JSONObject programOb = program.getJSONObject(i);
-                                ProgramModel model = new ProgramModel(programOb.getInt("id")+"",programOb.getString("name"),programOb.getString("name"),true);
+                                ProgramModel model = new ProgramModel(programOb.getInt("id")+"",programOb.getString("name"),programOb.getString("image"),true);
                                 programs.add(model);
                             }
                             programAdapter.notifyDataSetChanged();
                         }else{
                             planLabel.setVisibility(View.GONE);
                         }
+
+                        currentWeight.setText(data.getString("weight")+" Kg");
+
                     }else{
                         Tools.initCustomToast(getActivity(),ob.getString("msg"));
                     }
@@ -397,24 +440,31 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    public void setUpTrackers(){
+    public void setUpTrackers(boolean flag){
 
 //        setUpWaterLoader();
 
-        final FirebaseUtils mFirebaseUtils = new FirebaseUtils(getActivity());
 
-        GoogleFitUtils googleFitUtils = new GoogleFitUtils(getActivity(), new GoogleFitUtils.OnDataReady() {
+
+            googleFitUtils = new GoogleFitUtils(getActivity(), new GoogleFitUtils.OnDataReady() {
             @Override
             public void onStepsReady(String steps) {
-                todaySteps.setText(steps+"");
-                mFirebaseUtils.syncStepsData(steps);
-
+                if(steps.equalsIgnoreCase("-1"))
+                    todaySteps.setText("Enable");
+                else {
+                    todaySteps.setText(steps + "");
+                    mFirebaseUtils.syncStepsData(steps);
+                }
             }
 
             @Override
             public void onCaloriesReady(String totalCal, String walking, String running, String other) {
-                todayCal.setText(""+totalCal+" KCal.");
-                mFirebaseUtils.syncCaloriesData(totalCal);
+                if(totalCal.equalsIgnoreCase("-1"))
+                    todayCal.setText("Enable");
+                else {
+                    todayCal.setText("" + totalCal + " Cal.");
+                    mFirebaseUtils.syncCaloriesData(totalCal);
+                }
             }
 
             @Override
@@ -422,6 +472,8 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener{
 
             }
         });
+            googleFitUtils.setFlag(flag);
+            googleFitUtils.setWeekly(true);
         googleFitUtils.init();
     }
 
@@ -430,15 +482,15 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onResume() {
-        fetchGoals();
+//        fetchGoals();
         super.onResume();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 //        Log.d("onActivity Result Frag",data.toString());
-        if(requestCode==1&&resultCode==-1){
-            setUpTrackers();
+        if(requestCode==0&&resultCode==-1){
+            setUpTrackers(false);
         }else {
             super.onActivityResult(requestCode, resultCode, data);
         }

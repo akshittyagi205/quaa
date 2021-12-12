@@ -18,7 +18,8 @@
         android:padding="@dimen/small_padding"
         android:gravity="center_horizontal"
         android:textSize="@dimen/text_medium"
-        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/defaultfont"
+        android:textColor="@color/textColorLight"
         android:text="Update Today's Weight"/>
 
     <LinearLayout
@@ -35,7 +36,6 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:textColor="@color/grey_600"
         android:background="@color/transparent"
         android:padding="@dimen/medium_padding"
         android:hint="Enter your weight"

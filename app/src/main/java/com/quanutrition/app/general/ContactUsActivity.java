@@ -77,7 +77,7 @@ public class ContactUsActivity extends AppCompatActivity {
                                 address += ", "+res.getString("state");
                             if(!res.getString("country").isEmpty())
                                 address += ", "+res.getString("country");
-                            ContactUsModel model = new ContactUsModel(res.getString("city"),address,res.getString("pemail"),res.getString("phone"),"");
+                            ContactUsModel model = new ContactUsModel(res.getString("city"),address,res.getString("phone"),res.getString("pemail"),"");
 
 //                            model.setTag(res.optString("category","Myth and Facts"));
                             list.add(model);

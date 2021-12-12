@@ -7,7 +7,13 @@
             android:id="@+id/refer"
             android:icon="@drawable/ic_refer_earn"
             android:title="Refer and Earn" />-->
-        <item
+
+    <item
+        android:id="@+id/switchAccount"
+        android:icon="@drawable/ic_switch_account"
+        android:title="Switch Account" />
+
+    <item
         android:id="@+id/socialMedia"
         android:icon="@drawable/ic_media"
         android:title="Social Media Feed" />

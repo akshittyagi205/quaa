@@ -34,7 +34,7 @@
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/spacing_mxlarge"
                 android:paddingRight="@dimen/spacing_mxlarge"
-                android:paddingTop="@dimen/spacing_mxlarge"
+                android:paddingTop="@dimen/spacing_large"
                 >
 
                 <RelativeLayout
@@ -47,7 +47,7 @@
                     android:layout_height="80dp"
                     android:src="@drawable/ic_no_image" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:background="@drawable/circle_purple"
@@ -65,7 +65,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/clientProfile"
-                    android:background="?selectableItemBackground"
                     android:orientation="vertical">
 
                     <TextView
@@ -101,16 +100,323 @@
 
             </LinearLayout>
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:visibility="invisible"
+                android:background="@color/grey_800"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/layout_medium_margin"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/basic_info_layout"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:tint="@color/grey_200"
+                        app:backgroundTint="@color/grey_700"
+                        app:elevation="1dp"
+                        app:fabSize="normal"
+                        app:rippleColor="?attr/colorAccent"
+                        app:srcCompat="@drawable/ic_basic_info" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:text="Basic\nInformation"
+                        android:gravity="center"
+                        android:lines="2"
+                        android:padding="2dp"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_tiny"
+                        android:textColor="@color/textColorLight"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/food_info_layout"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:tint="@color/grey_200"
+                        app:backgroundTint="@color/grey_700"
+                        app:elevation="1dp"
+                        app:fabSize="normal"
+                        app:rippleColor="?attr/colorAccent"
+                        app:srcCompat="@drawable/ic_food_specification" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:text="Food\nSpecifications"
+                        android:gravity="center"
+                        android:lines="2"
+                        android:padding="2dp"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_tiny"
+                        android:textColor="@color/textColorLight"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/time_info_layout"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:tint="@color/grey_200"
+                        app:backgroundTint="@color/grey_700"
+                        app:elevation="1dp"
+                        app:fabSize="normal"
+                        app:rippleColor="?attr/colorAccent"
+                        app:srcCompat="@drawable/ic_clock" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:text="Time\nInformation"
+                        android:gravity="center"
+                        android:lines="2"
+                        android:padding="2dp"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_tiny"
+                        android:textColor="@color/textColorLight"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/general_data_layout"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:tint="@color/grey_200"
+                        app:backgroundTint="@color/grey_700"
+                        app:elevation="1dp"
+                        app:fabSize="normal"
+                        app:rippleColor="?attr/colorAccent"
+                        app:srcCompat="@drawable/ic_general_activity" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:text="General\nActivity"
+                        android:gravity="center"
+                        android:lines="2"
+                        android:padding="2dp"
+                        android:fontFamily="@font/defaultfont"
+                        android:textSize="@dimen/text_tiny"
+                        android:textColor="@color/textColorLight"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:visibility="invisible"
+                android:background="@color/grey_800"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_back"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="@dimen/layout_small_margin"
+                app:cardElevation="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:gravity="center"
                 android:orientation="vertical">
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:id="@+id/appointment_layout"
+                    android:gravity="center_vertical"
+                    android:minHeight="50dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/spacing_large"
+                    android:paddingRight="@dimen/spacing_large">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:padding="4dp"
+                        android:layout_height="30dp"
+                        android:tint="@color/textColorLight"
+                        android:src="@drawable/ic_appointment" />
+                    <View
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Appointments"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_small"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/textColorLight" />
 
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:padding="4dp"
+                        android:layout_height="30dp"
+                        android:tint="@color/grey_40"
+                        android:src="@drawable/ms_ic_chevron_right" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/layout_small_margin"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:background="@color/grey_10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:id="@+id/diet_recall_layout"
+                    android:gravity="center_vertical"
+                    android:minHeight="50dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/spacing_large"
+                    android:paddingRight="@dimen/spacing_large">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:padding="4dp"
+                        android:layout_height="30dp"
+                        android:tint="@color/textColorLight"
+                        android:src="@drawable/ic_diet_recall" />
+                    <View
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-light"
+                        android:text="24 Hour Diet Recall"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_small"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/textColorLight" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:padding="4dp"
+                        android:layout_height="30dp"
+                        android:tint="@color/grey_40"
+                        android:src="@drawable/ms_ic_chevron_right" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/layout_small_margin"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:background="@color/grey_10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:id="@+id/weight_progress_layout"
+                    android:gravity="center_vertical"
+                    android:minHeight="50dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/spacing_large"
+                    android:paddingRight="@dimen/spacing_large">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:padding="4dp"
+                        android:layout_height="30dp"
+                        android:tint="@color/textColorLight"
+                        android:src="@drawable/ic_weight" />
+                    <View
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Weight Progress"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_small"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/textColorLight" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:padding="4dp"
+                        android:layout_height="30dp"
+                        android:tint="@color/grey_40"
+                        android:src="@drawable/ms_ic_chevron_right" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/layout_small_margin"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:background="@color/grey_10" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -124,11 +430,11 @@
                     android:paddingLeft="@dimen/spacing_large"
                     android:paddingRight="@dimen/spacing_large">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:padding="4dp"
                         android:layout_height="30dp"
-                        android:tint="@color/colorAccent"
+                        android:tint="@color/textColorLight"
                         android:src="@drawable/ic_blog" />
                     <View
                         android:layout_width="@dimen/spacing_large"
@@ -145,12 +451,64 @@
                         android:textColor="@color/textColorLight" />
 
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:padding="4dp"
                         android:layout_height="30dp"
                         android:tint="@color/grey_40"
                         android:src="@drawable/ms_ic_chevron_right" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/layout_small_margin"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:background="@color/grey_10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:id="@+id/programs"
+                    android:gravity="center_vertical"
+                    android:minHeight="50dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/spacing_large"
+                    android:paddingRight="@dimen/spacing_large">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="4dp"
+                        android:tint="@color/textColorLight"
+                        android:src="@drawable/ic_browse_plans" />
+                    <View
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Plans &amp; Packages"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_small"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/textColorLight" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:padding="4dp"
+                        android:layout_height="30dp"
+                        android:tint="@color/grey_40"
+                        android:src="@drawable/ms_ic_chevron_right" />
+
 
 
                 </LinearLayout>
@@ -175,11 +533,11 @@
                     android:paddingLeft="@dimen/spacing_large"
                     android:paddingRight="@dimen/spacing_large">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:padding="4dp"
-                        android:tint="@color/colorAccent"
+                        android:tint="@color/textColorLight"
                         android:src="@drawable/ic_card" />
                     <View
                         android:layout_width="@dimen/spacing_large"
@@ -189,14 +547,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-light"
-                        android:text="Plans &amp; Packages"
+                        android:text="Payment History"
                         android:textStyle="bold"
                         android:textSize="@dimen/text_small"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/textColorLight" />
 
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:padding="4dp"
                         android:layout_height="30dp"
@@ -220,19 +578,19 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
-                    android:id="@+id/assessment_layout"
                     android:gravity="center_vertical"
                     android:minHeight="50dp"
+                    android:id="@+id/questionnaire"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/spacing_large"
                     android:paddingRight="@dimen/spacing_large">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:padding="4dp"
-                        android:tint="@color/colorAccent"
-                        android:src="@drawable/ic_progress" />
+                        android:tint="@color/textColorLight"
+                        android:src="@drawable/ic_question" />
                     <View
                         android:layout_width="@dimen/spacing_large"
                         android:layout_height="wrap_content" />
@@ -241,14 +599,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-light"
-                        android:text="Assessment"
+                        android:text="Questionnaire"
                         android:textStyle="bold"
                         android:textSize="@dimen/text_small"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/textColorLight" />
 
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:padding="4dp"
                         android:layout_height="30dp"
@@ -279,11 +637,11 @@
                     android:paddingLeft="@dimen/spacing_large"
                     android:paddingRight="@dimen/spacing_large">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:padding="4dp"
-                        android:tint="@color/colorAccent"
+                        android:tint="@color/textColorLight"
                         android:src="@drawable/ic_workout" />
                     <View
                         android:layout_width="@dimen/spacing_large"
@@ -300,7 +658,7 @@
                         android:textColor="@color/textColorLight" />
 
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:padding="4dp"
                         android:layout_height="30dp"
@@ -317,6 +675,7 @@
                     android:layout_marginBottom="@dimen/layout_small_margin"
                     android:layout_marginLeft="@dimen/spacing_large"
                     android:layout_marginRight="@dimen/spacing_large"
+                    android:visibility="gone"
                     android:background="@color/grey_10" />
 
                 <LinearLayout
@@ -325,13 +684,14 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:id="@+id/profile_layout"
+                    android:visibility="gone"
                     android:gravity="center_vertical"
                     android:minHeight="50dp"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/spacing_large"
                     android:paddingRight="@dimen/spacing_large">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:padding="4dp"
@@ -351,7 +711,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/textColorLight" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:padding="4dp"
                         android:layout_height="30dp"
@@ -376,13 +736,12 @@
                         android:padding="@dimen/layout_very_small_margin"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
-                        android:id="@+id/basic_info_layout"
                         android:orientation="vertical">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:background="@color/transparent"
@@ -437,7 +796,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@color/transparent"
@@ -483,7 +842,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/layout_very_small_margin"
-                    android:id="@+id/food_info_layout"
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:orientation="vertical">
@@ -491,7 +849,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@color/transparent"
@@ -536,7 +894,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/layout_very_small_margin"
-                        android:id="@+id/general_data_layout"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:orientation="vertical">
@@ -544,7 +901,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:background="@color/transparent"
@@ -589,7 +946,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/layout_very_small_margin"
-                        android:id="@+id/time_info_layout"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:orientation="vertical">
@@ -597,7 +953,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:background="@color/transparent"
@@ -638,16 +994,69 @@
                             android:layout_marginTop="@dimen/layout_very_small_margin"
                             android:background="@color/grey_400"/>
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/layout_very_small_margin"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@color/transparent"
+                                android:tint="@color/grey_200"
+                                android:alpha="0.8"
+                                android:layout_gravity="top"
+                                android:padding="@dimen/medium_padding"
+                                app:srcCompat="@drawable/ic_arrow_left" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-light"
+                                android:text="24 Hour Diet Recall"
+                                android:textSize="@dimen/text_small"
+                                android:textStyle="bold"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/textColorLight" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_large"
+                            android:layout_marginRight="@dimen/spacing_large"
+                            android:text="Diet preferences, allergies and cuisine"
+                            android:textSize="@dimen/text_very_small"
+                            android:visibility="gone"
+                            android:textColor="@color/grey_200"
+                            android:maxLines="1"
+                            android:minLines="1"
+                            app:fontFamily="@font/defaultfont"
+                            />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:visibility="gone"
+                            android:layout_marginTop="@dimen/layout_very_small_margin"
+                            android:background="@color/grey_400"/>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="@dimen/spacing_large"
+                    android:visibility="gone"
                     android:layout_marginRight="@dimen/spacing_large"
                     android:background="@color/grey_10" />
             </LinearLayout>
-
+            </androidx.cardview.widget.CardView>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_mlarge" />

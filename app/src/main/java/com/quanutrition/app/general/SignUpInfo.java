@@ -261,6 +261,7 @@ public class SignUpInfo extends AppCompatActivity implements View.OnClickListene
                         Tools.initCustomToast(getApplicationContext(), msg);
                         SharedPreferences.Editor editor = Tools.getGeneralEditor(SignUpInfo.this);
                         JSONObject data = basicInfoOuter.getJSONObject("data");
+                        editor.putString(Constants.AUTH_TOKEN,data.optString("token"));
                         JSONObject user = data.getJSONObject("user");
                         editor.putString(Constants.USER_ID,user.getInt("userId")+"");
                         editor.putString(Constants.PHONE, user.optString("phone"));
@@ -268,6 +269,9 @@ public class SignUpInfo extends AppCompatActivity implements View.OnClickListene
                         editor.putString(Constants.PROFILE_EMAIL, user.optString("email"));
                         editor.putString(Constants.PROFILE_NAME, user.optString("user_name", "-"));
                         editor.putString(Constants.PROFILE_IMAGE, user.optString("photo"));
+
+//                        NetworkManager.getInstance(SignUpInfo.this).sendNotification(SignUpInfo.this,"New App SignUp",firstName+" just signed up on Qua Nutrition App","-1");
+
                         if(data.getInt("dietitian_status")==1) {
 
                             JSONObject dietitian = data.optJSONObject("dietitian");
@@ -311,9 +315,10 @@ public class SignUpInfo extends AppCompatActivity implements View.OnClickListene
         params.put("dietitianCode",dietitian_code.getText().toString());
         params.put("ref_code",ref_code.getText().toString());
         params.put("is_ref",flag);
+        params.put("userId",Tools.getGeneralSharedPref(this).getString(Constants.USER_ID,"-1"));
 
 
-        NetworkManager.getInstance(this).sendPostRequestWithHeader(Urls.save_signUp_info, params,listener, errorListener, this);
+        NetworkManager.getInstance(this).sendPostRequest(Urls.save_signUp_info, params,listener, errorListener, this);
 
     }
 

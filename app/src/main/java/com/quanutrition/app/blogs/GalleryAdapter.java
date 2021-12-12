@@ -187,7 +187,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
                             String path = MediaStore.Images.Media.insertImage(mCtx.getContentResolver(), bm, "Image I want to share", null);
                             Uri uri = Uri.parse(path);
-                            String Message = "Hey!\n\nI Found this in Nmami Life Application.\n\nDownload the app now.\n\nAndroid -- http://bit.ly/nmamiapp\nIos -- http://bit.ly/nmamiios";
+                            String Message = "Hey!\n\nI Found this in Qua Nutrition Application.\n\nDownload the app now.\n\nhttps://qua.page.link/app";
                             onShare.onShare(Message,uri);
 
                         } catch(Exception e){

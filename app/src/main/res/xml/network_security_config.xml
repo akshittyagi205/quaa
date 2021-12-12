@@ -7,7 +7,7 @@
         <domain includeSubdomains="true">cloudinary.com</domain>
     </domain-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">dititio.com</domain>
+        <domain includeSubdomains="true">api.logikcal.in</domain>
     </domain-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">i3.ytimg.com</domain>

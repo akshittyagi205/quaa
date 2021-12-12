@@ -10,11 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.quanutrition.app.R;
+import com.quanutrition.app.Utils.Constants;
 import com.quanutrition.app.Utils.NetworkManager;
 import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.selectiondialogs.DialogUtils;
@@ -40,6 +43,11 @@ public class GeneralDataActivity extends AppCompatActivity implements View.OnCli
     ArrayList<ChipsModel> offDays;
     ArrayList<MultipleSelectionModel> offDays_base;
     ChipsAdapter offDays_Adapter;
+    RadioGroup pregnant,lactating;
+    String pregnantString,lactatingString;
+    LinearLayout femaleDetails;
+    EditText quantAlcohol,alcoholDetails,eatDetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +69,52 @@ public class GeneralDataActivity extends AppCompatActivity implements View.OnCli
         birthLayout = findViewById(R.id.birthLayout);
         smokeLayout = findViewById(R.id.smokeLayout);
         alcoholLayout = findViewById(R.id.alcoholLayout);
+        quantAlcohol = findViewById(R.id.quantAlcohol);
+        eatDetails = findViewById(R.id.eatDetails);
+        alcoholDetails = findViewById(R.id.alcoholDetails);
         save = findViewById(R.id.save);
+
+        pregnant = findViewById(R.id.pregnant);
+        lactating = findViewById(R.id.lactating);
+        femaleDetails = findViewById(R.id.femaleDetails);
+
+        ((RadioButton)findViewById(R.id.noPregnant)).setChecked(true);
+        ((RadioButton)findViewById(R.id.noLactating)).setChecked(true);
+
+        pregnantString = "No";
+        lactatingString = "No";
+
+        pregnant.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(pregnant.getCheckedRadioButtonId()==R.id.yesPregnant){
+                    pregnantString = "Yes";
+                }else{
+                    pregnantString = "No";
+                }
+                Log.d("Check Pregnant",pregnantString);
+            }
+        });
+
+        lactating.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(lactating.getCheckedRadioButtonId()==R.id.yesLactating){
+                    lactatingString = "Yes";
+                }else{
+                    lactatingString = "No";
+                }
+
+                Log.d("Check Lactating",lactatingString);
+            }
+        });
+
+
+        if(Tools.getGeneralSharedPref(this).getString(Constants.GENDER,"male").equalsIgnoreCase("female")){
+            femaleDetails.setVisibility(View.VISIBLE);
+        }else{
+            femaleDetails.setVisibility(View.GONE);
+        }
 
         offDays = new ArrayList<>();
         offDays_base = new ArrayList<>();
@@ -78,6 +131,7 @@ public class GeneralDataActivity extends AppCompatActivity implements View.OnCli
         unitWater.setFocusable(false);
         numberBirth.setFocusable(false);
         unitBirth.setFocusable(false);
+        quantAlcohol.setFocusable(false);
 
 
         help.setOnClickListener(this);
@@ -94,6 +148,7 @@ public class GeneralDataActivity extends AppCompatActivity implements View.OnCli
         unitWater.setOnClickListener(this);
         numberBirth.setOnClickListener(this);
         unitBirth.setOnClickListener(this);
+        quantAlcohol.setOnClickListener(this);
 
 
         offDays_Adapter = new ChipsAdapter(offDays, this, new ChipsAdapter.OnClickListener() {
@@ -129,7 +184,7 @@ public class GeneralDataActivity extends AppCompatActivity implements View.OnCli
                 }
             });*/
 
-            String[] data = {"No","Cook"};
+            String[] data = {"No","Yes"};
             DialogUtils.getCustomPicker(this, "Select Frequency", data, new DialogUtils.OnCustomItemPicked() {
                 @Override
                 public void onNumberPicked(String selected) {
@@ -145,42 +200,66 @@ public class GeneralDataActivity extends AppCompatActivity implements View.OnCli
                 }
             });
         } else if(id == R.id.numberEat){
-            String[] data = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+            String[] data = {"0","1-2 Times","2-5 Times","More Than 5 Times"};
             DialogUtils.getCustomPicker(this, "Select Eat Out Frequency", data, new DialogUtils.OnCustomItemPicked() {
                 @Override
                 public void onNumberPicked(String selected) {
+                    if(selected.equalsIgnoreCase("0"))
+                        unitEat.setText("");
+
                     numberEat.setText(selected);
                 }
             });
         } else if(id == R.id.numberSmoke){
-            String[] data = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+            String[] data = {"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
             DialogUtils.getCustomPicker(this, "Select Smoke Frequency", data, new DialogUtils.OnCustomItemPicked() {
                 @Override
                 public void onNumberPicked(String selected) {
+                    if(selected.equalsIgnoreCase("0"))
+                        unitSmoke.setText("");
+
                     numberSmoke.setText(selected);
                 }
             });
         } else if(id == R.id.numberBirth){
-            String[] data = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+            String[] data = {"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
             DialogUtils.getCustomPicker(this, "Birth Control Pill Frequency", data, new DialogUtils.OnCustomItemPicked() {
                 @Override
                 public void onNumberPicked(String selected) {
+                    if(selected.equalsIgnoreCase("0"))
+                        unitBirth.setText("");
+
                     numberBirth.setText(selected);
                 }
             });
         } else if(id == R.id.numberAlcohol){
-            String[] data = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+            String[] data = {"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
             DialogUtils.getCustomPicker(this, "Select Alcohol Frequency", data, new DialogUtils.OnCustomItemPicked() {
                 @Override
                 public void onNumberPicked(String selected) {
+                    if(selected.equalsIgnoreCase("0"))
+                        unitAlcohol.setText("");
+
                     numberAlcohol.setText(selected);
                 }
             });
+        } else if(id == R.id.quantAlcohol){
+            String[] data = {"-","100 ml","200 ml","500 ml","1000 ml"};
+            DialogUtils.getCustomPicker(this, "Select Alcohol Quantity", data, new DialogUtils.OnCustomItemPicked() {
+                @Override
+                public void onNumberPicked(String selected) {
+
+                    quantAlcohol.setText(selected);
+                }
+            });
         } else if(id == R.id.numberWater){
-            String[] data = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+            String[] data = {"Less than 1","1-2","2-3","More than 3"};
             DialogUtils.getCustomPicker(this, "Select Water Frequency", data, new DialogUtils.OnCustomItemPicked() {
                 @Override
                 public void onNumberPicked(String selected) {
+                    if(selected.equalsIgnoreCase("0"))
+                        unitWater.setText("");
+
                     numberWater.setText(selected);
                 }
             });
@@ -313,6 +392,11 @@ public class GeneralDataActivity extends AppCompatActivity implements View.OnCli
         params.put("birth1",Tools.getText(numberBirth));
         params.put("birth2",Tools.getText(unitBirth));
         params.put("offdays1",offDayString);
+        params.put("pregnant",pregnantString);
+        params.put("lactating",lactatingString);
+        params.put("eatout_details",Tools.getText(eatDetails));
+        params.put("alcohol_details",Tools.getText(alcoholDetails));
+        params.put("alcohol_quantity",Tools.getText(quantAlcohol));
 
 
         NetworkManager.getInstance(this).sendPostRequestWithHeader(Urls.save_general_info,params,listener,errorListener,this);
@@ -339,12 +423,29 @@ public class GeneralDataActivity extends AppCompatActivity implements View.OnCli
                         numberAlcohol.setText(data.getString("alcohol1"));
                         numberSmoke.setText(data.getString("smoke1"));
                         numberWater.setText(data.getString("water1"));
+                        numberBirth.setText(data.optString("birth1"));
 
                         unitEat.setText(data.getString("eat2"));
                         unitAlcohol.setText(data.getString("alcohol2"));
                         unitSmoke.setText(data.getString("smoke2"));
                         unitWater.setText(data.getString("water2"));
+                        unitBirth.setText(data.getString("birth2"));
 
+                        quantAlcohol.setText(data.getString("alcohol_quantity"));
+                        eatDetails.setText(data.getString("eatout_details"));
+                        alcoholDetails.setText(data.getString("alcohol_details"));
+
+                        if(data.optString("pregnant","no").equalsIgnoreCase("yes")){
+                            ((RadioButton)findViewById(R.id.yesPregnant)).setChecked(true);
+                        }else{
+                            ((RadioButton)findViewById(R.id.noPregnant)).setChecked(true);
+                        }
+
+                        if(data.optString("lactating","no").equalsIgnoreCase("yes")){
+                            ((RadioButton)findViewById(R.id.yesLactating)).setChecked(true);
+                        }else{
+                            ((RadioButton)findViewById(R.id.noLactating)).setChecked(true);
+                        }
 
                         if(data.getString("smoke_flag").equalsIgnoreCase("1")){
                             smokeLayout.setVisibility(View.VISIBLE);
@@ -358,7 +459,7 @@ public class GeneralDataActivity extends AppCompatActivity implements View.OnCli
                             alcoholLayout.setVisibility(View.GONE);
                         }
 
-                        if(data.getString("birth_flag").equalsIgnoreCase("1")){
+                        if(data.getString("birth_flag").equalsIgnoreCase("1")&&Tools.getGeneralSharedPref(GeneralDataActivity.this).getString(Constants.GENDER,"female").equalsIgnoreCase("female")){
                             birthLayout.setVisibility(View.VISIBLE);
                         }else{
                             birthLayout.setVisibility(View.GONE);

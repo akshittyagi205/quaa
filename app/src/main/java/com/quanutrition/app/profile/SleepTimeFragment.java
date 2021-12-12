@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,7 +81,7 @@ public class SleepTimeFragment extends Fragment {
             public void onClick(View view) {
 
 
-                DialogUtils.getMultipleSearchDialog(getActivity(), days_base, new DialogUtils.OnMultipleItemsSelected() {
+                DialogUtils.getMultipleSelectionDialogWithTitle(getActivity(),"Select Days",days_base, new DialogUtils.OnMultipleItemsSelected() {
 
                     @Override
                     public void onMultipleItemsSelected(ArrayList<MultipleSelectionModel> items) {
@@ -131,7 +132,7 @@ public class SleepTimeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(Tools.validateNormalText(fromTime)&&Tools.validateNormalText(toTime)&&Tools.validateNormalText(days)) {
-                    if(Tools.validateTime(Tools.getText(fromTime),Tools.getText(toTime))) {
+//                    if(Tools.validateTime(Tools.getText(fromTime),Tools.getText(toTime))) {
                     for (int i = 0; i < days_base.size(); i++) {
                         if (days_base.get(i).isSelected()) {
                             int flag = 0;
@@ -149,6 +150,7 @@ public class SleepTimeFragment extends Fragment {
                         }
                     }
 //                    list = Tools.sortDayWise(list);
+                    Collections.sort(list);
                     adapter.notifyDataSetChanged();
 
                     days_base = new ArrayList<>();
@@ -159,9 +161,9 @@ public class SleepTimeFragment extends Fragment {
                     days.setText("");
                     fromTime.setText("");
                     toTime.setText("");
-                    }else{
-                        Tools.initCustomToast(getActivity(),"Start Time cannot be greater than or equal to End Time!");
-                    }
+//                    }else{
+//                        Tools.initCustomToast(getActivity(),"Start Time cannot be greater than or equal to End Time!");
+//                    }
                 }else{
                     Tools.initCustomToast(getActivity(),"Please enter all the data!");
                 }
@@ -238,8 +240,8 @@ public class SleepTimeFragment extends Fragment {
                 JSONObject ob = new JSONObject();
                 try {
                     ob.put("day",list.get(i).getDay());
-                    ob.put("from",Tools.getUnformattedTime(list.get(i).getList().get(j).getFrom()));
-                    ob.put("to",Tools.getUnformattedTime(list.get(i).getList().get(j).getTo()));
+                    ob.put("from",list.get(i).getList().get(j).getFrom());
+                    ob.put("to",list.get(i).getList().get(j).getTo());
 
                     timeArray.put(ob);
                 } catch (JSONException e) {
@@ -314,8 +316,8 @@ public class SleepTimeFragment extends Fragment {
                         for(int i=0;i<dataArray.length();i++){
                             JSONObject ob = dataArray.getJSONObject(i);
                             String day = ob.getString("day");
-                            String from = Tools.getformattedTime(ob.getString("from"));
-                            String to = Tools.getformattedTime(ob.getString("to"));
+                            String from = ob.getString("from");
+                            String to = ob.getString("to");
                             int flag=0;
                             for (int j = 0; j < list.size(); j++) {
                                 if (list.get(j).getDay().equalsIgnoreCase(day)) {
@@ -326,10 +328,19 @@ public class SleepTimeFragment extends Fragment {
                             if (flag == 0) {
                                 ArrayList<TimeInputChildModel> childList = new ArrayList<>();
                                 childList.add(new TimeInputChildModel(from,to));
-                                list.add(new TimeInputModel(i + "", day, childList));
+                                final String[] daysArray = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+                                int pos = i;
+                                for(int l=0;l<daysArray.length;l++){
+                                    if(daysArray[l].equalsIgnoreCase(day)){
+                                        pos = l;
+                                        break;
+                                    }
+                                }
+                                list.add(new TimeInputModel(pos + "", day, childList));
                             }
                         }
 //                        list = Tools.sortDayWise(list);
+                        Collections.sort(list);
                         adapter.notifyDataSetChanged();
 
                     }

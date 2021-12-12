@@ -57,7 +57,7 @@ public class PhysicalActivityAdapter extends RecyclerView.Adapter<PhysicalActivi
 
         final PhysicalActivityModel model = list.get(position);
         holder.title.setText(model.getTitle());
-        holder.duration.setText(model.getDuration());
+        holder.duration.setText("From : "+model.getFrom()+"\nTo : "+model.getTo());
         holder.placeHolder.setText(model.getTitle().charAt(0)+"");
 
         if(model.getNotes().isEmpty()){

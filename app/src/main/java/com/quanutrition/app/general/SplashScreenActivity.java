@@ -38,8 +38,9 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Tools.setSystemBarColorCustom(this,R.color.textColorDark);
         setContentView(R.layout.activity_splash_screen);
-//        Tools.setSystemBarColorDark(this,R.color.colorPrimary);
+
         try{
 
                 Log.d("Null Intent",getIntent().getExtras().toString());
@@ -62,7 +63,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                                 @Override
                                                 public void run() {
                                                     try {
-                                                        Thread.sleep(1000);
+                                                        Thread.sleep(3000);
                                                     } catch (InterruptedException e1) {
                                                         e1.printStackTrace();
                                                     }
@@ -84,7 +85,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                             @Override
                                             public void run() {
                                                 try {
-                                                    Thread.sleep(1000);
+                                                    Thread.sleep(3000);
                                                 } catch (InterruptedException e1) {
                                                     e1.printStackTrace();
                                                 }
@@ -121,7 +122,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(3000);
                         } catch (InterruptedException e1) {
                             e1.printStackTrace();
                         }

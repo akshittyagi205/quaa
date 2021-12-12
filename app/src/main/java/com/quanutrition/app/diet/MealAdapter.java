@@ -29,6 +29,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
 
     private ArrayList<MealModel> mealList;
     private Context mCtx;
+    private boolean defaultOpen = false;
 
 
     public MealAdapter(ArrayList<MealModel> mealList, Context mCtx) {
@@ -36,8 +37,9 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
         this.mCtx = mCtx;
     }
 
-
-
+    public void setDefaultOpen(boolean defaultOpen) {
+        this.defaultOpen = defaultOpen;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -70,7 +72,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
     public void onBindViewHolder(final MealAdapter.MyViewHolder holder, final int position) {
 
         final MealModel meal = mealList.get(position);
-        holder.meal_item_re.setVisibility(View.GONE);
+
         if(meal.isTimeFlag()&&(!meal.getMealTime().trim().isEmpty()))
         holder.mealName.setText(meal.getMealName()+" ("+Tools.getformattedTime(meal.getMealTime())+")");
         else
@@ -81,6 +83,17 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
         }else{
             holder.mealCalories.setVisibility(View.GONE);
         }
+
+        if(defaultOpen) {
+            FoodAdapter foodAdapter = new FoodAdapter(meal.getMealData(), mCtx, meal.isRecipe_flag());
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mCtx);
+            holder.meal_item_re.setLayoutManager(layoutManager);
+            holder.meal_item_re.setAdapter(foodAdapter);
+            holder.meal_item_re.setVisibility(View.VISIBLE);
+        }else{
+            holder.meal_item_re.setVisibility(View.GONE);
+        }
+
         holder.mealHeadLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

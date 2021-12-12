@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingBottom="@dimen/small_padding"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/foodName"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_very_small_margin"
+            android:layout_marginEnd="@dimen/layout_very_small_margin"
+            android:layout_marginBottom="@dimen/layout_very_small_margin"
+            android:background="@drawable/textarea_border"
+            android:fontFamily="@font/defaultfont"
+            android:hint="Food Name"
+            android:gravity="top"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:padding="@dimen/medium_padding"
+            android:textSize="@dimen/text_small" />
+
+        <EditText
+            android:id="@+id/foodQuant"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_very_small_margin"
+            android:layout_marginEnd="@dimen/layout_very_small_margin"
+            android:layout_marginBottom="@dimen/layout_very_small_margin"
+            android:background="@drawable/textarea_border"
+            android:fontFamily="@font/defaultfont"
+            android:hint="Quantity"
+            android:gravity="top"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:padding="@dimen/medium_padding"
+            android:textSize="@dimen/text_small" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_close_chip"
+            android:layout_gravity="center_vertical"
+            android:padding="5dp"
+            android:id="@+id/delete"/>
+
+    </LinearLayout>
+</LinearLayout>

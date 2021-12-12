@@ -26,7 +26,6 @@
             android:hint="Search here..."
             android:id="@+id/search"
             android:textSize="@dimen/text_medium"
-            android:textColor="@color/grey_800"
             android:fontFamily="@font/defaultfont"
             android:layout_marginLeft="@dimen/layout_small_margin"
             android:layout_marginRight="@dimen/layout_small_margin"

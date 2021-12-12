@@ -2,7 +2,7 @@ package com.quanutrition.app.appointment;
 
 public class AppointmentHistoryModel {
 
-    private String id,date,time,dietitianName,type,status,notes;
+    private String id,date,time,dietitianName,type,status,notes,activity;
 
     public AppointmentHistoryModel(String id, String date, String time, String dietitianName, String type, String status, String notes) {
         this.id = id;
@@ -68,5 +68,13 @@ public class AppointmentHistoryModel {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
     }
 }

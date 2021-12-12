@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:text="Vegetarian"
+    android:textColor="@color/textColorLight"
+    android:layout_marginRight="@dimen/layout_very_small_margin"
+    android:textSize="@dimen/text_small"
+    android:fontFamily="@font/defaultfont"
+    android:id="@+id/rad"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+</RadioButton>

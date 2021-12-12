@@ -4,6 +4,7 @@ public class PhysicalActivityModel {
     String title,duration;
     String id;
     String notes;
+    String from,to;
 
     public PhysicalActivityModel(String title, String duration) {
         this.title = title;
@@ -40,5 +41,21 @@ public class PhysicalActivityModel {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
     }
 }

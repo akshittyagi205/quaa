@@ -315,6 +315,8 @@ public class PhysicalActivity extends AppCompatActivity implements View.OnClickL
             PhysicalActivityModel model = new PhysicalActivityModel(ob.getString("Activity"),Tools.getDuration(ob.getString("From"),ob.getString("To")));
             model.setNotes("");
             model.setId(id);
+            model.setFrom(ob.getString("From"));
+            model.setTo(ob.getString("To"));
             list.add(model);
         }
 

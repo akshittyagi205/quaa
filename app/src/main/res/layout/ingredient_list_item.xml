@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="@dimen/small_padding"
+        android:layout_height="wrap_content"
+        android:id="@+id/head">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/name"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_large"
+                android:paddingTop="@dimen/small_padding"
+                android:paddingBottom="@dimen/small_padding"
+                android:paddingLeft="@dimen/small_padding"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/defaultfont"
+                android:text="Name"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/grey_300"
+                android:fontFamily="@font/defaultfont"
+                android:text="100 gm."
+                android:gravity="center_vertical"
+                android:id="@+id/quantity"
+                android:paddingRight="@dimen/medium_padding"
+                android:paddingLeft="@dimen/medium_padding"
+                />
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="@dimen/layout_very_small_margin"
+            android:layout_marginLeft="@dimen/layout_very_small_margin"
+            android:layout_gravity="center"
+            android:id="@+id/expand"
+            android:tint="@color/grey_300"
+            android:src="@drawable/ic_arrow_drop_down"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="@color/grey_800"
+        android:id="@+id/details">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/small_padding">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:layout_weight="1.2"
+            android:textColor="@color/textColorLight"
+            android:text="Calories"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textColor="@color/textColorLight"
+            android:text=":"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:textSize="@dimen/text_small"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:layout_weight="1.5"
+            android:textColor="@color/textColorLight"
+            android:text="12 g"
+            android:id="@+id/cal"
+            android:textSize="@dimen/text_very_small"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:layout_weight="1"
+            android:textColor="@color/textColorLight"
+            android:text="Fat"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textColor="@color/textColorLight"
+            android:text=":"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:textSize="@dimen/text_small"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:layout_weight="1.5"
+            android:textColor="@color/textColorLight"
+            android:text="12 g"
+            android:id="@+id/fat"
+            android:textSize="@dimen/text_very_small"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/small_padding">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:layout_weight="1.2"
+            android:textColor="@color/textColorLight"
+            android:text="Protein"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textColor="@color/textColorLight"
+            android:text=":"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:textSize="@dimen/text_small"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:layout_weight="1.5"
+            android:textColor="@color/textColorLight"
+            android:text="12 g"
+            android:id="@+id/pro"
+            android:textSize="@dimen/text_very_small"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:layout_weight="1"
+            android:textColor="@color/textColorLight"
+            android:text="Carbs."
+            android:textStyle="bold"
+            android:textSize="@dimen/text_small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:textColor="@color/textColorLight"
+            android:text=":"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:textSize="@dimen/text_small"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:layout_weight="1.5"
+            android:textColor="@color/textColorLight"
+            android:text="12 g"
+            android:id="@+id/carbs"
+            android:textSize="@dimen/text_very_small"/>
+
+    </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/textColorLight"/>
+
+</LinearLayout>

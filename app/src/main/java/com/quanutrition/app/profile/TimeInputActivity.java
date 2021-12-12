@@ -44,6 +44,7 @@ SleepTimeFragment.OnFragmentInteractionListener, TrainingScheduleFragment.OnFrag
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new TravelTimeFragment(),"Travel Time");
         adapter.addFragment(new SleepTimeFragment(), "Sleep Time");
+        adapter.addFragment(new WorkingHoursFragment(), "Work Time");
         adapter.addFragment(new TrainingScheduleFragment(), "Training Schedule");
         viewPager.setAdapter(adapter);
     }

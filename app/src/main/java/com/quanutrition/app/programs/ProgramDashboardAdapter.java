@@ -69,7 +69,8 @@ public class ProgramDashboardAdapter extends RecyclerView.Adapter<ProgramDashboa
         }else{
             holder.image.setVisibility(View.GONE);
         }*/
-        Tools.loadImageIntoImageView(model.imageLink,holder.image);
+        if(!model.getImageLink().isEmpty())
+        Tools.loadImageIntoImageView(model.getImageLink(),holder.image);
         holder.name.setText(model.name);
         holder.backLayout.setOnClickListener(new View.OnClickListener() {
             @Override

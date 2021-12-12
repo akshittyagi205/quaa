@@ -64,7 +64,7 @@ public class WaterNotificationManager {
         }*/
         PendingIntent addIntent = PendingIntent.getBroadcast(mCtx, 0, i, 0);
 
-        mBuilder.addAction(R.drawable.ic_notification_glass,"+1 Glass",addIntent);
+//        mBuilder.addAction(R.drawable.ic_notification_glass,"+1 Glass",addIntent);
 
         mBuilder.setAutoCancel(true);
         Intent resultIntent;
