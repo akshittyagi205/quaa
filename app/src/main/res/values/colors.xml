@@ -18,6 +18,7 @@
     <color name="very_dark_gray">#636363</color>
 
     <color name="background">#e9e3dd</color>
+    <color name="transparent">#00ffffff</color>
 
     <color name="overlay_dark_10">#1A000000</color>
     <color name="overlay_dark_20">#33000000</color>

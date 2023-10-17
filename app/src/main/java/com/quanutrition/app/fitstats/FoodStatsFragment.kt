@@ -335,7 +335,7 @@ class FoodStatsFragment : Fragment() {
             yAxiesRight.isEnabled = false
             val yAxis: YAxis = binding.chart1.getAxisLeft()
 
-            yAxis.textColor = resources.getColor(R.color.transparent)
+            yAxis.textColor = Color.parseColor("#ffffff")
             yAxis.textSize = 0f
             yAxis.setDrawGridLines(false)
             yAxis.isEnabled = true

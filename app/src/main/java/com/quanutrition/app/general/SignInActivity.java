@@ -23,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.quanutrition.app.BuildConfig;
 import com.quanutrition.app.MainActivity;
 import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.Constants;

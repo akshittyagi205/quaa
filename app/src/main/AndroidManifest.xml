@@ -152,7 +152,8 @@
             android:name=".general.SplashScreenActivity"
             android:clearTaskOnLaunch="true"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -307,14 +308,16 @@
         </receiver>
         <receiver
             android:name=".Utils.SampleBootReciever"
-            android:enabled="false">
+            android:enabled="false"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <receiver
             android:name=".Utils.MyAlarmManager"
-            android:process=":remote">
+            android:process=":remote"
+            android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.APP_MESSAGING" />
 
@@ -332,7 +335,8 @@
         <service
             android:name=".googlefit.FirebaseSyncService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service android:name=".Utils.MyFirebaseMessagingService">
+        <service android:name=".Utils.MyFirebaseMessagingService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
