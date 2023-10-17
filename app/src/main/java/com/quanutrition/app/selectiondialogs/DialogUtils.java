@@ -1,11 +1,15 @@
 package com.quanutrition.app.selectiondialogs;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.quanutrition.app.R;
+import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.databinding.DialogTimepickerBinding;
 import com.shawnlin.numberpicker.NumberPicker;
 
@@ -51,6 +56,35 @@ public class DialogUtils {
         alertDialog.setView(inflator);
         alertDialog.setCancelable(true);
         RecyclerView recyclerView = inflator.findViewById(R.id.selection_re);
+        final ArrayList<SingleSelectionModel> modelList = list;
+        SingleSelectionAdapter adapter = new SingleSelectionAdapter(modelList, context, new SingleSelectionAdapter.OnClickListener() {
+            @Override
+            public void onItemSelected(View view, int position) {
+                onSingleItemSelectedListener.onItemSelected(position,modelList.get(position));
+                alertDialog1.dismiss();
+            }
+        });
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        alertDialog1 = null;
+        alertDialog1 = alertDialog.show();
+        alertDialog1.getWindow().setBackgroundDrawable(context.getResources().getDrawable(R.drawable.dialog_background_drawable));
+    }
+
+    public static void getSingleSelectionDialog(Context context,String title, ArrayList<SingleSelectionModel> list, final OnSingleItemSelectedListener onSingleItemSelectedListener){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        LayoutInflater linf = LayoutInflater.from(context);
+        final View inflator = linf.inflate(R.layout.selection_dialog, null);
+        alertDialog.setView(inflator);
+        alertDialog.setCancelable(true);
+        RecyclerView recyclerView = inflator.findViewById(R.id.selection_re);
+
+        TextView titleTV = inflator.findViewById(R.id.title);
+        titleTV.setVisibility(View.VISIBLE);
+        titleTV.setText(title);
+
         final ArrayList<SingleSelectionModel> modelList = list;
         SingleSelectionAdapter adapter = new SingleSelectionAdapter(modelList, context, new SingleSelectionAdapter.OnClickListener() {
             @Override
@@ -156,6 +190,14 @@ public class DialogUtils {
         alertDialog1.getWindow().setBackgroundDrawable(context.getResources().getDrawable(R.drawable.dialog_background_drawable));
     }
 
+
+    public static ArrayList<SingleSelectionModel> getSingleArrayListWithStringArray(String[] array){
+        ArrayList<SingleSelectionModel> list = new ArrayList<>();
+        for(int i=0;i<array.length;i++){
+            list.add(new SingleSelectionModel(i+"",array[i]));
+        }
+        return list;
+    }
 
     public static void getSingleSearchDialog(final Context context, ArrayList<SingleSelectionModel> list, final OnSingleItemSelectedListener onSingleItemSelectedListener){
 
@@ -394,6 +436,45 @@ public class DialogUtils {
         alertDialog1.getWindow().setBackgroundDrawable(context.getResources().getDrawable(R.drawable.dialog_background_drawable));
     }
 
+    public static void getDialogWithTitle(final Context context, String titleText, final OnCustomItemPicked onCustomItemPicked){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        LayoutInflater linf = LayoutInflater.from(context);
+        final View inflator = linf.inflate(R.layout.dialog_text_box, null);
+        alertDialog.setView(inflator);
+        alertDialog.setCancelable(true);
+        final EditText note = inflator.findViewById(R.id.note);
+        final TextView title = inflator.findViewById(R.id.title);
+
+        title.setText(titleText);
+
+        note.setHint("Enter here...");
+        note.requestFocus();
+        TextView save = inflator.findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Tools.validateNormalText(note)){
+                    onCustomItemPicked.onNumberPicked(Tools.getText(note));
+                    alertDialog1.dismiss();
+                }else{
+                    Tools.initCustomToast(context,"Please enter some text!");
+                }
+            }
+        });
+
+        TextView skip = inflator.findViewById(R.id.skip);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCustomItemPicked.onNumberPicked("");
+                alertDialog1.dismiss();
+            }
+        });
+        alertDialog1 = null;
+        alertDialog1 = alertDialog.show();
+        alertDialog1.getWindow().setBackgroundDrawable(context.getResources().getDrawable(R.drawable.dialog_background_drawable));
+    }
+
 
     public static void getSimpleNumberPickerHeight(final Context context, String title, final String unit, int last_position, final OnNumberPicked onNumberPicked){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
@@ -576,5 +657,66 @@ public class DialogUtils {
         alertDialog1 = alertDialog.show();
         alertDialog1.getWindow().setBackgroundDrawable(context.getResources().getDrawable(R.drawable.dialog_background_drawable));
     }
+
+
+    public static void getTakenDialog(final Context context, final OnCustomItemPicked onCustomItemPicked){
+
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.dialog_taken);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setCancelable(true);
+
+        Button close = dialog.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        Button missed = dialog.findViewById(R.id.miss);
+        missed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCustomItemPicked.onNumberPicked("2");
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    public static void getMissedDialog(final Context context,String otherfood,final OnCustomItemPicked onCustomItemPicked){
+
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.dialog_missed);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setCancelable(true);
+
+        dialog.findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        if(otherfood!=null)
+            if(!otherfood.trim().isEmpty()){
+                ((TextView)dialog.findViewById(R.id.text)).setText("You have marked this as missed and taken "+otherfood+" instead, do you want to change it to taken?");
+            }
+
+        dialog.findViewById(R.id.miss).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCustomItemPicked.onNumberPicked("1");
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
 
 }

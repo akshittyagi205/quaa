@@ -101,11 +101,11 @@ class SupplementsActivity : AppCompatActivity() {
                 for (k in 0 until options.length()) {
                     val optionFood = options.getJSONObject(k)
                     val optionMacro = optionFood.getJSONObject("macro")
-                    val optionsModel = FoodOptionsModel(optionFood.getString("id"), optionFood.getString("name"), optionMacro.getString("cal"), optionFood.getString("quantity") + " " + optionFood.getString("measure"), optionFood.optString("note", ""), false)
+                    val optionsModel = FoodOptionsModel(optionFood.getString("id"), optionFood.getString("name"), optionMacro.getString("cal"), optionFood.getString("quantity") + " " + optionFood.optString("measure",""), optionFood.optString("note", ""), false)
                     optionsModel.url = optionFood.optString("url", "")
                     optionsList.add(optionsModel)
                 }
-                val foodDataModel = FoodDataModel(food.getString("id"), food.getString("name"), foodMacro.getString("cal"), food.getString("quantity") + " " + food.getString("measure"), food.getString("note"), false, optionsList)
+                val foodDataModel = FoodDataModel(food.getString("id"), food.getString("name"), foodMacro.getString("cal"), food.getString("quantity") + " " + food.optString("measure",""), food.getString("note"), false, optionsList)
                 foodDataModel.url = food.optString("url", "")
                 foodList.add(foodDataModel)
             }

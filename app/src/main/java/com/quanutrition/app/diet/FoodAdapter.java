@@ -26,6 +26,8 @@ import com.android.volley.VolleyError;
 import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.NetworkManager;
 import com.quanutrition.app.Utils.Tools;
+import com.quanutrition.app.selectiondialogs.DialogUtils;
+import com.quanutrition.app.selectiondialogs.SingleSelectionModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     private Context mCtx;
     private boolean recipe_flag = false;
 
+    private OnDiaryDataChanged onDiaryDataChanged;
+
+    public void setOnDiaryDataChanged(OnDiaryDataChanged onDiaryDataChanged) {
+        this.onDiaryDataChanged = onDiaryDataChanged;
+    }
+
+    private boolean taken_flag = false;
+
+    public void setTaken_flag(boolean taken_flag) {
+        this.taken_flag = taken_flag;
+    }
 
     public FoodAdapter(ArrayList<FoodDataModel> foodList, Context mCtx, boolean recipe_flag) {
         this.foodList = foodList;
@@ -50,12 +63,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView foodName,foodQuant,foodCal,foodNotes;
+        TextView foodName,foodQuant,foodCal,foodNotes,takenStatus;
         ImageView showOption;
         RecyclerView food_options_re;
         CardView optionsCard;
-        LinearLayout foodLayout;
-        AppCompatImageView cart;
+        LinearLayout foodLayout,takenLayout;
+        AppCompatImageView cart,taken,missed;
         public MyViewHolder(View view) {
             super(view);
             foodName = view.findViewById(R.id.foodName);
@@ -67,6 +80,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
             optionsCard = view.findViewById(R.id.optionsCard);
             foodLayout = view.findViewById(R.id.foodLayout);
             cart = view.findViewById(R.id.cart);
+            takenLayout = view.findViewById(R.id.takenLayout);
+            taken = view.findViewById(R.id.taken);
+            missed = view.findViewById(R.id.missed);
+            takenStatus = view.findViewById(R.id.takenStatus);
         }
     }
 
@@ -101,7 +118,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
         if(meal.getOptionsList().size()==0){
             holder.showOption.setVisibility(View.GONE);
         }else{
-            holder.showOption.setVisibility(View.VISIBLE);
+            holder.showOption.setVisibility(View.GONE);
+            FoodOptionsAdapter foodAdapter = new FoodOptionsAdapter(meal.getOptionsList(), mCtx,recipe_flag);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mCtx);
+            holder.food_options_re.setLayoutManager(layoutManager);
+            holder.food_options_re.setAdapter(foodAdapter);
+            holder.food_options_re.setVisibility(View.VISIBLE);
+            holder.optionsCard.setVisibility(View.VISIBLE);
+            holder.food_options_re.startAnimation(AnimationUtils.loadAnimation(mCtx,android.R.anim.fade_in));
         }
         holder.showOption.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +188,138 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
                 intent.setData(Uri.parse(link));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mCtx.startActivity(intent);
+            }
+        });
+
+        if(taken_flag){
+            holder.foodCal.setVisibility(View.GONE);
+            if(meal.getIsTaken().equalsIgnoreCase("0")){
+                holder.takenStatus.setVisibility(View.GONE);
+                holder.takenLayout.setVisibility(View.VISIBLE);
+            }else{
+                holder.takenStatus.setVisibility(View.VISIBLE);
+                holder.takenLayout.setVisibility(View.GONE);
+                if(meal.getIsTaken().equalsIgnoreCase("1")){
+                    //Taken
+                    holder.takenStatus.setText("Taken");
+                    holder.takenStatus.setBackgroundResource(R.drawable.taken_back);
+                }else{
+                    //Missed
+                    holder.takenStatus.setText("Missed");
+                    holder.takenStatus.setBackgroundResource(R.drawable.missed_back);
+                }
+            }
+        }else{
+            holder.takenLayout.setVisibility(View.GONE);
+            holder.takenStatus.setVisibility(View.GONE);
+            if(meal.isFoodCalorieFlag())
+            holder.foodCal.setVisibility(View.VISIBLE);
+        }
+
+        holder.taken.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onDiaryDataChanged != null) {
+                    if (meal.getIsTaken().equalsIgnoreCase("0")) {
+                        if (meal.getOptionsList().size() == 0) {
+                            String name = meal.getFoodName();
+                            if (!meal.getFoodQuant().trim().isEmpty())
+                                name += "( " + meal.getFoodQuant() + " )";
+                            DiaryDataModel model = new DiaryDataModel(meal.getFoodId(), name, "", true, false);
+                            onDiaryDataChanged.onDataChanged(model,holder.getAdapterPosition());
+                        } else {
+                            final String[] data = new String[meal.getOptionsList().size() + 1];
+                            String name = meal.getFoodName();
+                            if (!meal.getFoodQuant().trim().isEmpty())
+                                name += "( " + meal.getFoodQuant() + " )";
+                            data[0] = name;
+                            Log.d("Data 0",data[0]);
+                            for (int i = 1; i <=meal.getOptionsList().size(); i++) {
+                                data[i] = meal.getOptionsList().get(i - 1).getFoodName();
+                                Log.d("Data "+i,data[i]);
+                            }
+
+                            DialogUtils.getSingleSelectionDialog(mCtx, "What did you eat?", DialogUtils.getSingleArrayListWithStringArray(data), new DialogUtils.OnSingleItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(int position, SingleSelectionModel item) {
+                                    String selected = item.getLabel();
+                                    int pos = 0;
+                                    for (int i = 0; i < data.length; i++) {
+                                        if (data[i].equalsIgnoreCase(selected)) {
+                                            pos = i;
+                                            break;
+                                        }
+                                    }
+                                    boolean optionFlag = false;
+                                    if (pos != 0)
+                                        optionFlag = true;
+
+                                    if(optionFlag) {
+                                        DiaryDataModel model = new DiaryDataModel(meal.getFoodId(), selected, selected, true, true);
+                                        onDiaryDataChanged.onDataChanged(model, holder.getAdapterPosition());
+                                    }else{
+                                        DiaryDataModel model = new DiaryDataModel(meal.getFoodId(), selected, "", true, false);
+                                        onDiaryDataChanged.onDataChanged(model, holder.getAdapterPosition());
+                                    }
+                                }
+                            });
+                        }
+                    } else if(meal.getIsTaken().equalsIgnoreCase("1")){
+                        //edit taken food
+                    }else{
+                        //edit missed food
+                    }
+                }
+            }
+        });
+
+        holder.missed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onDiaryDataChanged!=null){
+
+                    if(meal.getIsTaken().equalsIgnoreCase("0")){
+
+                        DialogUtils.getDialogWithTitle(mCtx, "What did you eat instead?", new DialogUtils.OnCustomItemPicked() {
+                            @Override
+                            public void onNumberPicked(String selected) {
+                                DiaryDataModel model = new DiaryDataModel(meal.getFoodId(), "", selected, false, false);
+                                onDiaryDataChanged.onDataChanged(model,holder.getAdapterPosition());
+                            }
+                        });
+
+                    }
+
+                }
+            }
+        });
+
+        holder.takenStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onDiaryDataChanged!=null){
+
+                    if(meal.getIsTaken().equalsIgnoreCase("1")){
+                        DialogUtils.getTakenDialog(mCtx, new DialogUtils.OnCustomItemPicked() {
+                            @Override
+                            public void onNumberPicked(String selected) {
+                                if(selected.equalsIgnoreCase("2")) {
+                                    meal.setIsTaken("0");
+                                    holder.missed.callOnClick();
+                                }
+                            }
+                        });
+                    }else if(meal.getIsTaken().equalsIgnoreCase("2")){
+                        DialogUtils.getMissedDialog(mCtx, meal.getFoodEaten(), new DialogUtils.OnCustomItemPicked() {
+                            @Override
+                            public void onNumberPicked(String selected) {
+                                meal.setIsTaken("0");
+                                holder.taken.callOnClick();
+                            }
+                        });
+                    }
+
+                }
             }
         });
 

@@ -43,15 +43,15 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
             android:id="@+id/cart"
             android:visibility="gone"
             android:layout_gravity="center"
             android:background="@drawable/circle_orange"
             android:layout_marginRight="@dimen/layout_small_margin"
             android:src="@drawable/ic_shopping_cart"
-            android:padding="8dp"
+            android:padding="5dp"
             android:tint="@color/grey_300"
             />
 

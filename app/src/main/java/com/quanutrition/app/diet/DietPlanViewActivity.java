@@ -99,7 +99,7 @@ public class DietPlanViewActivity extends AppCompatActivity {
 //        mealList.add(mealModel);
 //        mealList.add(mealModel1);
 //        mealList.add(mealModel2);
-        adapter = new MealAdapter(mealList, this);
+        adapter = new MealAdapter(mealList, this,false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         diet_main_re.setLayoutManager(layoutManager);
         diet_main_re.setAdapter(adapter);

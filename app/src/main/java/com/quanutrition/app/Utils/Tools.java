@@ -505,6 +505,14 @@ public class Tools {
         return sdf.format(c.getTimeInMillis());
     }
 
+    public static String getFormattedDateAddDates(int days){
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE,days);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String time = sdf.format(c.getTimeInMillis());
+        return time;
+    }
+
     public static String getFormattedDateToday(){
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

@@ -17,7 +17,7 @@
         android:textColor="@color/colorAccent"
         android:textStyle="bold"
         android:fontFamily="@font/defaultfont"
-        android:text="Day"/>
+        android:text="Monday"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

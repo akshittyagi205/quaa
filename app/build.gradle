@@ -8,8 +8,8 @@ android {
         applicationId "com.quanutrition.app"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 8
-        versionName "1.0.5.3"
+        versionCode 11
+        versionName "1.0.5.6"
         viewBinding.enabled = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

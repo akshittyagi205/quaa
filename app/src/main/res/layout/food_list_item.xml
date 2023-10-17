@@ -43,15 +43,15 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
             android:id="@+id/cart"
             android:visibility="gone"
             android:layout_gravity="center"
             android:background="@drawable/circle_orange"
             android:layout_marginRight="@dimen/layout_small_margin"
             android:src="@drawable/ic_shopping_cart"
-            android:padding="8dp"
+            android:padding="5dp"
             android:tint="@color/grey_300"
             />
 
@@ -76,6 +76,51 @@
             android:src="@drawable/ic_expand"
             android:padding="@dimen/small_padding"
             android:tint="@color/grey_300"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/takenLayout"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:id="@+id/taken"
+                android:layout_marginRight="@dimen/layout_small_margin"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/ic_tick"
+                app:tint="@color/green_300" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:id="@+id/missed"
+                android:layout_marginRight="@dimen/layout_very_small_margin"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/ic_close_chip"
+                app:tint="@color/red_300" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_very_small"
+            android:textColor="@color/grey_700"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:text="Taken"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/layout_small_margin"
+            android:drawablePadding="@dimen/small_padding"
+            android:background="@drawable/taken_back"
+            android:id="@+id/takenStatus"
+            android:paddingRight="@dimen/medium_padding"
+            android:paddingLeft="@dimen/medium_padding"
             />
 
 
@@ -126,4 +171,8 @@
         android:id="@+id/food_options_re"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        />
 </LinearLayout>

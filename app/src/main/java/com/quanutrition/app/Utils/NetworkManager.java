@@ -30,6 +30,12 @@ public class NetworkManager {
         return mInstance;
     }
 
+    public interface OnAPIResponse{
+        void onResponse(String response);
+        void onError();
+    }
+
+
     public void sendPostRequest(final String url, final Map<String, String> params, final Response.Listener<String> listener, final Response.ErrorListener errorListener, final Context context){
 
         String apiURL = "http://api.logikcal.in/"+url;
@@ -56,6 +62,44 @@ public class NetworkManager {
         String apiURL = "http://api.logikcal.in/"+url;
         Log.d("Call to URL ",apiURL);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,listener,errorListener)
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization","token "+Tools.getGeneralSharedPref(context).getString(Constants.AUTH_TOKEN,""));
+//                params.put("Authorization","token b38acce1274406181d86c147420e1d0a769d23a5");
+                return params;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                return params;
+            }
+        };
+        int MY_SOCKET_TIMEOUT_MS = 50000;
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public void sendPostRequestWithHeader(final String url, final Map<String, String> params,final Context context,final OnAPIResponse onAPIResponse){
+
+        String apiURL = "http://api.logikcal.in/"+url;
+        Log.d("Call to URL ",apiURL);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                onAPIResponse.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                onAPIResponse.onError();
+            }
+        })
         {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -116,6 +160,38 @@ public class NetworkManager {
         String apiURL = "http://api.logikcal.in/"+url;
         Log.d("Call to URL ",apiURL);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,listener,errorListener)
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization","token "+Tools.getGeneralSharedPref(context).getString(Constants.AUTH_TOKEN,""));
+                return params;
+            }
+        };
+        int MY_SOCKET_TIMEOUT_MS = 50000;
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public void sendGetRequest(final String url,final Context context,final OnAPIResponse onAPIResponse){
+
+        String apiURL = "http://api.logikcal.in/"+url;
+        Log.d("Call to URL ",apiURL);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                onAPIResponse.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                onAPIResponse.onError();
+            }
+        })
         {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {

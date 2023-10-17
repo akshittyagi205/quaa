@@ -28,6 +28,7 @@ import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.appointment.AppointmentsActivity;
 import com.quanutrition.app.blogs.HealthFeedActivity;
 import com.quanutrition.app.dietrecall.DietRecallActivity;
+import com.quanutrition.app.fitstats.FoodStatsActivity;
 import com.quanutrition.app.general.ClientProfile;
 import com.quanutrition.app.general.DailyDiaryActivity;
 import com.quanutrition.app.general.PhysicalActivity;
@@ -129,6 +130,13 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),WeightProgressActivity.class));
+            }
+        });
+
+        rootView.findViewById(R.id.health_report).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), FoodStatsActivity.class));
             }
         });
 

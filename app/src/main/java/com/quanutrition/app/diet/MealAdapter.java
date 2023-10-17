@@ -1,6 +1,7 @@
 package com.quanutrition.app.diet;
 
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -30,11 +31,17 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
     private ArrayList<MealModel> mealList;
     private Context mCtx;
     private boolean defaultOpen = false;
+    private OnDiaryDataChanged onDiaryDataChanged;
+    private boolean taken_flag;
 
+    public void setOnDiaryDataChanged(OnDiaryDataChanged onDiaryDataChanged) {
+        this.onDiaryDataChanged = onDiaryDataChanged;
+    }
 
-    public MealAdapter(ArrayList<MealModel> mealList, Context mCtx) {
+    public MealAdapter(ArrayList<MealModel> mealList, Context mCtx, boolean taken_flag) {
         this.mealList = mealList;
         this.mCtx = mCtx;
+        this.taken_flag = taken_flag;
     }
 
     public void setDefaultOpen(boolean defaultOpen) {
@@ -69,7 +76,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(final MealAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MealAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         final MealModel meal = mealList.get(position);
 
@@ -85,11 +92,26 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
         }
 
         if(defaultOpen) {
-            FoodAdapter foodAdapter = new FoodAdapter(meal.getMealData(), mCtx, meal.isRecipe_flag());
+            FoodAdapter foodAdapter = new FoodAdapter(meal.getMealData(), mCtx,meal.isRecipe_flag());
+            foodAdapter.setTaken_flag(taken_flag);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mCtx);
             holder.meal_item_re.setLayoutManager(layoutManager);
             holder.meal_item_re.setAdapter(foodAdapter);
             holder.meal_item_re.setVisibility(View.VISIBLE);
+
+            foodAdapter.setOnDiaryDataChanged(new OnDiaryDataChanged() {
+                @Override
+                public void onDataChanged(DiaryDataModel data,int pos) {
+                    if(onDiaryDataChanged!=null)
+                        onDiaryDataChanged.onMealDataChange(data,meal.getMealName(),meal.getMealTime(),holder.getAdapterPosition(),false);
+                }
+
+                @Override
+                public void onMealDataChange(DiaryDataModel data, String mealName, String mealTime, int pos, boolean isMealOption) {
+
+                }
+
+            });
         }else{
             holder.meal_item_re.setVisibility(View.GONE);
         }
@@ -99,10 +121,24 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolder> 
             public void onClick(View view) {
                 if(holder.meal_item_re.getVisibility()== View.GONE) {
                     FoodAdapter foodAdapter = new FoodAdapter(meal.getMealData(), mCtx,meal.isRecipe_flag());
+                    foodAdapter.setTaken_flag(taken_flag);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mCtx);
                     holder.meal_item_re.setLayoutManager(layoutManager);
                     holder.meal_item_re.setAdapter(foodAdapter);
                     holder.meal_item_re.setVisibility(View.VISIBLE);
+
+                    foodAdapter.setOnDiaryDataChanged(new OnDiaryDataChanged() {
+                        @Override
+                        public void onDataChanged(DiaryDataModel data,int pos) {
+                            if(onDiaryDataChanged!=null)
+                                onDiaryDataChanged.onMealDataChange(data,meal.getMealName(),meal.getMealTime(),holder.getAdapterPosition(),false);
+                        }
+
+                        @Override
+                        public void onMealDataChange(DiaryDataModel data, String mealName, String mealTime, int pos, boolean isMealOption) {
+
+                        }
+                    });
 
                 }else{
                     holder.meal_item_re.setVisibility(View.GONE);

@@ -34,6 +34,7 @@ import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.chat.ChatActivity;
 import com.quanutrition.app.dietextras.IngredientsActivity;
 import com.quanutrition.app.dietextras.SupplementsActivity;
+import com.quanutrition.app.fitstats.FoodStatsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,8 +64,9 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
     String recommendation="";
     LinearLayout mealHeadLayout;
     TextView dietNotes;
-    CardView notesLayout;
+    CardView notesLayout,report_banner;
     LinearLayout actionLayout;
+    JSONObject diary_status = new JSONObject();
 
     public DietPlanFragment() {
         // Required empty public constructor
@@ -103,6 +105,8 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
         notesLayout = rootView.findViewById(R.id.notesLayout);
         actionLayout = rootView.findViewById(R.id.actionLayout);
 
+        report_banner = rootView.findViewById(R.id.report_banner);
+
         mon.setOnClickListener(this);
         tue.setOnClickListener(this);
         wed.setOnClickListener(this);
@@ -120,13 +124,31 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
         satData = new ArrayList<>();
         sunData = new ArrayList<>();
 
-        adapter = new MealAdapter(data,getActivity());
+        adapter = new MealAdapter(data,getActivity(),false);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnDiaryDataChanged(new OnDiaryDataChanged() {
+            @Override
+            public void onDataChanged(DiaryDataModel data,int pos) {
 
+            }
+
+            @Override
+            public void onMealDataChange(DiaryDataModel data, String mealName,String mealTime, int pos,boolean isMealOption) {
+                Log.d("Data Received",data.getName()+"  "+data.isTaken()+"    "+data.getOtherfood()+"   "+data.isOption()+"   "+mealName);
+//                saveDiaryData(data,mealName,pos,isMealOption);
+            }
+        });
+
+        report_banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), FoodStatsActivity.class));
+            }
+        });
 
         lastId = daysText[Tools.getDayNumberToday()];
         onClick(rootView.findViewById(days[Tools.getDayNumberToday()]));
@@ -226,7 +248,46 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
             }
             monTxt.setTextColor(Color.parseColor("#FFFFFF"));
             monTxt.setBackgroundResource(R.drawable.circle_yellow);
-            MealAdapter adapter = new MealAdapter(monData, getActivity());
+            boolean taken = false;
+            if(Tools.getDayNumberToday()==0){
+                taken = true;
+            }
+            MealAdapter adapter = new MealAdapter(monData, getActivity(),taken);
+            adapter.setDefaultOpen(taken);
+            adapter.setOnDiaryDataChanged(new OnDiaryDataChanged() {
+                @Override
+                public void onDataChanged(DiaryDataModel data,int pos) {
+
+                }
+
+                @Override
+                public void onMealDataChange(DiaryDataModel data, String mealName,String mealTime, int pos,boolean isMealOption) {
+                    Log.d("Data Received",data.getName()+"  "+data.isTaken()+"    "+data.getOtherfood()+"   "+data.isOption()+"   "+mealName);
+                    int offset = -1;
+                    int day = 0;
+                    if(Tools.getDayNumberToday()==day){
+                        offset = 0;
+                    }
+                    saveDiaryData(data,mealName,mealTime,pos,isMealOption,day,offset,new OnDiaryDataSaved(){
+                        @Override
+                        public void onDataUpdate() {
+                            ArrayList<FoodDataModel> foodList = monData.get(pos).getMealData();
+                            for (int i = 0; i < foodList.size(); i++) {
+                                if (data.getId().equalsIgnoreCase(foodList.get(i).getFoodId())) {
+                                    if (data.isTaken())
+                                        foodList.get(i).setIsTaken("1");
+                                    else
+                                        foodList.get(i).setIsTaken("2");
+
+                                    foodList.get(i).setFoodEaten(data.getOtherfood());
+
+                                    adapter.notifyItemChanged(pos);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
             recyclerView.setAdapter(adapter);
             if(monData.size()==0){
                 noData.setVisibility(View.VISIBLE);
@@ -245,7 +306,46 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
             }
             tueTxt.setTextColor(Color.parseColor("#FFFFFF"));
             tueTxt.setBackgroundResource(R.drawable.circle_yellow);
-            MealAdapter adapter = new MealAdapter(tueData,getActivity());
+            boolean taken = false;
+            if(Tools.getDayNumberToday()==1){
+                taken = true;
+            }
+            MealAdapter adapter = new MealAdapter(tueData,getActivity(),taken);
+            adapter.setDefaultOpen(taken);
+            adapter.setOnDiaryDataChanged(new OnDiaryDataChanged() {
+                @Override
+                public void onDataChanged(DiaryDataModel data,int pos) {
+
+                }
+
+                @Override
+                public void onMealDataChange(DiaryDataModel data, String mealName,String mealTime,int pos,boolean isMealOption) {
+                    Log.d("Data Received",data.getName()+"  "+data.isTaken()+"    "+data.getOtherfood()+"   "+data.isOption()+"   "+mealName);
+                    int offset = -1;
+                    int day = 1;
+                    if(Tools.getDayNumberToday()==day){
+                        offset = 0;
+                    }
+                    saveDiaryData(data,mealName,mealTime,pos,isMealOption,day,offset,new OnDiaryDataSaved(){
+                        @Override
+                        public void onDataUpdate() {
+                            ArrayList<FoodDataModel> foodList = tueData.get(pos).getMealData();
+                            for (int i = 0; i < foodList.size(); i++) {
+                                if (data.getId().equalsIgnoreCase(foodList.get(i).getFoodId())) {
+                                    if (data.isTaken())
+                                        foodList.get(i).setIsTaken("1");
+                                    else
+                                        foodList.get(i).setIsTaken("2");
+
+                                    foodList.get(i).setFoodEaten(data.getOtherfood());
+
+                                    adapter.notifyItemChanged(pos);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
             recyclerView.setAdapter(adapter);
             if(tueData.size()==0){
                 noData.setVisibility(View.VISIBLE);
@@ -263,7 +363,46 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
             }
             wedTxt.setTextColor(Color.parseColor("#FFFFFF"));
             wedTxt.setBackgroundResource(R.drawable.circle_yellow);
-            MealAdapter adapter = new MealAdapter(wedData,getActivity());
+            boolean taken = false;
+            if(Tools.getDayNumberToday()==2){
+                taken = true;
+            }
+            MealAdapter adapter = new MealAdapter(wedData,getActivity(),taken);
+            adapter.setDefaultOpen(taken);
+            adapter.setOnDiaryDataChanged(new OnDiaryDataChanged() {
+                @Override
+                public void onDataChanged(DiaryDataModel data,int pos) {
+
+                }
+
+                @Override
+                public void onMealDataChange(DiaryDataModel data, String mealName,String mealTime, int pos,boolean isMealOption) {
+                    Log.d("Data Received",data.getName()+"  "+data.isTaken()+"    "+data.getOtherfood()+"   "+data.isOption()+"   "+mealName);
+                    int offset = -1;
+                    int day = 2;
+                    if(Tools.getDayNumberToday()==day){
+                        offset = 0;
+                    }
+                    saveDiaryData(data,mealName,mealTime,pos,isMealOption,day,offset,new OnDiaryDataSaved(){
+                        @Override
+                        public void onDataUpdate() {
+                            ArrayList<FoodDataModel> foodList = wedData.get(pos).getMealData();
+                            for (int i = 0; i < foodList.size(); i++) {
+                                if (data.getId().equalsIgnoreCase(foodList.get(i).getFoodId())) {
+                                    if (data.isTaken())
+                                        foodList.get(i).setIsTaken("1");
+                                    else
+                                        foodList.get(i).setIsTaken("2");
+
+                                    foodList.get(i).setFoodEaten(data.getOtherfood());
+
+                                    adapter.notifyItemChanged(pos);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
             recyclerView.setAdapter(adapter);
             if(wedData.size()==0){
                 noData.setVisibility(View.VISIBLE);
@@ -282,7 +421,46 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
             }
             thuTxt.setTextColor(Color.parseColor("#FFFFFF"));
             thuTxt.setBackgroundResource(R.drawable.circle_yellow);
-            MealAdapter adapter = new MealAdapter(thuData,getActivity());
+            boolean taken = false;
+            if(Tools.getDayNumberToday()==3){
+                taken = true;
+            }
+            MealAdapter adapter = new MealAdapter(thuData,getActivity(),taken);
+            adapter.setDefaultOpen(taken);
+            adapter.setOnDiaryDataChanged(new OnDiaryDataChanged() {
+                @Override
+                public void onDataChanged(DiaryDataModel data,int pos) {
+
+                }
+
+                @Override
+                public void onMealDataChange(DiaryDataModel data, String mealName,String mealTime, int pos,boolean isMealOption) {
+                    Log.d("Data Received",data.getName()+"  "+data.isTaken()+"    "+data.getOtherfood()+"   "+data.isOption()+"   "+mealName);
+                    int offset = -1;
+                    int day = 3;
+                    if(Tools.getDayNumberToday()==day){
+                        offset = 0;
+                    }
+                    saveDiaryData(data,mealName,mealTime,pos,isMealOption,day,offset,new OnDiaryDataSaved(){
+                        @Override
+                        public void onDataUpdate() {
+                            ArrayList<FoodDataModel> foodList = thuData.get(pos).getMealData();
+                            for (int i = 0; i < foodList.size(); i++) {
+                                if (data.getId().equalsIgnoreCase(foodList.get(i).getFoodId())) {
+                                    if (data.isTaken())
+                                        foodList.get(i).setIsTaken("1");
+                                    else
+                                        foodList.get(i).setIsTaken("2");
+
+                                    foodList.get(i).setFoodEaten(data.getOtherfood());
+
+                                    adapter.notifyItemChanged(pos);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
             recyclerView.setAdapter(adapter);
             if(thuData.size()==0){
                 noData.setVisibility(View.VISIBLE);
@@ -301,7 +479,46 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
             }
             friTxt.setTextColor(Color.parseColor("#FFFFFF"));
             friTxt.setBackgroundResource(R.drawable.circle_yellow);
-            MealAdapter adapter = new MealAdapter(friData,getActivity());
+            boolean taken = false;
+            if(Tools.getDayNumberToday()==4){
+                taken = true;
+            }
+            MealAdapter adapter = new MealAdapter(friData,getActivity(),taken);
+            adapter.setDefaultOpen(taken);
+            adapter.setOnDiaryDataChanged(new OnDiaryDataChanged() {
+                @Override
+                public void onDataChanged(DiaryDataModel data,int pos) {
+
+                }
+
+                @Override
+                public void onMealDataChange(DiaryDataModel data, String mealName,String mealTime, int pos,boolean isMealOption) {
+                    Log.d("Data Received",data.getName()+"  "+data.isTaken()+"    "+data.getOtherfood()+"   "+data.isOption()+"   "+mealName);
+                    int offset = -1;
+                    int day = 4;
+                    if(Tools.getDayNumberToday()==day){
+                        offset = 0;
+                    }
+                    saveDiaryData(data,mealName,mealTime,pos,isMealOption,day,offset,new OnDiaryDataSaved(){
+                        @Override
+                        public void onDataUpdate() {
+                            ArrayList<FoodDataModel> foodList = friData.get(pos).getMealData();
+                            for (int i = 0; i < foodList.size(); i++) {
+                                if (data.getId().equalsIgnoreCase(foodList.get(i).getFoodId())) {
+                                    if (data.isTaken())
+                                        foodList.get(i).setIsTaken("1");
+                                    else
+                                        foodList.get(i).setIsTaken("2");
+
+                                    foodList.get(i).setFoodEaten(data.getOtherfood());
+
+                                    adapter.notifyItemChanged(pos);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
             recyclerView.setAdapter(adapter);
             if(friData.size()==0){
                 noData.setVisibility(View.VISIBLE);
@@ -320,7 +537,46 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
             }
             satTxt.setTextColor(Color.parseColor("#FFFFFF"));
             satTxt.setBackgroundResource(R.drawable.circle_yellow);
-            MealAdapter adapter = new MealAdapter(satData,getActivity());
+            boolean taken = false;
+            if(Tools.getDayNumberToday()==5){
+                taken = true;
+            }
+            MealAdapter adapter = new MealAdapter(satData,getActivity(),taken);
+            adapter.setDefaultOpen(taken);
+            adapter.setOnDiaryDataChanged(new OnDiaryDataChanged() {
+                @Override
+                public void onDataChanged(DiaryDataModel data,int pos) {
+
+                }
+
+                @Override
+                public void onMealDataChange(DiaryDataModel data, String mealName,String mealTime,int pos,boolean isMealOption) {
+                    Log.d("Data Received",data.getName()+"  "+data.isTaken()+"    "+data.getOtherfood()+"   "+data.isOption()+"   "+mealName);
+                    int offset = -1;
+                    int day = 5;
+                    if(Tools.getDayNumberToday()==day){
+                        offset = 0;
+                    }
+                    saveDiaryData(data,mealName,mealTime,pos,isMealOption,day,offset,new OnDiaryDataSaved(){
+                        @Override
+                        public void onDataUpdate() {
+                            ArrayList<FoodDataModel> foodList = satData.get(pos).getMealData();
+                            for (int i = 0; i < foodList.size(); i++) {
+                                if (data.getId().equalsIgnoreCase(foodList.get(i).getFoodId())) {
+                                    if (data.isTaken())
+                                        foodList.get(i).setIsTaken("1");
+                                    else
+                                        foodList.get(i).setIsTaken("2");
+
+                                    foodList.get(i).setFoodEaten(data.getOtherfood());
+
+                                    adapter.notifyItemChanged(pos);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
             recyclerView.setAdapter(adapter);
             if(satData.size()==0){
                 noData.setVisibility(View.VISIBLE);
@@ -338,7 +594,47 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
             }
             sunTxt.setTextColor(Color.parseColor("#FFFFFF"));
             sunTxt.setBackgroundResource(R.drawable.circle_yellow);
-            MealAdapter adapter = new MealAdapter(sunData,getActivity());
+            boolean taken = false;
+            if(Tools.getDayNumberToday()==6){
+                taken = true;
+            }
+            MealAdapter adapter = new MealAdapter(sunData,getActivity(),taken);
+            adapter.setDefaultOpen(taken);
+            adapter.setOnDiaryDataChanged(new OnDiaryDataChanged() {
+                @Override
+                public void onDataChanged(DiaryDataModel data,int pos) {
+
+                }
+
+                @Override
+                public void onMealDataChange(DiaryDataModel data, String mealName,String mealTime, int pos,boolean isMealOption) {
+                    Log.d("Data Received",data.getName()+"  "+data.isTaken()+"    "+data.getOtherfood()+"   "+data.isOption()+"   "+mealName);
+                    int offset = -1;
+                    int day = 6;
+                    if(Tools.getDayNumberToday()==day){
+                        offset = 0;
+                    }
+                    saveDiaryData(data,mealName,mealTime,pos,isMealOption,day,offset,new OnDiaryDataSaved(){
+                        @Override
+                        public void onDataUpdate() {
+                            ArrayList<FoodDataModel> foodList = sunData.get(pos).getMealData();
+                            for (int i = 0; i < foodList.size(); i++) {
+                                if (data.getId().equalsIgnoreCase(foodList.get(i).getFoodId())) {
+                                    if (data.isTaken())
+                                        foodList.get(i).setIsTaken("1");
+                                    else
+                                        foodList.get(i).setIsTaken("2");
+
+                                    foodList.get(i).setFoodEaten(data.getOtherfood());
+
+                                    adapter.notifyItemChanged(pos);
+                                }
+                            }
+                        }
+                    });
+
+                }
+            });
             recyclerView.setAdapter(adapter);
             if(sunData.size()==0){
                 noData.setVisibility(View.VISIBLE);
@@ -348,6 +644,52 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
         }
 
         recyclerView.startAnimation(AnimationUtils.loadAnimation(getActivity(),android.R.anim.fade_in));
+    }
+
+    void saveDiaryData(final DiaryDataModel dataModel, String mealName,String mealTime, final int position, final boolean isMealOption,int day,int offSet,final OnDiaryDataSaved onDiaryDataSaved){
+
+        final AlertDialog ad = Tools.getDialog("Adding Data...",getActivity());
+        ad.show();
+
+        HashMap<String,String> params = new HashMap<>();
+        params.put("foodId",dataModel.getId());
+        params.put("mealName",mealName);
+        params.put("mealTime",mealTime);
+        params.put("taken",dataModel.isTaken()+"");
+        params.put("isOption",dataModel.isOption()+"");
+        params.put("otherFood",dataModel.getOtherfood());
+        params.put("date",Tools.getFormattedDateAddDates(offSet));
+        params.put("offset",offSet+"");
+        params.put("day",day+"");
+
+
+        Log.d("params",params.toString());
+
+        NetworkManager.getInstance(getActivity()).sendPostRequestWithHeader(Urls.FOOD_DIARY, params, getActivity(), new NetworkManager.OnAPIResponse() {
+            @Override
+            public void onResponse(String response) {
+                ad.dismiss();
+                try{
+                    JSONObject res = new JSONObject(response);
+                    Log.d("Response",response);
+                    if(res.getInt("res")==1){
+                        report_banner.setVisibility(View.VISIBLE);
+                       onDiaryDataSaved.onDataUpdate();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError() {
+                ad.dismiss();
+                Tools.initNetworkErrorToast(getActivity());
+            }
+        });
+
+
+
     }
 
 
@@ -377,19 +719,21 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
                         time_flag = data.getBoolean("time_status");
                         macro_flag = data.getBoolean("macro_status");
 
-                        getData(monData,foodData.getJSONObject("Monday").getJSONArray("diet"));
+                        diary_status = data.getJSONObject("diary_status");
+
+                        getData(0,monData,foodData.getJSONObject("Monday").getJSONArray("diet"));
                         monNotes = foodData.getJSONObject("Monday").getString("note");
-                        getData(tueData,foodData.getJSONObject("Tuesday").getJSONArray("diet"));
+                        getData(1,tueData,foodData.getJSONObject("Tuesday").getJSONArray("diet"));
                         tueNotes = foodData.getJSONObject("Tuesday").getString("note");
-                        getData(wedData,foodData.getJSONObject("Wednesday").getJSONArray("diet"));
+                        getData(2,wedData,foodData.getJSONObject("Wednesday").getJSONArray("diet"));
                         wedNotes = foodData.getJSONObject("Wednesday").getString("note");
-                        getData(thuData,foodData.getJSONObject("Thursday").getJSONArray("diet"));
+                        getData(3,thuData,foodData.getJSONObject("Thursday").getJSONArray("diet"));
                         thuNotes = foodData.getJSONObject("Thursday").getString("note");
-                        getData(friData,foodData.getJSONObject("Friday").getJSONArray("diet"));
+                        getData(4,friData,foodData.getJSONObject("Friday").getJSONArray("diet"));
                         friNotes = foodData.getJSONObject("Friday").getString("note");
-                        getData(satData,foodData.getJSONObject("Saturday").getJSONArray("diet"));
+                        getData(5,satData,foodData.getJSONObject("Saturday").getJSONArray("diet"));
                         satNotes = foodData.getJSONObject("Saturday").getString("note");
-                        getData(sunData,foodData.getJSONObject("Sunday").getJSONArray("diet"));
+                        getData(6,sunData,foodData.getJSONObject("Sunday").getJSONArray("diet"));
                         sunNotes = foodData.getJSONObject("Sunday").getString("note");
 
                         recommendation = foodData.getString("recommendation");
@@ -436,11 +780,43 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
         NetworkManager.getInstance(getActivity()).sendPostRequestWithHeader(Urls.FETCH_PARTICULAR_DIET, params, listener, errorListener, getActivity());
     }
 
-    void getData(ArrayList<MealModel> mealList,JSONArray foodData)throws JSONException {
+    void getData(int dayNumber,ArrayList<MealModel> mealList,JSONArray foodData)throws JSONException {
+        boolean takenFeature = false;
+        String date = "";
+        JSONObject dayData = new JSONObject();
+        if(dayNumber==Tools.getDayNumberToday()) {
+            takenFeature = true;
+            date = Tools.getFormattedDateAddDates(0);
+            if(diary_status.has(date)){
+                dayData = diary_status.getJSONObject(date);
+            }
+        }
+
         mealList.clear();
         for(int i=0;i<foodData.length();i++){
             JSONObject ob = foodData.getJSONObject(i);
             JSONObject macro = ob.getJSONObject("mealmacro");
+            String mealName = ob.getString("mealname");
+            String mealTime = ob.getString("mealtime");
+            ArrayList<String> taken,missed;
+            taken = new ArrayList<>();
+            missed = new ArrayList<>();
+            if(takenFeature&&dayData.has(mealName+" "+mealTime)){
+                JSONObject mealDiary = dayData.getJSONObject(mealName+" "+mealTime);
+                JSONArray takenArray = mealDiary.getJSONArray("taken");
+                JSONArray optionArray = mealDiary.getJSONArray("options");
+                JSONArray missedArray = mealDiary.getJSONArray("missed");
+
+                for(int g=0;g<takenArray.length();g++){
+                    taken.add(takenArray.getString(g));
+                }
+                for(int g=0;g<optionArray.length();g++){
+                    taken.add(takenArray.getString(g));
+                }
+                for(int g=0;g<missedArray.length();g++){
+                    missed.add(missedArray.getString(g));
+                }
+            }
             JSONArray foodArray = ob.getJSONArray("fooddata");
             ArrayList<FoodDataModel> foodList = new ArrayList<>();
             for(int j=0;j<foodArray.length();j++){
@@ -451,12 +827,23 @@ public class DietPlanFragment extends Fragment implements View.OnClickListener{
                 for(int k=0;k<options.length();k++){
                     JSONObject optionFood = options.getJSONObject(k);
                     JSONObject optionMacro = optionFood.getJSONObject("macro");
-                    FoodOptionsModel optionsModel = new FoodOptionsModel(optionFood.getString("id"),optionFood.getString("name"),optionMacro.getString("cal"),optionFood.getString("quantity")+" "+optionFood.getString("measure"),optionFood.optString("note",""),cal_flag);
+                    FoodOptionsModel optionsModel = new FoodOptionsModel(optionFood.getString("id"),optionFood.getString("name"),optionMacro.getString("cal"),optionFood.getString("quantity")+" "+optionFood.optString("measure",""),optionFood.optString("note",""),cal_flag);
                     optionsModel.setUrl(optionFood.optString("url",""));
                     optionsList.add(optionsModel);
                 }
                 FoodDataModel foodDataModel = new FoodDataModel(food.getString("id"),food.getString("name"),foodMacro.getString("cal"),food.getString("quantity")+" "+food.optString("measure",""),food.getString("note"),cal_flag,optionsList);
                 foodDataModel.setUrl(food.optString("url",""));
+                if(takenFeature){
+                    String isTaken = "0";
+                    if(taken.contains(foodDataModel.getFoodId())){
+                        isTaken = "1";
+                        report_banner.setVisibility(View.VISIBLE);
+                    }else if(missed.contains(foodDataModel.getFoodId())){
+                        isTaken = "2";
+                        report_banner.setVisibility(View.VISIBLE);
+                    }
+                    foodDataModel.setIsTaken(isTaken);
+                }
                 foodList.add(foodDataModel);
                 if(food.optString("measure","").equalsIgnoreCase("")){
                     Log.d("Food without measure",food.getString("name"));

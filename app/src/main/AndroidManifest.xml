@@ -16,7 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".TestActivity"></activity>
+        <activity
+            android:name=".fitstats.FoodStatsActivity"
+            android:exported="false" />
+        <activity android:name=".TestActivity" />
         <activity android:name=".dietextras.IngredientsActivity" />
         <activity android:name=".dietextras.SupplementsActivity" />
         <activity android:name=".bottomtabs.WeightProgressActivity" />

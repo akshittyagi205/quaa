@@ -7,6 +7,8 @@ public class FoodDataModel {
     private boolean foodCalorieFlag;
     private ArrayList<FoodOptionsModel> optionsList;
     private String url = "";
+    private String isTaken = "0";
+    private String foodEaten = "";
 
     public FoodDataModel(String foodId, String foodName, String foodCalories, String foodQuant, String foodNotes, boolean foodCalorieFlag, ArrayList<FoodOptionsModel> optionsList) {
         this.foodId = foodId;
@@ -70,6 +72,14 @@ public class FoodDataModel {
         return optionsList;
     }
 
+    public String getIsTaken() {
+        return isTaken;
+    }
+
+    public void setIsTaken(String isTaken) {
+        this.isTaken = isTaken;
+    }
+
     public void setOptionsList(ArrayList<FoodOptionsModel> optionsList) {
         this.optionsList = optionsList;
     }
@@ -80,5 +90,15 @@ public class FoodDataModel {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+
+
+    public String getFoodEaten() {
+        return foodEaten;
+    }
+
+    public void setFoodEaten(String foodEaten) {
+        this.foodEaten = foodEaten;
     }
 }

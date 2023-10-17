@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_medium"
+        android:padding="@dimen/small_padding"
+        android:visibility="gone"
+        android:textColor="@color/grey_800"
+        android:text="Diet Compliance"
+        android:layout_marginTop="@dimen/layout_medium_margin"
+        android:fontFamily="@font/defaultfont"
+        />
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tabLayout"
+        app:tabMode="fixed"
+        android:layout_margin="@dimen/layout_small_margin"
+        app:tabIndicatorHeight="2dp"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorAnimationDuration="500"
+        >
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today"
+            style="@style/TextAppearance.AppCompat"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weekly"
+            style="@style/TextAppearance.AppCompat"
+            />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/daily">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_xxxlarge"
+                android:id="@+id/noData"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:elevation="0dp"
+                android:background="?attr/colorPrimary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/illustration_no_diet" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_small_margin"
+                        android:padding="@dimen/small_padding"
+                        android:textColor="@color/grey_40"
+                        android:textSize="@dimen/text_medium"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="No data found for this day"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_small_margin"
+                        android:padding="@dimen/medium_padding"
+                        android:textColor="@color/textColorLight"
+                        android:gravity="center"
+                        android:id="@+id/basicBtn"
+                        android:textSize="@dimen/text_medium"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/defaultfont"
+                        android:background="@drawable/curve_back"
+                        android:text="Click to Add Food Diary"
+                        />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/dataAvailable"
+            >
+
+
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart"
+                android:layout_marginLeft="@dimen/layout_medium_margin"
+                android:layout_marginRight="@dimen/layout_medium_margin"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                />
+
+
+
+        </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/weekly">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_xxxlarge"
+                android:id="@+id/noData1"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:elevation="0dp"
+                android:background="?attr/colorPrimary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/illustration_no_diet" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_small_margin"
+                        android:padding="@dimen/small_padding"
+                        android:textColor="@color/grey_40"
+                        android:textSize="@dimen/text_medium"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="No data found for this week"/>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/dataAvailable1"
+                >
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                android:minHeight="250dp"
+                android:id="@+id/chart1"
+                android:layout_margin="@dimen/layout_small_margin"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_large"
+                android:textColor="@color/colorAccent"
+                android:text="7 Days Summary"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:fontFamily="@font/defaultfont"
+                android:padding="@dimen/small_padding"/>
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/layout_small_margin"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:layout_marginBottom="@dimen/layout_medium_margin"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" >
+
+                    <View style="@style/DividerH" />
+                </LinearLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Status"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/small_padding"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/textColorLight"
+                        android:fontFamily="@font/roboto_medium"
+                        />
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/small_padding"
+                        android:textColor="@color/textColorLight"
+                        android:gravity="center"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Number of Foods"
+                        android:textSize="@dimen/text_small"
+                        />
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                </TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" >
+
+                    <View style="@style/DividerH" />
+                </LinearLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/defaultfont"
+                        android:gravity="center"
+                        android:padding="@dimen/small_padding"
+                        android:text="Taken"
+                        android:layout_gravity="center"
+                        android:textColor="@color/textColorLight"
+                        android:textSize="@dimen/text_small" />
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/small_padding"
+                        android:textColor="@color/textColorLight"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="-"
+                        android:gravity="center"
+                        android:textSize="@dimen/text_small"
+                        android:id="@+id/takenTotalTxt"/>
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                </TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" >
+
+                    <View style="@style/DividerH" />
+                </LinearLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Missed"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/small_padding"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/textColorLight"
+                        android:fontFamily="@font/defaultfont"
+                        />
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/small_padding"
+                        android:textColor="@color/textColorLight"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="-"
+                        android:gravity="center"
+                        android:textSize="@dimen/text_small"
+                        android:id="@+id/missedTotalTxt"/>
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                </TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:visibility="gone">
+                    <View style="@style/DividerH" />
+                </LinearLayout>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Options Taken"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/small_padding"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/textColorLight"
+                        android:fontFamily="@font/defaultfont"
+                        />
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/small_padding"
+                        android:textColor="@color/textColorLight"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="-"
+                        android:gravity="center"
+                        android:textSize="@dimen/text_small"
+                        />
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                </TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" >
+
+                    <View style="@style/DividerH" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/layout_small_margin"
+                    android:layout_height="1dp" >
+
+                    <View style="@style/DividerH" />
+                </LinearLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Total"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/small_padding"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/textColorLight"
+                        android:fontFamily="@font/defaultfont"
+                        />
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/small_padding"
+                        android:textColor="@color/textColorLight"
+                        android:fontFamily="@font/defaultfont"
+                        android:text="-"
+                        android:gravity="center"
+                        android:textSize="@dimen/text_small"
+                        android:id="@+id/weeklyTotalTxt"/>
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                </TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" >
+
+                    <View style="@style/DividerH" />
+                </LinearLayout>
+
+
+
+            </TableLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/footer">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@color/textColorLight"
+            android:text="-"
+            android:layout_marginTop="@dimen/small_padding"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/layout_small_margin"
+            android:layout_marginRight="@dimen/layout_small_margin"
+            android:id="@+id/complaince"
+            android:fontFamily="@font/defaultfont"
+            android:padding="@dimen/small_padding"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_small_margin"
+            android:layout_marginRight="@dimen/layout_small_margin"
+            android:layout_marginBottom="@dimen/layout_small_margin"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/small_padding"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/taken"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/defaultfont"
+                    android:gravity="center"
+                    android:padding="@dimen/small_padding"
+                    android:text="0"
+                    android:textColor="@color/textColorLight"
+                    android:textSize="@dimen/text_medium" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_small"
+                    android:padding="@dimen/small_padding"
+                    android:textColor="@color/green_600"
+                    android:text="Taken"
+                    android:fontFamily="@font/roboto_medium"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="80dp"
+                android:background="@color/textColorLight"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/small_padding"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/missed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/defaultfont"
+                    android:gravity="center"
+                    android:padding="@dimen/small_padding"
+                    android:text="0"
+                    android:textColor="@color/textColorLight"
+                    android:textSize="@dimen/text_medium" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_small"
+                    android:padding="@dimen/small_padding"
+                    android:textColor="@color/red_600"
+                    android:text="Missed"
+                    android:fontFamily="@font/roboto_medium"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="80dp"
+                android:background="@color/textColorLight"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/small_padding"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/pending"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/defaultfont"
+                    android:gravity="center"
+                    android:padding="@dimen/small_padding"
+                    android:text="0"
+                    android:textColor="@color/textColorLight"
+                    android:textSize="@dimen/text_medium" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_small"
+                    android:padding="@dimen/small_padding"
+                    android:textColor="@color/orange_300"
+                    android:text="Pending"
+                    android:fontFamily="@font/roboto_medium"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

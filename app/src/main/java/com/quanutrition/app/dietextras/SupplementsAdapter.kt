@@ -30,7 +30,7 @@ class SupplementsAdapter(val context : Context) : RecyclerView.Adapter<Supplemen
 
         fun bind(item: SupplementModel, context: Context) {
             binding.dayName.text = item.day
-            val adapter = MealAdapter(item.list,context)
+            val adapter = MealAdapter(item.list,context,false)
 //            adapter.setDefaultOpen(true)
             binding.re.adapter = adapter
         }

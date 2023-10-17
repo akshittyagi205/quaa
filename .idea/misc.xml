@@ -1,14 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/atyag/StudioProjects/qua-nutrition/app/src/main/res/layout/activity_sign_up_info.xml" value="0.22" />
         <entry key="..\:/Users/atyag/StudioProjects/qua-nutrition/app/src/main/res/layout/activity_splash_screen.xml" value="0.1796875" />
+        <entry key="app/src/main/res/drawable/curve_back.xml" value="0.2462962962962963" />
+        <entry key="app/src/main/res/drawable/curve_back_stoke.xml" value="0.2462962962962963" />
+        <entry key="app/src/main/res/drawable/ic_health_stats.xml" value="0.24074074074074073" />
+        <entry key="app/src/main/res/drawable/ic_tick.xml" value="0.2462962962962963" />
+        <entry key="app/src/main/res/drawable/missed_back.xml" value="0.2462962962962963" />
+        <entry key="app/src/main/res/drawable/taken_back.xml" value="0.2462962962962963" />
+        <entry key="app/src/main/res/layout/activity_food_stats.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/activity_refer.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/activity_supplements.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/custom_marker_view.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/dialog_missed.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/dialog_taken.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/dialog_text_box.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/food_list_item.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/food_option_list_row.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_diet_plan.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_food_stats.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/meal_list_row.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/selection_dialog.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/supplement_list_item.xml" value="0.23802083333333332" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="liberica-1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
