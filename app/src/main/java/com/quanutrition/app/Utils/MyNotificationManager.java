@@ -82,7 +82,7 @@ public class MyNotificationManager {
         }
 
         resultIntent.putExtra("KEY_NOTIFICATION_ID", 1);
-        PendingIntent pendingIntent = PendingIntent.getActivity(mCtx, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mCtx, 0, resultIntent, PendingIntent.FLAG_IMMUTABLE);
         mBuilder.setContentIntent(pendingIntent);
         NotificationManager mNotifyMgr =
                 (NotificationManager) mCtx.getSystemService(NOTIFICATION_SERVICE);

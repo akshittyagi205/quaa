@@ -388,7 +388,7 @@ public class MainActivity extends AppCompatActivity
         PendingIntent alarmIntent;
         alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, WaterReminderReciever.class);
-        alarmIntent = PendingIntent.getBroadcast(this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmIntent = PendingIntent.getBroadcast(this, 100, intent, PendingIntent.FLAG_IMMUTABLE);
         SharedPreferences sharedPreferences = Tools.getGeneralSharedPref(this);
         String fromTime = sharedPreferences.getString("from","10:00");
         String toTime = sharedPreferences.getString("to","22:00");
@@ -432,7 +432,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, MyAlarmManager.class);
         intent.putExtra("mealTime",mealTime);
         intent.putExtra("status",true);
-        alarmIntent = PendingIntent.getBroadcast(this, Integer.parseInt(mealTime), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmIntent = PendingIntent.getBroadcast(this, Integer.parseInt(mealTime), intent, PendingIntent.FLAG_IMMUTABLE);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());

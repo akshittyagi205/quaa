@@ -432,7 +432,7 @@ public class ReminderSetupActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyAlarmManager.class);
         intent.putExtra("mealTime",mealTime);
         intent.putExtra("status",status);
-        alarmIntent = PendingIntent.getBroadcast(this, Integer.parseInt(mealTime), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmIntent = PendingIntent.getBroadcast(this, Integer.parseInt(mealTime), intent, PendingIntent.FLAG_IMMUTABLE);
 
         Calendar calendar = Calendar.getInstance();
 //        calendar.setTimeInMillis(System.currentTimeMillis());

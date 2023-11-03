@@ -39,7 +39,7 @@ public class SampleBootReciever extends BroadcastReceiver {
         Intent intent = new Intent(mCtx, MyAlarmManager.class);
         intent.putExtra("mealTime",mealTime);
         intent.putExtra("status",status);
-        alarmIntent = PendingIntent.getBroadcast(mCtx, Integer.parseInt(mealTime), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmIntent = PendingIntent.getBroadcast(mCtx, Integer.parseInt(mealTime), intent, PendingIntent.FLAG_IMMUTABLE);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, time);
@@ -59,7 +59,7 @@ public class SampleBootReciever extends BroadcastReceiver {
         PendingIntent alarmIntent;
         alarmMgr = (AlarmManager)mCtx.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(mCtx, WaterReminderReciever.class);
-        alarmIntent = PendingIntent.getBroadcast(mCtx, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmIntent = PendingIntent.getBroadcast(mCtx, 100, intent, PendingIntent.FLAG_IMMUTABLE);
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                 Tools.getGeneralSharedPref(mCtx).getLong("interval",60*60*1000), alarmIntent);
     }

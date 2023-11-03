@@ -268,7 +268,7 @@ public class WaterGraphActivity extends AppCompatActivity implements View.OnClic
                         PendingIntent alarmIntent;
                         alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
                         Intent intent = new Intent(WaterGraphActivity.this, WaterReminderReciever.class);
-                        alarmIntent = PendingIntent.getBroadcast(WaterGraphActivity.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        alarmIntent = PendingIntent.getBroadcast(WaterGraphActivity.this, 100, intent, PendingIntent.FLAG_IMMUTABLE);
                         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                                 (long)interval, alarmIntent);
 
@@ -348,7 +348,7 @@ public class WaterGraphActivity extends AppCompatActivity implements View.OnClic
                         PendingIntent alarmIntent;
                         alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
                         Intent intent = new Intent(WaterGraphActivity.this, WaterReminderReciever.class);
-                        alarmIntent = PendingIntent.getBroadcast(WaterGraphActivity.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        alarmIntent = PendingIntent.getBroadcast(WaterGraphActivity.this, 100, intent, PendingIntent.FLAG_IMMUTABLE);
                         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                                 (long)interval, alarmIntent);
 
@@ -393,7 +393,7 @@ public class WaterGraphActivity extends AppCompatActivity implements View.OnClic
                         PendingIntent alarmIntent;
                         alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
                         Intent intent = new Intent(WaterGraphActivity.this, WaterReminderReciever.class);
-                        alarmIntent = PendingIntent.getBroadcast(WaterGraphActivity.this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        alarmIntent = PendingIntent.getBroadcast(WaterGraphActivity.this, 100, intent, PendingIntent.FLAG_IMMUTABLE);
                         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                                 (long)interval, alarmIntent);
                     }

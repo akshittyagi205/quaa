@@ -277,7 +277,7 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
         Intent intent = new Intent(this, MyAlarmManager.class);
         intent.putExtra("mealTime",mealTime);
         intent.putExtra("status",true);
-        alarmIntent = PendingIntent.getBroadcast(this, Integer.parseInt(mealTime), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmIntent = PendingIntent.getBroadcast(this, Integer.parseInt(mealTime), intent, PendingIntent.FLAG_IMMUTABLE);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());

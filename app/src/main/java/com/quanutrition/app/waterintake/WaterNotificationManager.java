@@ -70,7 +70,7 @@ public class WaterNotificationManager {
         Intent resultIntent;
         resultIntent = new Intent(mCtx, MainActivity.class);
         resultIntent.putExtra("KEY_NOTIFICATION_ID", id);
-        PendingIntent pendingIntent = PendingIntent.getActivity(mCtx, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mCtx, 0, resultIntent, PendingIntent.FLAG_IMMUTABLE);
         mBuilder.setContentIntent(pendingIntent);
         NotificationManager mNotifyMgr =
                 (NotificationManager) mCtx.getSystemService(NOTIFICATION_SERVICE);
