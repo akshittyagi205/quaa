@@ -17,5 +17,6 @@ public class Urls {
     static String save_signUp_info = "dieter/v1/save_partial_info/";
     static String referred_details = "dieter/v1/referred_details/";
     public static String save_token = "dieter/v1/save_token/";
+    public static String Get_notification = "dieter/v1/notification";
 
 }

@@ -41,18 +41,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView title,description,cal,time;
-        ImageView image,video_play;
+        TextView title,added_on,author;
+        ImageView image;
         LinearLayout lyt_parent;
         public MyViewHolder(View view) {
             super(view);
-            title = view.findViewById(R.id.title);
-            description =  view.findViewById(R.id.description);
-            image = view.findViewById(R.id.image);
             lyt_parent = view.findViewById(R.id.lyt_parent);
-            video_play = view.findViewById(R.id.video_play);
-            cal = view.findViewById(R.id.cal);
-            time = view.findViewById(R.id.time);
+            image = view.findViewById(R.id.image);
+            title = view.findViewById(R.id.title);
+            added_on =  view.findViewById(R.id.added_on);
+            author =  view.findViewById(R.id.author);
+
         }
     }
 
@@ -70,11 +69,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
 
         final BlogsModel model = blogs.get(position);
         holder.title.setText(model.getTitle());
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            holder.description.setText(Html.fromHtml(model.getDescription(), Html.FROM_HTML_MODE_COMPACT));
-        } else {
-            holder.description.setText(Html.fromHtml(model.getDescription()));
-        }*/
+        if (!model.getAdded_on().isEmpty())
+            holder.added_on.setText("Published On : "+model.getAdded_on());
+
+        if (model.getAuthor().isEmpty()){
+            holder.author.setVisibility(View.GONE);
+        }else {
+            holder.author.setVisibility(View.VISIBLE);
+            holder.author.setText("Author : "+model.getAuthor());
+        }
 
         Display display = ((Activity)mCtx).getWindowManager(). getDefaultDisplay();
         Point size = new Point();
@@ -85,21 +88,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
         holder.image.getLayoutParams().height = width/2;
         holder.image.getLayoutParams().width = width;
 
-        Tools.loadBlogImage(model.getImageLink(),holder.image);
+        if (!model.getImageLink().isEmpty())
+            Tools.loadImageIntoImageView(model.getImageLink(),holder.image);
         holder.lyt_parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onItemClicked.onClick(holder.image,holder.getAdapterPosition());
             }
         });
-        if(!model.getType().equalsIgnoreCase("2")){
-            holder.video_play.setVisibility(View.GONE);
-        }else{
-            holder.video_play.setVisibility(View.VISIBLE);
-        }
-
-        holder.time.setText("Cooking Time : "+model.cookingTime);
-        holder.cal.setText("Calories : "+model.cal);
     }
 
     @Override

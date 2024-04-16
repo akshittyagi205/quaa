@@ -29,8 +29,8 @@ import android.widget.Toast;
 
 import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AlertDialog;
-import androidx.viewpager.widget.PagerAdapter;
 
+import com.quanutrition.app.BuildConfig;
 import com.quanutrition.app.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -38,7 +38,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
-import com.quanutrition.app.profile.TimeInputChildModel;
+import com.quanutrition.app.googlefit.healthconnect.SessionData;
 import com.quanutrition.app.profile.TimeInputModel;
 import com.squareup.picasso.Picasso;
 
@@ -49,9 +49,11 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -81,7 +83,9 @@ public class Tools {
             return b;
         }
     }
-
+    public static SharedPreferences getFirstLabSharedPref(Context context) {
+        return context.getSharedPreferences(Constants.FirstOpenLabPrefs,Context.MODE_PRIVATE);
+    }
     public static boolean isValidEmail(EditText editText) {
         String target = editText.getText().toString().trim();
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
@@ -124,6 +128,22 @@ public class Tools {
 
     public static void initCustomToast(Context c, String message){
         Toast.makeText(c,message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static Instant convertTimeMillisToInstant(long timeMillis) {
+        return Instant.ofEpochMilli(timeMillis);
+    }
+
+    public static ArrayList<SessionData> printStartAndTimeInterval(int numberOfDays) {
+        ArrayList<SessionData> sessionData = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        for (int i = 0; i < numberOfDays; i++) {
+            String formattedDate = dateFormat.format(calendar.getTime());
+            sessionData.add(new SessionData(formattedDate,0L,"0.0"));
+            calendar.add(Calendar.DAY_OF_MONTH, -1);
+        }
+        return sessionData;
     }
 
 
@@ -661,7 +681,6 @@ public class Tools {
         }
     }
 
-
     public static ArrayList<TimeInputModel> sortDayWise(ArrayList<TimeInputModel> list){
         ArrayList<TimeInputModel> sortedList = new ArrayList<>();
 
@@ -680,6 +699,16 @@ public class Tools {
         return sortedList;
     }
 
+    public static HashMap<String,String> getHeaders(Context context){
+
+        HashMap<String,String> headers = new HashMap<>();
+        if(BuildConfig.TEST_TOKEN.equalsIgnoreCase("NO"))
+            headers.put("Authorization","token "+Tools.getGeneralSharedPref(context).getString(Constants.AUTH_TOKEN,""));
+        else
+            headers.put("Authorization","token "+BuildConfig.TOKEN);
+//        headers.put("Authorization","token 623ebc7b5bc45947f78ab3e0612361dd78104356");
+        return headers;
+    }
 
 
 }

@@ -7,6 +7,16 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+<!--    <uses-permission android:name="android.permission.health.READ_STEPS" />-->
+<!--    <uses-permission android:name="android.permission.health.READ_TOTAL_CALORIES_BURNED" />-->
+
+    <queries>
+
+        <!-- declare Health Connect visibility -->
+        <package android:name="com.google.android.apps.healthdata" />
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -16,6 +26,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".general.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.NotesDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.NotesListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".blogs.TestimonialActivity"
+            android:exported="false" />
+        <activity
+            android:name=".googlefit.healthconnect.HealthConnectWebViewActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".googlefit.healthconnect.HealthConnectActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
+
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".fitstats.FoodStatsActivity"
             android:exported="false" />
@@ -151,9 +189,9 @@
         <activity
             android:name=".general.SplashScreenActivity"
             android:clearTaskOnLaunch="true"
+            android:exported="true"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -316,8 +354,8 @@
         </receiver>
         <receiver
             android:name=".Utils.MyAlarmManager"
-            android:process=":remote"
-            android:exported="true">
+            android:exported="true"
+            android:process=":remote">
             <intent-filter>
                 <category android:name="android.intent.category.APP_MESSAGING" />
 
@@ -335,7 +373,8 @@
         <service
             android:name=".googlefit.FirebaseSyncService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service android:name=".Utils.MyFirebaseMessagingService"
+        <service
+            android:name=".Utils.MyFirebaseMessagingService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

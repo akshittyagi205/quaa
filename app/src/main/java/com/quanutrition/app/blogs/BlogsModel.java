@@ -3,8 +3,36 @@ package com.quanutrition.app.blogs;
 import java.util.ArrayList;
 
 public class BlogsModel {
-    private String id,title,link,imageLink,author,description;
+    private String id;
+    private String title;
+    private String link;
+    private String imageLink;
+    private String author;
+    private String description;
+
+    public String getUrl() {
+        return url;
+    }
+
+    private String url;
+    private String added_on;
     private String type;
+
+    public String getAdded_on() {
+        return added_on;
+    }
+
+    public void setAdded_on(String added_on) {
+        this.added_on = added_on;
+    }
+
+    public BlogsModel(String id, String title, String url, String added_on) {
+        this.id = id;
+        this.title = title;
+        this.url = url;
+        this.added_on = added_on;
+    }
+
     private ArrayList<String> tags;
     public String cookingTime="",cal="";
 
@@ -16,6 +44,8 @@ public class BlogsModel {
         this.author = author;
         this.description = description;
     }
+
+
 
     public String getId() {
         return id;

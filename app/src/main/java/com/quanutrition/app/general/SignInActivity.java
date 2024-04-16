@@ -1,10 +1,12 @@
 package com.quanutrition.app.general;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.telephony.PhoneNumberUtils;
@@ -43,8 +45,8 @@ import java.util.Map;
 public class SignInActivity extends AppCompatActivity {
 
     TextView pin;
-    EditText phone;
-    LinearLayout proceed;
+    EditText phone,country,email;
+    LinearLayout proceed,email_lyt;
     CheckBox agree;
     int country_code = 101;
     int time=1;
@@ -56,13 +58,17 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 //        Tools.setSystemBarColorCustom(this,R.color.colorPrimary);
+        country = findViewById(R.id.country);
         pin = findViewById(R.id.pin);
         phone = findViewById(R.id.phone);
+        email = findViewById(R.id.email);
         proceed = findViewById(R.id.proceed);
+        email_lyt = findViewById(R.id.email_lyt);
 //        agree = findViewById(R.id.agree);
-        pin.setOnClickListener(new View.OnClickListener() {
+        country.setFocusable(false);
+        country.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 SqliteDbHelper helper = new SqliteDbHelper(SignInActivity.this);
                 ArrayList<CountryModel> countryModel = helper.getCountries();
                 ArrayList<SingleSelectionModel> list = new ArrayList<>();
@@ -75,10 +81,35 @@ public class SignInActivity extends AppCompatActivity {
                     public void onItemSelected(int position, SingleSelectionModel item) {
                         pin.setText(item.getLabel().split(":")[0].trim());
                         country_code = Integer.parseInt(item.getId());
+                        country.setText(item.getLabel().split(":")[1].trim());
+                        if (!country.getText().toString().trim().equalsIgnoreCase("India")){
+                            email_lyt.setVisibility(View.VISIBLE);
+                        }else {
+                            email_lyt.setVisibility(View.GONE);
+                        }
                     }
                 });
             }
         });
+//        pin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                SqliteDbHelper helper = new SqliteDbHelper(SignInActivity.this);
+//                ArrayList<CountryModel> countryModel = helper.getCountries();
+//                ArrayList<SingleSelectionModel> list = new ArrayList<>();
+//                for(int i=0;i<countryModel.size();i++){
+//                    list.add(new SingleSelectionModel(countryModel.get(i).getId()+"","+"+countryModel.get(i).getPhonecode()+" : "+countryModel.get(i).getName()));
+//                }
+//
+//                DialogUtils.getSingleSearchDialog(SignInActivity.this, list, new DialogUtils.OnSingleItemSelectedListener() {
+//                    @Override
+//                    public void onItemSelected(int position, SingleSelectionModel item) {
+//                        pin.setText(item.getLabel().split(":")[0].trim());
+//                        country_code = Integer.parseInt(item.getId());
+//                    }
+//                });
+//            }
+//        });
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,23 +117,26 @@ public class SignInActivity extends AppCompatActivity {
                     if (pin.getText().toString().equalsIgnoreCase("+91")) {
                         if (phone.getText().toString().trim().length() == 10 && PhoneNumberUtils.isGlobalPhoneNumber(phone.getText().toString().trim())) {
                             //valid indian number
-                            checkLayout();
+                            checkLayout(true);
                         } else {
                             Tools.initCustomToast(SignInActivity.this, "Please enter a valid number");
                         }
                     } else {
                         //valid international number
-                        checkLayout();
+                        if(Tools.validateEmail(email)){
+                            checkLayout(false);
+                        }else {
+                            Tools.initCustomToast(SignInActivity.this,"Please enter a valid email address!");
+                        }
                     }
 
             }
         });
     }
 
-    void checkLayout(){
+    void checkLayout(boolean indian){
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         // Setting Dialog Message
-        alertDialog.setTitle("Verify number");
         alertDialog.setIcon(R.mipmap.ic_launcher);
         alertDialog.setMessage("We will be verifying the phone number : \n" + pin.getText() + " " + phone.getText().toString().trim() + "\nYou will receive an OTP on this number.");
         alertDialog.setPositiveButton("Verify", new DialogInterface.OnClickListener() {
@@ -110,7 +144,7 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
 //                                    Tools.initCustomToast(getActivity(),"Verify");
                 time=1;
-                requestOTP(pin.getText().toString(),phone.getText().toString().trim());
+                requestOTP(pin.getText().toString(),phone.getText().toString().trim(),indian);
 //                                    showDialog(pin.getText()+" "+editPhoneNumber.getText().toString().trim());
             }
         });
@@ -123,8 +157,7 @@ public class SignInActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-
-    void requestOTP(final String code, final String Phone){
+    void requestOTP(final String code, final String Phone, boolean indian){
         final AlertDialog ad = Tools.getDialog("Requesting OTP...",this);
         ad.show();
         Response.Listener<String> listener = new Response.Listener<String>() {
@@ -137,7 +170,7 @@ public class SignInActivity extends AppCompatActivity {
 //                        user_created_status=result.getInt("status");
 //                        Tools.initCustomToast(SignInActivity.this,result.getString("otp"));
                         Tools.getGeneralEditor(SignInActivity.this).putString(Constants.USER_ID,result.getInt("id")+"").commit();
-                        showDialog(Phone,code,result.getInt("status"),result.getString("otp"),result.getString("type"));
+                        showDialog(Phone,code,result.getInt("status"),result.getString("otp"),result.getString("type"),indian);
 
                     }else{
                         Tools.initCustomToast(SignInActivity.this,"Some error occured! Try again later.");
@@ -162,15 +195,20 @@ public class SignInActivity extends AppCompatActivity {
         };
         Map<String, String> params = new HashMap<>();
         params.put("mobile",code+"-"+Phone);
+        params.put("country",country.getText().toString().trim());
+        if (!indian){
+            params.put("email",email.getText().toString().trim());
+        }
+        Log.d("response",params.toString());
 
-        NetworkManager.getInstance(this).sendPostRequest(Urls.Request_OTP,params,listener,errorListener,this);
+        NetworkManager.getInstance(this).sendRequestOTPRequest(Urls.Request_OTP,params,listener,errorListener,this);
 
     }
 
 
     LinearLayout checkAgree;
 
-    void showDialog(final String PhoneNumber, final String code, final int status, String otpText, final String type){
+    void showDialog(final String PhoneNumber, final String code, final int status, String otpText, final String type,final Boolean indian){
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         LayoutInflater linf = LayoutInflater.from(this);
@@ -195,7 +233,7 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 //                    time = 1;
-                    requestOTP(code, PhoneNumber);
+                    requestOTP(code, PhoneNumber, indian);
                     if(countDownTimer!=null)
                         countDownTimer.cancel();
                     alertDialog1.dismiss();
@@ -227,7 +265,7 @@ public class SignInActivity extends AppCompatActivity {
                         //Send Request to server
                         if(agree.isChecked()||status==0) {
                         alertDialog1.dismiss();
-                        verifyOTP(otp.getText().toString().trim(),type);
+                        verifyOTP(otp.getText().toString().trim(),type,indian);
                     }else{
                         Tools.initCustomToast(SignInActivity.this,"Please agree to the terms and conditions before continuing!");
                     }
@@ -266,7 +304,7 @@ public class SignInActivity extends AppCompatActivity {
         }.start();
     }
 
-    void verifyOTP(final String otp, final String type){
+    void verifyOTP(final String otp, final String type, Boolean indian){
         final AlertDialog ad = Tools.getDialog("Verifying OTP...",this);
         ad.show();
         Response.Listener<String> listener = new Response.Listener<String>() {
@@ -278,47 +316,50 @@ public class SignInActivity extends AppCompatActivity {
                     JSONObject result = new JSONObject(response);
                     if (result.getInt("res") == 1) {
                         if(type.equalsIgnoreCase("1")){
-                        SharedPreferences.Editor editor = Tools.getGeneralEditor(SignInActivity.this);
-                        JSONObject data = result.getJSONObject("data");
-                        editor.putString(Constants.AUTH_TOKEN,data.optString("token"));
-                        JSONObject user = data.getJSONObject("user");
-                        editor.putString(Constants.PROFILE_EMAIL, user.optString("email"));
-                        editor.putString(Constants.PROFILE_NAME, user.optString("name", "-"));
-                        editor.putString(Constants.USER_ID,user.getInt("userId")+"");
-                        editor.putString(Constants.PHONE, user.optString("phone"));
+                            SharedPreferences.Editor editor = Tools.getGeneralEditor(SignInActivity.this);
+                            JSONObject data = result.getJSONObject("data");
+                            editor.putString(Constants.AUTH_TOKEN,data.optString("token"));
+                            JSONObject user = data.getJSONObject("user");
+                            if (indian){
+                                editor.putString(Constants.PROFILE_EMAIL, user.optString("email"));
+                            }else {
+                                editor.putString(Constants.PROFILE_EMAIL, email.getText().toString().trim());
+                            }
+                            editor.putString(Constants.PROFILE_NAME, user.optString("name", "-"));
+                            editor.putString(Constants.USER_ID,user.getInt("userId")+"");
+                            editor.putString(Constants.PHONE, user.optString("phone"));
 //                        editor.putString(Constants.REFER_CODE,user.getString("user_code"));
-                        editor.putString(Constants.PROFILE_IMAGE, user.optString("photo"));
+                            editor.putString(Constants.PROFILE_IMAGE, user.optString("photo"));
 //                        editor.putString(Constants.CUSTOM_ID, user.optString("custom_id"));
-                        if(data.getInt("dietitian_status")==1) {
-                            editor.putString(Constants.GENDER,user.getString("gender").toLowerCase());
+                            if(data.getInt("dietitian_status")==1) {
+                                editor.putString(Constants.GENDER,user.getString("gender").toLowerCase());
 
-                            JSONObject dietitian = data.optJSONObject("dietitian");
-                            editor.putString(Constants.DIETITIAN_NAME, dietitian.optString("name"));
-                            editor.putString(Constants.DIETITIAN_PIC, dietitian.getString("photo"));
-                            editor.putString(Constants.DIETITIAN_ID, dietitian.optInt("dietitianId", 0) + "");
-                            editor.putString(Constants.DIETITIAN_PHONE, dietitian.getString("phone"));
+                                JSONObject dietitian = data.optJSONObject("dietitian");
+                                editor.putString(Constants.DIETITIAN_NAME, dietitian.optString("name"));
+                                editor.putString(Constants.DIETITIAN_PIC, dietitian.getString("photo"));
+                                editor.putString(Constants.DIETITIAN_ID, dietitian.optInt("dietitianId", 0) + "");
+                                editor.putString(Constants.DIETITIAN_PHONE, dietitian.getString("phone"));
 //                            editor.putString(Constants.CLINIC, dietitian.getString("clinic"));
 //                            editor.putString(Constants.CLINIC_ID, dietitian.optString("clinicId", "0"));
 //                            editor.putString(Constants.DIETITIAN_EXPERIENCE, dietitian.getString("exp"));
 //                            editor.commit();
 //                            finish();
 //                            startActivity(new Intent(SignInActivity.this, MainActivity.class));
-                        }
+                            }
                             editor.commit();
                             //Call to temp info activity
 
-                                Intent intent = new Intent(SignInActivity.this,MainActivity.class);
-                                finish();
-                                startActivity(intent);
-                            }else {
-                                Intent intent = new Intent(SignInActivity.this, SignUpInfo.class);
-                                if (getIntent().hasExtra("user_ref")) {
-                                    intent.putExtra("user_ref", getIntent().getStringExtra("user_ref"));
-                                }
-                                finish();
-                                startActivity(intent);
+                            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+                            finish();
+                            startActivity(intent);
+                        }else {
+                            Intent intent = new Intent(SignInActivity.this, SignUpInfo.class);
+                            if (getIntent().hasExtra("user_ref")) {
+                                intent.putExtra("user_ref", getIntent().getStringExtra("user_ref"));
                             }
-
+                            finish();
+                            startActivity(intent);
+                        }
                     }else{
                         Tools.initCustomToast(SignInActivity.this,result.getString("msg"));
                     }
@@ -343,8 +384,12 @@ public class SignInActivity extends AppCompatActivity {
         params.put("userId",Tools.getGeneralSharedPref(this).getString(Constants.USER_ID,"0"));
         params.put("otp",otp);
         params.put("type",type);
+        if (!indian){
+            params.put("email",email.getText().toString().trim());
+        }
+        Log.d("response",params.toString());
 
-        NetworkManager.getInstance(this).sendPostRequest(Urls.Verify_OTP,params,listener,errorListener,this);
+        NetworkManager.getInstance(this).sendRequestOTPRequest(Urls.Verify_OTP,params,listener,errorListener,this);
 
     }
 

@@ -3,10 +3,13 @@ package com.quanutrition.app.programs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,13 +28,17 @@ import java.util.ArrayList;
 
 public class ProgramsActivity extends AppCompatActivity {
 
+    com.quanutrition.app.databinding.ActivityProgramsBinding binding;
     RecyclerView plans_view;
     ArrayList<ProgramModel> plans;
     ProgramsGridAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_programs);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_programs);
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 //        Tools.setSystemBarColorDark(this, R.color.colorPrimary);
 
         plans_view = findViewById(R.id.plans_view);
@@ -99,5 +106,13 @@ public class ProgramsActivity extends AppCompatActivity {
 
         NetworkManager.getInstance(this).sendGetRequest(Urls.GET_ALL_PROGRAMS,listener,errorListener,this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

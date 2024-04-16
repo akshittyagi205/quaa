@@ -80,17 +80,12 @@ public class RecipesFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 BlogsModel model = blogList.get(position);
-                if(!model.getType().equalsIgnoreCase("2")) {
-                    Intent intent = new Intent(getActivity(), BlogDetailsActivity.class);
-                    intent.putExtra("id", model.getId() + "");
-                    final ActivityOptions options =
-                            ActivityOptions.makeSceneTransitionAnimation(getActivity(), view, view.getTransitionName());
-                    startActivity(intent,options.toBundle());
-                }else{
-                    Intent intent = new Intent(getActivity(), YoutubePlayActivity.class);
-                    intent.putExtra("video", model.getLink() + "");
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(getActivity(), BlogDetailsActivity.class);
+                intent.putExtra("id", model.getId() + "");
+                intent.putExtra("type", model.getType() + "");
+                final ActivityOptions options =
+                        ActivityOptions.makeSceneTransitionAnimation(getActivity(), view, view.getTransitionName());
+                startActivity(intent,options.toBundle());
             }
         });
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
@@ -145,12 +140,9 @@ public class RecipesFragment extends Fragment {
                         JSONArray data = ob.getJSONArray("data");
                         for(int i=0;i<data.length();i++){
                             JSONObject blog = data.getJSONObject(i);
-                            ArrayList<String> tags = new ArrayList<>();
-                            tags.add("Trending");
-                            BlogsModel model = new BlogsModel(blog.getInt("id")+"",blog.getString("title"),blog.optString("url"),blog.getString("image"),blog.getString("author"),blog.getString("content"));
-                            model.setType(blog.optString("type","3"));
-                            model.cal = blog.getString("calories");
-                            model.cookingTime = blog.getString("cooking_time");
+                            BlogsModel model = new BlogsModel(blog.getInt("id")+"",blog.getString("title"),blog.optString("url"),blog.getString("image"),blog.getString("client_name"),blog.getString("content"));
+                            model.setAdded_on(blog.optString("added_on",""));
+                            model.setType("3");
                             blogList.add(model);
                         }
                         blogsAdapter.notifyDataSetChanged();
@@ -173,7 +165,8 @@ public class RecipesFragment extends Fragment {
                 Log.d("myTag","I am here");
             }
         };
-        NetworkManager.getInstance(getActivity()).sendGetRequest(Urls.GET_ALL_RECIPES,listener,errorListener,getActivity());
+        String url = Urls.GET_ALL_BLOG +"?type=3";
+        NetworkManager.getInstance(getActivity()).sendGetRequest(url,listener,errorListener,getActivity());
 
     }
 
@@ -227,6 +220,7 @@ public class RecipesFragment extends Fragment {
                             if(!model.getType().equalsIgnoreCase("2")) {
                                 Intent intent = new Intent(getActivity(), BlogDetailsActivity.class);
                                 intent.putExtra("id", model.getId() + "");
+                                intent.putExtra("type", model.getType() + "");
                                 startActivity(intent);
                             }else{
                                 //type 1
@@ -276,6 +270,7 @@ public class RecipesFragment extends Fragment {
                             if(!model.getType().equalsIgnoreCase("2")) {
                                 Intent intent = new Intent(getActivity(), BlogDetailsActivity.class);
                                 intent.putExtra("id", model.getId() + "");
+                                intent.putExtra("type", model.getType() + "");
                                 startActivity(intent);
                             }else{
                                 //type 1
@@ -358,6 +353,7 @@ public class RecipesFragment extends Fragment {
                                         if(!model.getType().equalsIgnoreCase("2")) {
                                             Intent intent = new Intent(getActivity(), BlogDetailsActivity.class);
                                             intent.putExtra("id", model.getId() + "");
+                                            intent.putExtra("type", model.getType() + "");
                                             startActivity(intent);
                                         }else{
                                             //type 1

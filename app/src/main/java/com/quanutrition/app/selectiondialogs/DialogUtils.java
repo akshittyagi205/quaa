@@ -241,7 +241,7 @@ public class DialogUtils {
                     for(SingleSelectionModel model:modelList){
 
                         String charString = charSequence + "";
-                        if (model.getLabel().toLowerCase().contains(charString.toLowerCase())) {
+                        if (model.getLabel().toLowerCase().contains(charString.toLowerCase().toString().trim())) {
                             filteredList.add(model);
                         }
                     }

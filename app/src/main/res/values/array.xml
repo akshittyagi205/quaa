@@ -73,6 +73,21 @@
         <item>@string/oPos</item>
     </string-array>
 
+    <string-array name="MaritalStatus">
+        <item>@string/Single</item>
+        <item>@string/Married</item>
+        <item>@string/Divorced</item>
+    </string-array>
+
+    <string-array name="Profession">
+        <item>@string/IT</item>
+        <item>@string/Businessman</item>
+        <item>@string/Student</item>
+        <item>@string/Management</item>
+        <item>@string/Sportsman</item>
+        <item>@string/Others</item>
+    </string-array>
+
     <string-array name="Howdidyou">
         <item>@string/Google</item>
         <item>@string/facebook</item>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,8 +16,8 @@ import com.android.volley.VolleyError;
 import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.NetworkManager;
 import com.quanutrition.app.Utils.Tools;
-import com.quanutrition.app.firebaseUtils.FirebaseUtils;
-import com.quanutrition.app.firebaseUtils.GraphModel;
+import com.quanutrition.app.googlefit.healthconnect.HealthConnectManager;
+import com.quanutrition.app.googlefit.healthconnect.SessionData;
 import com.quanutrition.app.selectiondialogs.DialogUtils;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -33,8 +34,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CaloriesGraphActivity extends AppCompatActivity implements View.OnClickListener{
@@ -43,7 +44,9 @@ public class CaloriesGraphActivity extends AppCompatActivity implements View.OnC
     LinearLayout setGoal;
     TextView goalText,current,dailyGoal,progress;
     String goal,currentAchieved;
-    ArrayList<GraphModel> graphData;
+    ArrayList<SessionData> graphData;
+
+    HealthConnectManager healthConnectManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,44 +59,59 @@ public class CaloriesGraphActivity extends AppCompatActivity implements View.OnC
         dailyGoal = findViewById(R.id.goal);
         progress = findViewById(R.id.progress);
 
-        FirebaseUtils mFirebaseUtils = new FirebaseUtils(this);
-        mFirebaseUtils.getCaloriesGraph(new FirebaseUtils.OnGraphReady() {
-            @Override
-            public void onDataReady(ArrayList<GraphModel> data) {
-
-                Collections.sort(data);
-
-                /*for(int i=0;i<data.size();i++){
-                    Log.d("Water Graph Data : "+data.get(i).getDate(),data.get(i).getValue());
-                }*/
-                graphData = data;
-                setUpBarGraph();
-            }
-
-        });
+        healthConnectManager = new HealthConnectManager(this);
+//        FirebaseUtils mFirebaseUtils = new FirebaseUtils(this);
+//        mFirebaseUtils.getCaloriesGraph(new FirebaseUtils.OnGraphReady() {
+//            @Override
+//            public void onDataReady(ArrayList<GraphModel> data) {
+//
+//                Collections.sort(data);
+//
+//                /*for(int i=0;i<data.size();i++){
+//                    Log.d("Water Graph Data : "+data.get(i).getDate(),data.get(i).getValue());
+//                }*/
+//                graphData = data;
+//                setUpBarGraph();
+//            }
+//
+//        });
 
         goal = getIntent().getStringExtra("goal");
 
-
-        GoogleFitUtils googleFitUtils = new GoogleFitUtils(this, new GoogleFitUtils.OnDataReady() {
+        healthConnectManager.readStepsByWeekly(7, new HealthConnectManager.StepsByWeeklyCallback() {
             @Override
-            public void onStepsReady(String data) {
-
-            }
-
-            @Override
-            public void onCaloriesReady(String data, String walking, String running, String other) {
-                currentAchieved=data;
+            public void onStepsByWeeklyResult(@NonNull List<? extends SessionData> result) {
+                currentAchieved = result.get(0).getTotalEnergyBurned().toString();
                 setProgressText(currentAchieved);
+                graphData = (ArrayList<SessionData>) result;
+                setUpBarGraph();
             }
 
             @Override
-            public void onWeeklyDataReady(ArrayList<String> days, ArrayList<String> steps) {
+            public void onError(@NonNull Exception exception) {
 
             }
         });
-        googleFitUtils.setFlag(false);
-        googleFitUtils.init();
+
+//        GoogleFitUtils googleFitUtils = new GoogleFitUtils(this, new GoogleFitUtils.OnDataReady() {
+//            @Override
+//            public void onStepsReady(String data) {
+//
+//            }
+//
+//            @Override
+//            public void onCaloriesReady(String data, String walking, String running, String other) {
+//                currentAchieved=data;
+//                setProgressText(currentAchieved);
+//            }
+//
+//            @Override
+//            public void onWeeklyDataReady(ArrayList<String> days, ArrayList<String> steps) {
+//
+//            }
+//        });
+//        googleFitUtils.setFlag(false);
+//        googleFitUtils.init();
 
 
         setGoal.setOnClickListener(this);
@@ -128,11 +146,11 @@ public class CaloriesGraphActivity extends AppCompatActivity implements View.OnC
         chart.getLegend().setEnabled(false);
         ArrayList<BarEntry> values = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
-            float val = Float.parseFloat(graphData.get(i).getValue());
+            float val = Float.parseFloat(graphData.get(i).getTotalEnergyBurned());
             values.add(new BarEntry(i, val));
         }
         BarDataSet set1;
-        set1 = new BarDataSet(values, "Steps");
+        set1 = new BarDataSet(values, "Calories");
         set1.setValues(values);
         set1.setDrawValues(false);
         set1.setColor(Color.parseColor("#FFFFFF"));

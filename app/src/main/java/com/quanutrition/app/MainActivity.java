@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -63,14 +65,15 @@ import com.quanutrition.app.firebaseUtils.FirebaseUtils;
 import com.quanutrition.app.general.AboutDietitianActivity;
 import com.quanutrition.app.general.ContactUsActivity;
 import com.quanutrition.app.general.FeedbackUtils;
-import com.quanutrition.app.general.ReferActivity;
+import com.quanutrition.app.general.NotificationActivity;
 import com.quanutrition.app.general.SettingsActivity;
 import com.quanutrition.app.general.SignInActivity;
-import com.quanutrition.app.general.SignUpInfo;
 import com.quanutrition.app.general.Urls;
 import com.quanutrition.app.general.UserListAdapter;
 import com.quanutrition.app.googlefit.GoogleFitUtils;
-import com.quanutrition.app.profile.MeasurementsActivity;
+import com.quanutrition.app.googlefit.healthconnect.HealthConnectActivity;
+import com.quanutrition.app.googlefit.healthconnect.HealthConnectAvailability;
+import com.quanutrition.app.googlefit.healthconnect.HealthConnectManager;
 import com.quanutrition.app.waterintake.WaterReminderReciever;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -114,7 +117,7 @@ public class MainActivity extends AppCompatActivity
     int lastSelected=-1;
     FirebaseRemoteConfig mFirebaseRemoteConfig;
     DatabaseReference readReference;
-    TextView chatItem;
+    TextView chatItem,notificationItem;
     private AlertDialog alertDialog1;
 
     @Override
@@ -170,6 +173,12 @@ public class MainActivity extends AppCompatActivity
         TextView experience = header.findViewById(R.id.experience);
         TextView clients = header.findViewById(R.id.clients);
         CircleImageView image = header.findViewById(R.id.image);
+        Menu nav_menu = navigationView.getMenu();
+        if (BuildConfig.HEALTH_CONNECT.equalsIgnoreCase("YES")){
+            nav_menu.findItem(R.id.devices).setVisible(true);
+        }else {
+            nav_menu.findItem(R.id.devices).setVisible(false);
+        }
 
         final SharedPreferences sharedPreferences = Tools.getGeneralSharedPref(this);
         dtName.setText(sharedPreferences.getString(Constants.PROFILE_NAME,"Unknown"));
@@ -257,6 +266,17 @@ public class MainActivity extends AppCompatActivity
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            int hasPerm = pm.checkPermission(android.Manifest.permission.POST_NOTIFICATIONS, getPackageName());
+            if (hasPerm != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
+                        87888
+                );
+            }
+        }
+
         SharedPreferences reminderPrefs = Tools.getGeneralSharedPref(this);
         int tag = reminderPrefs.getInt("reminderTag", 0);
         if(tag==0) {
@@ -341,6 +361,14 @@ public class MainActivity extends AppCompatActivity
 
 //        MyNotificationManager.getInstance(this).displayNotification("Title", "Body", "3", Constants.REMINDER_CHANNEL_ID);
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==8788&&grantResults.length==1&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+            //Do Nothing
+        }
     }
 
     private void showUpdateDialog() {
@@ -462,13 +490,18 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
 
         final MenuItem menuItem = menu.findItem(R.id.chat);
+        final MenuItem menuItem1 = menu.findItem(R.id.notify);
 
 //        View actionView = MenuItemCompat.getActionView(menuItem);
 
         View actionView  = menuItem.getActionView();
+        View actionView1  = menuItem1.getActionView();
 
         chatItem = (TextView) actionView.findViewById(R.id.cart_badge);
         chatItem.setVisibility(View.GONE);
+
+        notificationItem = (TextView) actionView1.findViewById(R.id.cart_badge);
+        notificationItem.setVisibility(View.GONE);
 
 //        setupBadge();
 
@@ -476,6 +509,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 onOptionsItemSelected(menuItem);
+            }
+        });
+        actionView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem1);
             }
         });
 
@@ -534,6 +573,8 @@ public class MainActivity extends AppCompatActivity
             readReference.child("read").setValue("true");
             startActivity(new Intent(MainActivity.this, ChatActivity.class));
 
+        }else if (id == R.id.notify){
+            startActivity(new Intent(MainActivity.this, NotificationActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -576,6 +617,14 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this, ContactUsActivity.class));
         } else if(id == R.id.switchAccount){
             showUserDialog(new AccountDBUtils(this).get());
+        }else if (id == R.id.devices){
+            HealthConnectManager healthConnectManager = new HealthConnectManager(MainActivity.this);
+            HealthConnectAvailability availability = healthConnectManager.getAvailability().getValue();
+            if (availability.toString().equalsIgnoreCase("NOT_INSTALLED")){
+                showHealthConnectDialog();
+            }else {
+                startActivity(new Intent(MainActivity.this, HealthConnectActivity.class));
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -892,6 +941,31 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    void showHealthConnectDialog(){
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        // Setting Dialog Message
+        alertDialog.setTitle("Install Health Connect");
+        alertDialog.setIcon(R.drawable.ic_health_connect_logo);
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("Do you really want to install health connect?");
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Uri url = Uri.parse(getResources().getString(R.string.market_url)).buildUpon()
+                        .appendQueryParameter("id", getResources().getString(R.string.health_connect_package))
+                        .appendQueryParameter("url", getResources().getString(R.string.onboarding_url))
+                        .build();
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url.toString())));
+            }
+        });
+        alertDialog.setNeutralButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alertDialog.show();
+    }
 
     void showLoginDialog() {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);

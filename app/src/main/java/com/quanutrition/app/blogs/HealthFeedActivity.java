@@ -22,9 +22,13 @@ public class HealthFeedActivity extends AppCompatActivity implements BlogsFragme
         setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
+        if (getIntent().getStringExtra("type").equalsIgnoreCase("2")){
+            getSupportActionBar().setTitle("Videos");
+        }else {
+            getSupportActionBar().setTitle("Blog Posts");
+        }
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = new BlogsFragment();
+        Fragment fragment = BlogsFragment.newInstance(getIntent().getStringExtra("type"));
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         transaction.replace(R.id.main_fragment_frame, fragment).commit();

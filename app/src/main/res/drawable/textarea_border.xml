@@ -11,5 +11,5 @@
     <corners android:radius="5dp" />
 
     <!--Color to fill in-->
-    <solid android:color="@color/grey_600"/>
+    <solid android:color="@color/grey_800"/>
 </shape>

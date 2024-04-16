@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,8 +16,8 @@ import com.android.volley.VolleyError;
 import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.NetworkManager;
 import com.quanutrition.app.Utils.Tools;
-import com.quanutrition.app.firebaseUtils.FirebaseUtils;
-import com.quanutrition.app.firebaseUtils.GraphModel;
+import com.quanutrition.app.googlefit.healthconnect.HealthConnectManager;
+import com.quanutrition.app.googlefit.healthconnect.SessionData;
 import com.quanutrition.app.selectiondialogs.DialogUtils;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -33,8 +34,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StepsGraphActivity extends AppCompatActivity implements View.OnClickListener{
@@ -43,7 +44,9 @@ public class StepsGraphActivity extends AppCompatActivity implements View.OnClic
     LinearLayout setGoal;
     TextView goalText,current,dailyGoal,progress;
     String goal,currentAchieved;
-    ArrayList<GraphModel> graphData;
+    ArrayList<SessionData> graphData;
+
+    HealthConnectManager healthConnectManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class StepsGraphActivity extends AppCompatActivity implements View.OnClic
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        Tools.setSystemBarColorCustom(this,R.color.colorPrimary);
+        healthConnectManager = new HealthConnectManager(this);
         chart = findViewById(R.id.barGraph);
         setGoal = findViewById(R.id.setGoal);
         goalText = findViewById(R.id.goalText);
@@ -59,46 +63,59 @@ public class StepsGraphActivity extends AppCompatActivity implements View.OnClic
         dailyGoal = findViewById(R.id.goal);
         progress = findViewById(R.id.progress);
 
-        FirebaseUtils mFirebaseUtils = new FirebaseUtils(this);
-        mFirebaseUtils.getStepsGraph(new FirebaseUtils.OnGraphReady() {
-            @Override
-            public void onDataReady(ArrayList<GraphModel> data) {
-
-                Collections.sort(data);
-
-                /*for(int i=0;i<data.size();i++){
-                    Log.d("Water Graph Data : "+data.get(i).getDate(),data.get(i).getValue());
-                }*/
-                graphData = data;
-                setUpBarGraph();
-            }
-
-        });
+//        FirebaseUtils mFirebaseUtils = new FirebaseUtils(this);
+//        mFirebaseUtils.getStepsGraph(new FirebaseUtils.OnGraphReady() {
+//            @Override
+//            public void onDataReady(ArrayList<GraphModel> data) {
+//
+//                Collections.sort(data);
+//
+//                /*for(int i=0;i<data.size();i++){
+//                    Log.d("Water Graph Data : "+data.get(i).getDate(),data.get(i).getValue());
+//                }*/
+//                graphData = data;
+//                setUpBarGraph();
+//            }
+//
+//        });
 
         goal = getIntent().getStringExtra("goal");
 
-
-        GoogleFitUtils googleFitUtils = new GoogleFitUtils(this, new GoogleFitUtils.OnDataReady() {
+        healthConnectManager.readStepsByWeekly(7, new HealthConnectManager.StepsByWeeklyCallback() {
             @Override
-            public void onStepsReady(String data) {
-
-                currentAchieved = data;
+            public void onStepsByWeeklyResult(@NonNull List<? extends SessionData> result) {
+                currentAchieved = result.get(0).getTotalSteps().toString();
                 setProgressText(currentAchieved);
-
+                graphData = (ArrayList<SessionData>) result;
+                setUpBarGraph();
             }
 
             @Override
-            public void onCaloriesReady(String totalCal, String walking, String running, String other) {
-
-            }
-
-            @Override
-            public void onWeeklyDataReady(ArrayList<String> days, ArrayList<String> steps) {
+            public void onError(@NonNull Exception exception) {
 
             }
         });
-        googleFitUtils.setFlag(false);
-        googleFitUtils.init();
+//        GoogleFitUtils googleFitUtils = new GoogleFitUtils(this, new GoogleFitUtils.OnDataReady() {
+//            @Override
+//            public void onStepsReady(String data) {
+//
+//                currentAchieved = data;
+//                setProgressText(currentAchieved);
+//
+//            }
+//
+//            @Override
+//            public void onCaloriesReady(String totalCal, String walking, String running, String other) {
+//
+//            }
+//
+//            @Override
+//            public void onWeeklyDataReady(ArrayList<String> days, ArrayList<String> steps) {
+//
+//            }
+//        });
+//        googleFitUtils.setFlag(false);
+//        googleFitUtils.init();
 
 
         setGoal.setOnClickListener(this);
@@ -133,8 +150,8 @@ public class StepsGraphActivity extends AppCompatActivity implements View.OnClic
         chart.animateY(1500);
         chart.getLegend().setEnabled(false);
         ArrayList<BarEntry> values = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            float val = Float.parseFloat(graphData.get(i).getValue());
+        for (int i = 0; i < graphData.size(); i++) {
+            float val = Float.parseFloat(graphData.get(i).getTotalSteps().toString());
             values.add(new BarEntry(i, val));
         }
         BarDataSet set1;

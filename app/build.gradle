@@ -1,34 +1,53 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 34
     defaultConfig {
         applicationId "com.quanutrition.app"
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 34
-        versionCode 12
-        versionName "1.0.5.7"
-        viewBinding.enabled = true
+        versionCode 14
+        versionName "1.0.5.9"
+        buildFeatures {
+            dataBinding true
+            viewBinding true
+            compose true
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://api.logikcal.in/\""
+            buildConfigField "String", "TEST_TOKEN","\"NO\""
+            buildConfigField "String", "HEALTH_CONNECT", "\"NO\""  // please comment out steps and calories permissions
+            buildConfigField "String", "TOKEN", "\"\""
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://api.logikcal.in/\""
+            buildConfigField "String", "TEST_TOKEN","\"NO\""
+            buildConfigField "String", "HEALTH_CONNECT", "\"NO\""  // please comment out steps and calories permissions
+            buildConfigField "String", "TOKEN", "\"\""
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+        buildConfig true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
     namespace 'com.quanutrition.app'
 }
@@ -82,11 +101,46 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.4'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.activity:activity:1.8.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation "androidx.core:core-ktx:1.6.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
+    //Jetpack Compose
+    implementation("androidx.compose.animation:animation-core:$compose_version")
+    implementation("androidx.compose.animation:animation:$compose_version")
+    implementation("androidx.compose.ui:ui:$compose_version")
+    implementation("androidx.compose.foundation:foundation:$compose_version")
+    implementation("androidx.compose.ui:ui-geometry:$compose_version")
+    implementation("androidx.compose.ui:ui-graphics:$compose_version")
+    implementation("androidx.compose.foundation:foundation-layout:$compose_version")
+    implementation("androidx.compose.runtime:runtime-livedata:$compose_version")
+    implementation("androidx.compose.material:material:$compose_version")
+    implementation("androidx.compose.runtime:runtime-rxjava2:$compose_version")
+    implementation("androidx.compose.ui:ui-text:$compose_version")
+    implementation("androidx.compose.ui:ui-util:$compose_version")
+    implementation("androidx.compose.ui:ui-viewbinding:$compose_version")
+    implementation("androidx.compose.ui:ui-tooling:$compose_version")
+    implementation 'com.google.accompanist:accompanist-pager:0.22.0-rc'
+    implementation 'androidx.compose.material3:material3:1.1.2'
+
+    //Kotlin Coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
+
+    //Retrofit + Scalar
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
+
+    //Image Loader
+    implementation "io.coil-kt:coil-compose:2.4.0"
+
+    // Add a dependency of Health Connect SDK
+    implementation "androidx.activity:activity-compose:1.8.2"
+    implementation "androidx.health.connect:connect-client:1.1.0-alpha07"
 }
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'

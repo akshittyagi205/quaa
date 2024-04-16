@@ -17,10 +17,12 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,13 +50,15 @@ public class BlogsFragment extends Fragment {
     RelativeLayout noData;
     Context context;
 
+    String type;
     public BlogsFragment() {
         // Required empty public constructor
     }
 
-    public static BlogsFragment newInstance(String param1, String param2) {
+    public static BlogsFragment newInstance(String param1) {
         BlogsFragment fragment = new BlogsFragment();
         Bundle args = new Bundle();
+        args.putString("type",param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,6 +68,7 @@ public class BlogsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 //        setHasOptionsMenu(true);
         if (getArguments() != null) {
+            type = getArguments().getString("type");
         }
     }
 
@@ -76,7 +81,7 @@ public class BlogsFragment extends Fragment {
         blogs_re = rootView.findViewById(R.id.blogs_re);
         blogList = new ArrayList<>();
         noData = rootView.findViewById(R.id.noData);
-        noData.setVisibility(View.GONE);
+        noData.setVisibility(View.VISIBLE);
         blogsAdapter = new BlogsAdapter(blogList, context, new BlogsAdapter.OnItemClicked() {
             @Override
             public void onClick(View view, int position) {
@@ -84,6 +89,7 @@ public class BlogsFragment extends Fragment {
                 if(!model.getType().equalsIgnoreCase("2")) {
                     Intent intent = new Intent(getActivity(), BlogDetailsActivity.class);
                     intent.putExtra("id", model.getId() + "");
+                    intent.putExtra("type","2");
                     final ActivityOptions options =
                             ActivityOptions.makeSceneTransitionAnimation(getActivity(), view, view.getTransitionName());
                     startActivity(intent,options.toBundle());
@@ -98,7 +104,6 @@ public class BlogsFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         blogs_re.setLayoutManager(layoutManager);
         blogs_re.setAdapter(blogsAdapter);
-
         fetchData();
 
         return rootView;
@@ -144,19 +149,24 @@ public class BlogsFragment extends Fragment {
                     JSONObject ob = new JSONObject(response);
                     if(ob.getInt("res")==1){
                         blogList.clear();
+                        noData.setVisibility(View.GONE);
                         JSONArray data = ob.getJSONArray("data");
                         for(int i=0;i<data.length();i++){
                             JSONObject blog = data.getJSONObject(i);
-                            ArrayList<String> tags = new ArrayList<>();
-                            tags.add("Trending");
-                            BlogsModel model = new BlogsModel(blog.getInt("id")+"",blog.getString("title"),blog.optString("url"),blog.getString("image"),blog.getString("author"),blog.getString("content"));
-                            model.setType(blog.optString("type","1"));
-                            if(model.getType().equalsIgnoreCase("2")){
+                            BlogsModel model = new BlogsModel(blog.getInt("id")+"",blog.getString("title"),blog.optString("url"),blog.getString("image"),blog.getString("client_name"),blog.getString("content"));
+                            model.setAdded_on(blog.optString("added_on",""));
+                            model.setType(type);
+                            if(type.equalsIgnoreCase("2")){
                                 model.setImageLink("http://i3.ytimg.com/vi/"+blog.optString("url")+"/maxresdefault.jpg");
                             }
                             blogList.add(model);
                         }
-                        blogsAdapter.notifyDataSetChanged();
+                        if (blogList.size() > 0){
+                            noData.setVisibility(View.GONE);
+                            blogsAdapter.notifyDataSetChanged();
+                        }else {
+                            noData.setVisibility(View.VISIBLE);
+                        }
                     }else{
                         Tools.initCustomToast(getActivity(),ob.getString("msg"));
                     }
@@ -176,7 +186,8 @@ public class BlogsFragment extends Fragment {
                 Log.d("myTag","I am here");
             }
         };
-        NetworkManager.getInstance(getActivity()).sendGetRequest(Urls.GET_ALL_BLOG,listener,errorListener,getActivity());
+        String url = Urls.GET_ALL_BLOG +"?type="+type;
+        NetworkManager.getInstance(getActivity()).sendGetRequest(url,listener,errorListener,getActivity());
 
     }
 
@@ -230,6 +241,7 @@ public class BlogsFragment extends Fragment {
                             if(!model.getType().equalsIgnoreCase("2")) {
                                 Intent intent = new Intent(getActivity(), BlogDetailsActivity.class);
                                 intent.putExtra("id", model.getId() + "");
+                                intent.putExtra("type", model.getType() + "");
                                 startActivity(intent);
                             }else{
                                 //type 1
@@ -279,6 +291,7 @@ public class BlogsFragment extends Fragment {
                             if(!model.getType().equalsIgnoreCase("2")) {
                                 Intent intent = new Intent(getActivity(), BlogDetailsActivity.class);
                                 intent.putExtra("id", model.getId() + "");
+                                intent.putExtra("type", model.getType() + "");
                                 startActivity(intent);
                             }else{
                                 //type 1
@@ -361,6 +374,7 @@ public class BlogsFragment extends Fragment {
                                         if(!model.getType().equalsIgnoreCase("2")) {
                                             Intent intent = new Intent(getActivity(), BlogDetailsActivity.class);
                                             intent.putExtra("id", model.getId() + "");
+                                            intent.putExtra("type", model.getType() + "");
                                             startActivity(intent);
                                         }else{
                                             //type 1

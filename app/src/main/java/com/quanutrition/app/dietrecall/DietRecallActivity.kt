@@ -14,7 +14,6 @@ import com.quanutrition.app.Utils.Tools
 import com.quanutrition.app.databinding.ActivityDietRecallBinding
 import com.quanutrition.app.selectiondialogs.DialogUtils
 import com.quanutrition.app.selectiondialogs.SingleSelectionModel
-import kotlinx.android.synthetic.main.activity_diet_recall.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject

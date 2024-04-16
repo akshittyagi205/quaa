@@ -60,6 +60,19 @@
     <string name="ABNeg">AB-</string>
     <string name="ABPos">AB+</string>
 
+    <!-- Marital Status Data -->
+    <string name="Single">Single</string>
+    <string name="Married">Married</string>
+    <string name="Divorced">Divorced</string>
+
+    <!-- Profession Data -->
+    <string name="IT">IT Profession</string>
+    <string name="Businessman">Businessman</string>
+    <string name="Student">Student</string>
+    <string name="Management">Management</string>
+    <string name="Sportsman">Sportsman</string>
+    <string name="Others">Others</string>
+
     <!-- How did you data -->
     <string name="facebook">Facebook</string>
     <string name="Google">Google</string>
@@ -95,4 +108,8 @@
     <string name="title_activity_youtube_play">YoutubePlayActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="market_url">market://details</string>
+    <string name="health_connect_package">com.google.android.apps.healthdata</string>
+    <string name="onboarding_url">healthconnect://onboarding</string>
 </resources>

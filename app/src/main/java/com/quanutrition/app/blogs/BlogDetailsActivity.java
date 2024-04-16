@@ -3,6 +3,7 @@ package com.quanutrition.app.blogs;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,9 +22,11 @@ import com.quanutrition.app.Utils.Tools;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class BlogDetailsActivity extends AppCompatActivity {
 
-    TextView title,body;
+    TextView title,body,added_on;
     ImageView image;
     WebView htmlWeb;
     @Override
@@ -31,12 +34,18 @@ public class BlogDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blog_details);
 
+        Log.d("response", getIntent().getStringExtra("type"));
+        Log.d("response type", getIntent().getStringExtra("type").getClass().getSimpleName());
         setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
-        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
+        if (getIntent().getStringExtra("type").equalsIgnoreCase("4")){
+            getSupportActionBar().setTitle("Testimonials");
+        }else if (getIntent().getStringExtra("type").equalsIgnoreCase("3")){
+            getSupportActionBar().setTitle("Recipe Details");
+        }
         title = findViewById(R.id.title);
+        added_on = findViewById(R.id.added_on);
         body = findViewById(R.id.body);
         image = findViewById(R.id.image);
 
@@ -58,6 +67,13 @@ public class BlogDetailsActivity extends AppCompatActivity {
                     if(ob.getInt("res")==1){
                         JSONObject data = ob.getJSONObject("data");
                         title.setText(data.getString("title"));
+                        added_on.setText("Published On : " + data.getString("added_on"));
+                        if (!data.getString("image").isEmpty()){
+                            image.setVisibility(View.VISIBLE);
+                            Tools.loadImageIntoImageView(data.getString("image"),image);
+                        }else {
+                            image.setVisibility(View.GONE);
+                        }
                        Tools.setHTMLData(body,data.getString("content"));
 
                         final String mimeType = "text/html";
@@ -67,8 +83,6 @@ public class BlogDetailsActivity extends AppCompatActivity {
 
 //                        htmlWeb.loadDataWithBaseURL("", html, mimeType, encoding, "");
 
-
-                        Tools.loadBlogImage(data.getString("image"),image);
                     }else{
                         Tools.initCustomToast(BlogDetailsActivity.this,ob.getString("msg"));
                     }
@@ -89,6 +103,7 @@ public class BlogDetailsActivity extends AppCompatActivity {
             }
         };
         String url = Urls.GET_BLOG_DETAILS+"?id="+getIntent().getStringExtra("id");
+        Log.d("response",url.toString());
         NetworkManager.getInstance(BlogDetailsActivity.this).sendGetRequest(url,listener,errorListener,BlogDetailsActivity.this);
 
     }

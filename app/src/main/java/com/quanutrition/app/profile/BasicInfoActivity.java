@@ -45,8 +45,8 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
     EditText dob,gender,country,city,countryCode,height,weight,weightUnit,firstName_edit,lastname_edit,emailId_edit,phoneNo_edit;
     String unitWeight="Kgs",unitHeight="ft. in.",stateName = " ",firstName="",lastName ="",countryCode_string,phone,emailId ="",countryName ="" ,cityName="",dobString="",genderString="",heightString="",weightString="",weightUnitString="";
     int country_code=101;
-    EditText bloodGroup, physicalActivity;
-    String bloodGroup_String="",physicalActivity_string="";
+    EditText bloodGroup, physicalActivity,marital_status,profession;
+    String bloodGroup_String="",physicalActivity_string="",marital_status_String="",profession_String="";
     TextView saveBasicInfo;
 
 
@@ -67,6 +67,8 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
         height = findViewById(R.id.height);
         bloodGroup = findViewById(R.id.bloodGroup);
         physicalActivity = findViewById(R.id.physicalActivity);
+        marital_status = findViewById(R.id.marital);
+        profession = findViewById(R.id.profession);
         weight = findViewById(R.id.weight);
         weightUnit = findViewById(R.id.selectWeightUnit);
         firstName_edit = findViewById(R.id.editFirstName);
@@ -86,6 +88,8 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
         weightUnit.setFocusable(false);
         bloodGroup.setFocusable(false);
         physicalActivity.setFocusable(false);
+        marital_status.setFocusable(false);
+        profession.setFocusable(false);
         phoneNo_edit.setFocusable(false);
 
         requestFetch();
@@ -96,6 +100,8 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
         city.setOnClickListener(this);
         bloodGroup.setOnClickListener(this);
         physicalActivity.setOnClickListener(this);
+        marital_status.setOnClickListener(this);
+        profession.setOnClickListener(this);
       //  countryCode.setOnClickListener(this);
         height.setOnClickListener(this);
         saveBasicInfo.setOnClickListener(this);
@@ -245,6 +251,22 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
                     physicalActivity_string = item.getId();
                 }
             });
+        }else if (id == R.id.marital) {
+            String[] array = getResources().getStringArray(R.array.MaritalStatus);
+            DialogUtils.getCustomPicker(this, "Select Marital Status", array, new DialogUtils.OnCustomItemPicked() {
+                @Override
+                public void onNumberPicked(String selected) {
+                    marital_status.setText(selected);
+                }
+            });
+        }else if (id == R.id.profession) {
+            String[] array = getResources().getStringArray(R.array.Profession);
+            DialogUtils.getCustomPicker(this, "Select Profession", array, new DialogUtils.OnCustomItemPicked() {
+                @Override
+                public void onNumberPicked(String selected) {
+                    profession.setText(selected);
+                }
+            });
         } else if (id == R.id.selectWeightUnit) {
             DialogUtils.getSingleSelectionDialog(this, DialogUtils.getSingleArrayListWithResource(this, R.array.weightUnit), new DialogUtils.OnSingleItemSelectedListener() {
                 @Override
@@ -263,6 +285,8 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
             countryName = country.getText().toString().trim();
             cityName = city.getText().toString().trim();
             bloodGroup_String = bloodGroup.getText().toString();
+            marital_status_String = marital_status.getText().toString();
+            profession_String = profession.getText().toString();
 //            physicalActivity_string = physicalActivity.getText().toString().replace('\n',' ');
             if(!height.getText().toString().trim().isEmpty())
             setheightInInches(height.getText().toString().trim());
@@ -280,7 +304,7 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
             genderString = gender.getText().toString();
             Log.d("myTag",firstName+ "  "+emailId + "  "+ dobString + "  "+ genderString + "  " +heightString +"  "+ weightString);
 
-            if(firstName.equals("")|| emailId.equals("") ||cityName.equalsIgnoreCase("")|| height.getText().toString().equals("") || weightString.equals("") || dobString.equals("") || genderString.equals("") || bloodGroup_String.equals("")||physicalActivity_string.equals(""))
+            if(firstName.equals("")|| emailId.equals("") ||cityName.equalsIgnoreCase("")|| height.getText().toString().equals("") || weightString.equals("") || dobString.equals("") || genderString.equals("") || bloodGroup_String.equals("")||marital_status_String.equals("") || profession_String.equals("") )
             {
                 Toast.makeText(getApplicationContext(),"Please fill all the data to proceed! ", Toast.LENGTH_LONG).show();
             }
@@ -362,8 +386,11 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
         params.put("city",cityName);
         params.put("email",emailId);
         params.put("bloodgroup",bloodGroup_String);
+        params.put("martial_status",marital_status_String);
+        params.put("profession",profession_String);
         params.put("physicalactivity",physicalActivity_string);
 
+        Log.d("response",params.toString());
 
         NetworkManager.getInstance(this).sendPostRequestWithHeader(Urls.save_basic_info,params,listener,errorListener,this);
 
@@ -408,7 +435,11 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
                             country.setEnabled(false);
 
                         if(!(basicInfodata.getString("bloodgroup").equalsIgnoreCase("null")))
-                        bloodGroup.setText(basicInfodata.getString("bloodgroup"));
+                            bloodGroup.setText(basicInfodata.getString("bloodgroup"));
+                        if (!basicInfodata.getString("martial_status").isEmpty())
+                            marital_status.setText(basicInfodata.getString("martial_status"));
+                        if (!basicInfodata.getString("profession").isEmpty())
+                            profession.setText(basicInfodata.getString("profession"));
                         physical = new ArrayList<>();
                         JSONArray pa_list = basicInfodata.getJSONArray("pa_list");
                         for(int i=0;i<pa_list.length();i++){

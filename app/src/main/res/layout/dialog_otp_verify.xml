@@ -51,6 +51,7 @@
         android:layout_gravity="center"
         android:padding="@dimen/medium_padding"
         android:textSize="@dimen/text_tiny"
+        android:id="@+id/desc"
         android:textColor="@color/colorPrimary"
         android:fontFamily="@font/sourcesansproregular"
         android:text="Enter the 6 digit otp sent to your phone number"/>
@@ -97,6 +98,7 @@
         android:text="Verify"/>
 
     <LinearLayout
+        android:id="@+id/resendLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/small_padding"

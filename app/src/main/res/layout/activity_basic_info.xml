@@ -365,6 +365,7 @@
                 android:text="Physical Activity :"
                 />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -399,6 +400,73 @@
                 android:background="@drawable/textarea_border"
                 android:fontFamily="@font/defaultfont"
                 android:hint="Physical Activity"
+                android:inputType="numberDecimal"
+                android:padding="@dimen/medium_padding"
+                android:textColorHint="@color/grey_400"
+                android:textSize="@dimen/text_small" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/grey_200"
+                android:layout_marginRight="@dimen/layout_small_margin"
+                android:fontFamily="@font/defaultfont"
+                android:text="Marital Status :"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/grey_200"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:fontFamily="@font/defaultfont"
+                android:text="Profession :"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/layout_very_small_margin"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/marital"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_small_margin"
+                android:layout_marginRight="@dimen/layout_small_margin"
+                android:background="@drawable/textarea_border"
+                android:drawablePadding="@dimen/medium_padding"
+                android:drawableEnd="@drawable/ic_arrow_drop_down"
+                android:fontFamily="@font/defaultfont"
+                android:hint="Marital Status"
+                android:inputType="numberDecimal"
+                android:padding="@dimen/medium_padding"
+                android:textColorHint="@color/grey_400"
+                android:textSize="@dimen/text_small" />
+
+            <EditText
+                android:id="@+id/profession"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_small_margin"
+                android:layout_marginLeft="@dimen/layout_small_margin"
+                android:drawableEnd="@drawable/ic_arrow_drop_down"
+                android:background="@drawable/textarea_border"
+                android:fontFamily="@font/defaultfont"
+                android:hint="Profession"
                 android:inputType="numberDecimal"
                 android:padding="@dimen/medium_padding"
                 android:textColorHint="@color/grey_400"

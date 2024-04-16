@@ -2,6 +2,8 @@ package com.quanutrition.app.Utils;
 
 public class Constants {
     public static final String MyPreferences = "MyPrefs";
+
+    public static final String FirstOpenLabPrefs = "FirstOpen";
     public static final String MyPreferencesToken = "MyPrefsToken";
     public static final String ChannelID = "my_channel_01";
     public static final String UserID = "userId";

@@ -14,6 +14,7 @@ public class Urls {
     static String get_basic_info = "dieter/v1/getbasicinfo/";
     static String get_medical_info = "dieter/v1/getmedicalinfo/";
     static String get_disease_info = "dieter/v1/getdiseaseinfo/";
+    static String GET_USER_NOTES = "dieter/v2/dieter_note";
     static String save_disease_info = "dieter/v1/savediseaseinfo/";
     static String get_measurement_info = "dieter/v1/measurements/";
     static String save_measurement_info = "dieter/v1/save_measurement/";

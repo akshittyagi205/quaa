@@ -153,6 +153,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                        editor.putString(Constants.DIETITIAN_PHONE,data.getString("phone"));
                        editor.putString(Constants.DIETITIAN_PIC,data.getString("imageUrl"));
                        editor.putString(Constants.PROFILE_NAME,data.optString("user_name"));
+                       editor.putString(Constants.PROFILE_EMAIL,data.optString("email"));
                        editor.commit();
                        finish();
                        startActivity(new Intent(SplashScreenActivity.this,MainActivity.class));

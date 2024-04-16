@@ -8,4 +8,12 @@
         app:actionLayout="@layout/chat_action_view"
         android:icon="@drawable/ic_chat"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/notify"
+        android:orderInCategory="1"
+        android:title="Notification"
+        app:actionLayout="@layout/notification_action_view"
+        android:icon="@drawable/ic_notifications"
+        android:iconTint="@color/colorAccent"
+        app:showAsAction="always" />
 </menu>
