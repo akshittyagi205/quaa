@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,6 +42,9 @@ import com.quanutrition.app.profile.NotesListActivity;
 import com.quanutrition.app.profile.TimeInputActivity;
 import com.quanutrition.app.programs.ProgramsActivity;
 import com.quanutrition.app.questionnaire.QuestionnaireActivity;
+import com.quanutrition.app.reports.GeneticReportActivity;
+import com.quanutrition.app.reports.MicrobiomeReportActivity;
+import com.quanutrition.app.reports.ReportWebviewActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,7 +65,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
     NestedScrollView nested_scroll_view;
     CircleImageView image;
     TextView user_name,user_email,user_number;
-    private LinearLayout profile_child_layout,clientProfile,general_data_layout,time_info_layout,workout_layout,programs,feed_layout,profile_layout,basic_info_layout,medical_info_layout,food_info_layout,plan_layout,appointment_layout,notes_layout;
+    private LinearLayout profile_child_layout,clientProfile,general_data_layout,time_info_layout,workout_layout,programs,feed_layout,profile_layout,basic_info_layout,medical_info_layout,food_info_layout,plan_layout,appointment_layout,notes_layout,report_layout,report_child_layout,blood_progress_report,genetic_report,microbiome_report;
     private LinearLayout diet_recall_layout,questionnaire;
     public MoreFragment() {
         // Required empty public constructor
@@ -97,6 +101,11 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
         nested_scroll_view = rootView.findViewById(R.id.nested_scroll_view);
         diet_recall_layout = rootView.findViewById(R.id.diet_recall_layout);
         notes_layout = rootView.findViewById(R.id.notes_layout);
+        report_layout = rootView.findViewById(R.id.report_layout);
+        report_child_layout= rootView.findViewById(R.id.report_child_layout);
+        blood_progress_report= rootView.findViewById(R.id.blood_progress_report);
+        genetic_report= rootView.findViewById(R.id.genetic_report);
+        microbiome_report= rootView.findViewById(R.id.microbiome_report);
         questionnaire = rootView.findViewById(R.id.questionnaire);
 
         SharedPreferences sharedPreferences  = getActivity().getSharedPreferences(Constants.MyPreferences, Context.MODE_PRIVATE);
@@ -128,6 +137,10 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
         diet_recall_layout.setOnClickListener(this);
         questionnaire.setOnClickListener(this);
         notes_layout.setOnClickListener(this);
+        report_layout.setOnClickListener(this);
+        blood_progress_report.setOnClickListener(this);
+        genetic_report.setOnClickListener(this);
+        microbiome_report.setOnClickListener(this);
 
         rootView.findViewById(R.id.weight_progress_layout).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,6 +197,19 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
                     }
                 });
             }
+        }if(id==R.id.report_layout){
+            if(report_child_layout.getVisibility()== View.VISIBLE){
+                report_child_layout.setVisibility(View.GONE);
+            }else{
+                report_child_layout.setVisibility(View.VISIBLE);
+                report_child_layout.startAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.drop_down));
+                nested_scroll_view.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        nested_scroll_view.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
+            }
         }else if(id==R.id.basic_info_layout){
             startActivity(new Intent(getActivity(), BasicInfoActivity.class));
         }else if(id == R.id.medical_info_layout){
@@ -214,6 +240,12 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
             startActivity(new Intent(getActivity(), DietRecallActivity.class));
         }else if(id == R.id.questionnaire){
             startActivity(new Intent(getActivity(), QuestionnaireActivity.class));
+        }else if(id == R.id.blood_progress_report){
+            startActivity(new Intent(getActivity(), ReportWebviewActivity.class));
+        }else if(id == R.id.genetic_report){
+            startActivity(new Intent(getActivity(), GeneticReportActivity.class));
+        }else if(id == R.id.microbiome_report){
+            startActivity(new Intent(getActivity(), MicrobiomeReportActivity.class));
         }
     }
 

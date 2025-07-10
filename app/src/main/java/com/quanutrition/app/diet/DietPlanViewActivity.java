@@ -1,5 +1,6 @@
 package com.quanutrition.app.diet;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.NetworkManager;
 import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.chat.ChatActivity;
+import com.quanutrition.app.customviews.HorizontalCalendarView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,9 +31,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import devs.mulham.horizontalcalendar.HorizontalCalendar;
-import devs.mulham.horizontalcalendar.HorizontalCalendarView;
-import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 public class DietPlanViewActivity extends AppCompatActivity {
 
@@ -41,6 +40,7 @@ public class DietPlanViewActivity extends AppCompatActivity {
     TextView toolbar_text;
     String dateTxt;
     TextView basicBtn;
+    HorizontalCalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class DietPlanViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar_text = findViewById(R.id.toolbar_text);
+        calendarView = findViewById(R.id.calendarView);
         dateTxt = Tools.getFormattedDateToday();
         toolbar_text.setText("Diet Plan (" + dateTxt + ")");
         findViewById(R.id.calendarView).setVisibility(View.GONE);
@@ -133,35 +134,28 @@ public class DietPlanViewActivity extends AppCompatActivity {
 
         Calendar setDate = Calendar.getInstance();
         setDate.add(Calendar.DATE, -6);
-
-        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView)
-                .range(startDate, endDate)
-                .datesNumberOnScreen(7)
-                .defaultSelectedDate(setDate)
-                .build();
-
-
-        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
-            @Override
-            public void onDateSelected(Calendar date, int position) {
-                //do something
-                dateTxt = Tools.getFormattedDate(date.getTimeInMillis());
-                toolbar_text.setText("Diet Plan (" + dateTxt + ")");
-                findViewById(R.id.calendarView).setVisibility(View.GONE);
-                fetchData(dateTxt);
-            }
-
-            @Override
-            public void onCalendarScroll(HorizontalCalendarView calendarView, int dx, int dy) {
-
-            }
-        });
+        ArrayList<String> datesToBeColored = new ArrayList<>();
+        HorizontalCalendarView horizontalcalendarView = new HorizontalCalendarView(DietPlanViewActivity.this);
+        horizontalcalendarView.setUpCalendar(startDate.getTimeInMillis(),
+                endDate.getTimeInMillis(),
+                datesToBeColored, new HorizontalCalendarView.OnCalendarListener() {
+                    @Override
+                    public void onDateSelected(String date) {
+                        dateTxt = date;
+                        toolbar_text.setText("Diet Plan (" + dateTxt + ")");
+                        calendarView.setVisibility(View.GONE);
+                        findViewById(R.id.calendarView).setVisibility(View.GONE);
+                        fetchData(dateTxt);
+                    }
+                }
+        );
     }
 
     void fetchData(final String date) {
         final AlertDialog ad = Tools.getDialog("Fetching...", this);
         ad.show();
         Response.Listener<String> listener = new Response.Listener<String>() {
+            @SuppressLint("SuspiciousIndentation")
             @Override
             public void onResponse(String response) {
                 ad.dismiss();

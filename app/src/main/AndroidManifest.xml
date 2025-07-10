@@ -27,6 +27,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".reports.ReportWebviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".reports.MicrobiomeReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".reports.GeneticReportActivity"
+            android:exported="false" />
+        <activity
             android:name=".general.NotificationActivity"
             android:exported="false" />
         <activity
@@ -40,14 +49,14 @@
             android:exported="false" />
         <activity
             android:name=".googlefit.healthconnect.HealthConnectWebViewActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
             </intent-filter>
         </activity>
         <activity
             android:name=".googlefit.healthconnect.HealthConnectActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
 
@@ -74,7 +83,7 @@
             android:name=".general.ContactUsActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
@@ -83,7 +92,7 @@
             android:name=".blogs.SocialMediaGridActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
@@ -92,7 +101,7 @@
             android:name=".general.ClientProfile"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
@@ -101,7 +110,7 @@
             android:name=".blogs.HealthFeedActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
@@ -115,7 +124,7 @@
             android:label="@string/title_activity_youtube_play"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
@@ -124,7 +133,7 @@
             android:name=".general.ReferHistoryActivity"
             android:parentActivityName=".general.ReferActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".general.ReferActivity" />
@@ -133,7 +142,7 @@
             android:name=".profile.MeasurementsActivity"
             android:parentActivityName=".MainActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -146,7 +155,7 @@
             android:name=".payments.ExtendDurationActivity"
             android:parentActivityName=".payments.PaymentHistory"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".payments.PaymentHistory" />
@@ -155,7 +164,7 @@
             android:name=".programs.ProgramDetailsActivity"
             android:parentActivityName=".programs.ProgramsActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".programs.ProgramsActivity" />
@@ -172,7 +181,7 @@
             android:name=".diet.ReminderSetupActivity"
             android:parentActivityName=".general.SettingsActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".general.SettingsActivity" />
@@ -181,7 +190,7 @@
             android:name=".general.PhysicalActivity"
             android:parentActivityName=".MainActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -191,7 +200,7 @@
             android:clearTaskOnLaunch="true"
             android:exported="true"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -228,7 +237,7 @@
             android:name=".general.ReferActivity"
             android:parentActivityName=".MainActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -237,7 +246,7 @@
             android:name=".payments.PaymentHistory"
             android:parentActivityName=".MainActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -246,7 +255,7 @@
             android:name=".general.AboutDietitianActivity"
             android:parentActivityName=".MainActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -255,7 +264,7 @@
             android:name=".general.SettingsActivity"
             android:parentActivityName=".MainActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -264,7 +273,7 @@
             android:name=".general.DailyDiaryActivity"
             android:parentActivityName=".MainActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -273,7 +282,7 @@
             android:name=".appointment.AppointmentsActivity"
             android:parentActivityName=".MainActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -302,7 +311,7 @@
             android:name=".diet.DietPlanViewActivity"
             android:parentActivityName=".MainActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -317,7 +326,7 @@
             android:name=".chat.ChatActivity"
             android:parentActivityName=".MainActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -339,7 +348,7 @@
         <receiver
             android:name=".waterintake.WaterActionReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="Add_Water" />
             </intent-filter>
@@ -347,7 +356,7 @@
         <receiver
             android:name=".Utils.SampleBootReciever"
             android:enabled="false"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -355,7 +364,7 @@
         <receiver
             android:name=".Utils.MyAlarmManager"
             android:exported="true"
-            android:process=":remote">
+            android:process=":remote" >
             <intent-filter>
                 <category android:name="android.intent.category.APP_MESSAGING" />
 
@@ -375,7 +384,7 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
             android:name=".Utils.MyFirebaseMessagingService"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

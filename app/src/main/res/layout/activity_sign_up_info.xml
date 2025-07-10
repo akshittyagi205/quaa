@@ -269,8 +269,22 @@
                         android:visibility="gone"
                         android:textColorHint="@color/grey_200"
                         android:textSize="@dimen/text_small" />
-
-
+                    <EditText
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/layout_small_margin"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:background="@drawable/textarea_border"
+                        android:fontFamily="@font/defaultfont"
+                        android:drawablePadding="@dimen/medium_padding"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:hint="Select your city"
+                        android:importantForAutofill="no"
+                        android:inputType="textNoSuggestions"
+                        android:padding="@dimen/medium_padding"
+                        android:textColorHint="@color/grey_200"
+                        android:textSize="@dimen/text_small" />
             </LinearLayout>
 
 

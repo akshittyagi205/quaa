@@ -16,6 +16,10 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.Constants;
 import com.quanutrition.app.Utils.NetworkManager;
@@ -23,8 +27,6 @@ import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.selectiondialogs.DialogUtils;
 import com.quanutrition.app.selectiondialogs.MultipleSelectionModel;
 import com.quanutrition.app.selectiondialogs.SingleSelectionModel;
-import com.xiaofeng.flowlayoutmanager.Alignment;
-import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -163,11 +165,14 @@ public class GeneralDataActivity extends AppCompatActivity implements View.OnCli
                 offDays_Adapter.notifyDataSetChanged();
             }
         });
-        RecyclerView.LayoutManager flowLayoutManager = new FlowLayoutManager();
-        ((FlowLayoutManager) flowLayoutManager).setAlignment(Alignment.LEFT);
-        ((FlowLayoutManager) flowLayoutManager).setAutoMeasureEnabled(true);
-        ((FlowLayoutManager) flowLayoutManager).maxItemsPerLine(3);
-        offDays_re.setLayoutManager(flowLayoutManager);
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(GeneralDataActivity.this);
+
+        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP); // Enable wrapping of items
+        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW); // Layout items in a row
+        flexboxLayoutManager.setAutoMeasureEnabled(true);
+        flexboxLayoutManager.setMaxLine(3);
+        offDays_re.setLayoutManager(flexboxLayoutManager);
         offDays_re.setAdapter(offDays_Adapter);
 
         requestFetch();

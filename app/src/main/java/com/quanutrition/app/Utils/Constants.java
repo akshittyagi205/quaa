@@ -37,6 +37,8 @@ public class Constants {
     public static final String REMINDER_CHANNEL_DESCRIPTION = "Reminder Notifications Channel";
     public static final String AUTH_TOKEN = "auth_token";
     public static final String PHONE = "phone";
+    public static final String COUNTRY_ID = "country_id";
+    public static final String COUNTRY = "country";
     public static final String DIETITIAN_PIC = "dietitianPic";
     public static final String DIETITIAN_PHONE = "dietitianPhone";
     public static final String CLINIC = "clinic";

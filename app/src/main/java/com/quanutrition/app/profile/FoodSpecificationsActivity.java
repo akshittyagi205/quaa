@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.google.android.material.chip.Chip;
 import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.NetworkManager;
@@ -22,8 +26,6 @@ import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.selectiondialogs.DialogUtils;
 import com.quanutrition.app.selectiondialogs.MultipleSelectionModel;
 import com.quanutrition.app.selectiondialogs.SingleSelectionModel;
-import com.xiaofeng.flowlayoutmanager.Alignment;
-import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -124,11 +126,12 @@ public class FoodSpecificationsActivity extends AppCompatActivity implements Vie
                 nv_exempt_Adapter.notifyDataSetChanged();
             }
         });
-        RecyclerView.LayoutManager flowLayoutManager = new FlowLayoutManager();
-        ((FlowLayoutManager) flowLayoutManager).setAlignment(Alignment.LEFT);
-        ((FlowLayoutManager) flowLayoutManager).setAutoMeasureEnabled(true);
-        ((FlowLayoutManager) flowLayoutManager).maxItemsPerLine(3);
-        nv_exempt_re.setLayoutManager(flowLayoutManager);
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(FoodSpecificationsActivity.this);
+
+        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        flexboxLayoutManager.setAutoMeasureEnabled(true);
+        flexboxLayoutManager.setMaxLine(3);
+        nv_exempt_re.setLayoutManager(flexboxLayoutManager);
         nv_exempt_re.setAdapter(nv_exempt_Adapter);
 
         fastAdapter = new ChipsAdapter(fast, this, new ChipsAdapter.OnClickListener() {
@@ -143,11 +146,13 @@ public class FoodSpecificationsActivity extends AppCompatActivity implements Vie
                 fastAdapter.notifyDataSetChanged();
             }
         });
-        RecyclerView.LayoutManager flowLayoutManager2 = new FlowLayoutManager();
-        ((FlowLayoutManager) flowLayoutManager2).setAlignment(Alignment.LEFT);
-        ((FlowLayoutManager) flowLayoutManager2).setAutoMeasureEnabled(true);
-        ((FlowLayoutManager) flowLayoutManager2).maxItemsPerLine(3);
-        fast_re.setLayoutManager(flowLayoutManager2);
+        FlexboxLayoutManager flexboxLayoutManager2 = new FlexboxLayoutManager(FoodSpecificationsActivity.this);
+
+        flexboxLayoutManager2.setJustifyContent(JustifyContent.FLEX_START);
+        flexboxLayoutManager2.setAutoMeasureEnabled(true);
+        flexboxLayoutManager2.setMaxLine(3);
+
+        fast_re.setLayoutManager(flexboxLayoutManager2);
         fast_re.setAdapter(fastAdapter);
 
 
@@ -166,11 +171,12 @@ public class FoodSpecificationsActivity extends AppCompatActivity implements Vie
 
             }
         });
-        RecyclerView.LayoutManager flowLayoutManager1 = new FlowLayoutManager();
-        ((FlowLayoutManager) flowLayoutManager1).setAlignment(Alignment.LEFT);
-        ((FlowLayoutManager) flowLayoutManager1).setAutoMeasureEnabled(true);
-        ((FlowLayoutManager) flowLayoutManager1).maxItemsPerLine(3);
-        cuisines_re.setLayoutManager(flowLayoutManager1);
+        FlexboxLayoutManager flexboxLayoutManager1 = new FlexboxLayoutManager(FoodSpecificationsActivity.this);
+
+        flexboxLayoutManager1.setJustifyContent(JustifyContent.FLEX_START);
+        flexboxLayoutManager1.setAutoMeasureEnabled(true);
+        flexboxLayoutManager1.setMaxLine(3);
+        cuisines_re.setLayoutManager(flexboxLayoutManager1);
         cuisines_re.setAdapter(cuisinesAdapter);
 
         requestFetch();

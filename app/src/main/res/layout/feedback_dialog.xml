@@ -31,13 +31,23 @@
         android:text="Tell us about your experience, things you liked, and areas of improvement. Your feedback is valuable to us."
         android:gravity="center"/>
 
-    <com.hsalf.smilerating.SmileRating
+    <com.hadi.emojiratingbar.EmojiRatingBar
+        android:id="@+id/emoji_rating_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ratingBar"
-        app:textSelectionColor="@color/colorAccent"
-        app:textNonSelectionColor="@color/grey_200"
-        android:layout_marginTop="@dimen/spacing_mlarge"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/spacing_mlarge"
+        app:showText="false"
+        app:showAllText="false"
+        app:titleColor="#844848"
+        app:defaultValue="GOOD" />
+<!--    <com.hsalf.smilerating.SmileRating-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/ratingBar"-->
+<!--        app:textSelectionColor="@color/colorAccent"-->
+<!--        app:textNonSelectionColor="@color/grey_200"-->
+<!--        android:layout_marginTop="@dimen/spacing_mlarge"/>-->
 
     <EditText
         android:layout_width="match_parent"

@@ -23,6 +23,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.Constants;
 import com.quanutrition.app.Utils.NetworkManager;
@@ -36,8 +40,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.xiaofeng.flowlayoutmanager.Alignment;
-import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -122,12 +124,13 @@ public class MedicalHistory extends AppCompatActivity implements View.OnClickLis
                 adapter.notifyDataSetChanged();
             }
         });
-        RecyclerView.LayoutManager flowLayoutManager = new FlowLayoutManager();
-        ((FlowLayoutManager) flowLayoutManager).setAlignment(Alignment.LEFT);
-        ((FlowLayoutManager) flowLayoutManager).setAutoMeasureEnabled(true);
-        ((FlowLayoutManager) flowLayoutManager).maxItemsPerLine(5);
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(MedicalHistory.this);
 
-        reports_re.setLayoutManager(flowLayoutManager);
+        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        flexboxLayoutManager.setAutoMeasureEnabled(true);
+        flexboxLayoutManager.setMaxLine(5);
+
+        reports_re.setLayoutManager(flexboxLayoutManager);
         reports_re.setAdapter(adapter);
 
         pregnant_radio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

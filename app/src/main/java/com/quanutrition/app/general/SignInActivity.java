@@ -328,6 +328,8 @@ public class SignInActivity extends AppCompatActivity {
                             editor.putString(Constants.PROFILE_NAME, user.optString("name", "-"));
                             editor.putString(Constants.USER_ID,user.getInt("userId")+"");
                             editor.putString(Constants.PHONE, user.optString("phone"));
+                            editor.putInt(Constants.COUNTRY_ID, country_code);
+                            editor.putString(Constants.COUNTRY, country.getText().toString().trim());
 //                        editor.putString(Constants.REFER_CODE,user.getString("user_code"));
                             editor.putString(Constants.PROFILE_IMAGE, user.optString("photo"));
 //                        editor.putString(Constants.CUSTOM_ID, user.optString("custom_id"));

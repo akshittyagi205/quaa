@@ -55,17 +55,23 @@
     </com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar>
 -->
 
-    <devs.mulham.horizontalcalendar.HorizontalCalendarView
-        android:id="@+id/calendarView"
+    <com.quanutrition.app.customviews.HorizontalCalendarView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:textColorNormal="@color/colorPrimary"
-        app:textColorSelected="@color/colorAccent"
-        app:sizeTopText="10dp"
-        android:background="@color/colorPrimaryDark"
-        app:sizeMiddleText="12dp"
-        app:sizeBottomText="12dp"
-        app:selectorColor="@color/transparent"/>
+        android:background="@color/textColorLight"
+        android:paddingBottom="@dimen/small_padding"
+        android:id="@+id/calendarView"/>
+<!--    <devs.mulham.horizontalcalendar.HorizontalCalendarView-->
+<!--        android:id="@+id/calendarView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:textColorNormal="@color/colorPrimary"-->
+<!--        app:textColorSelected="@color/colorAccent"-->
+<!--        app:sizeTopText="10dp"-->
+<!--        android:background="@color/colorPrimaryDark"-->
+<!--        app:sizeMiddleText="12dp"-->
+<!--        app:sizeBottomText="12dp"-->
+<!--        app:selectorColor="@color/transparent"/>-->
 
     <RelativeLayout
         android:layout_width="match_parent"

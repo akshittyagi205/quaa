@@ -24,8 +24,10 @@ import com.quanutrition.app.MainActivity;
 import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.Constants;
 import com.quanutrition.app.Utils.NetworkManager;
+import com.quanutrition.app.Utils.SqliteDbHelper;
 import com.quanutrition.app.Utils.Tools;
 import com.quanutrition.app.profile.BasicInfoActivity;
+import com.quanutrition.app.selectiondialogs.CountryModel;
 import com.quanutrition.app.selectiondialogs.DialogUtils;
 import com.quanutrition.app.selectiondialogs.SingleSelectionModel;
 
@@ -33,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,15 +44,16 @@ import java.util.Map;
 public class SignUpInfo extends AppCompatActivity implements View.OnClickListener {
 
 
-    EditText firstName_edit, lastname_edit, goal_edit, gender_edit,dietitian_code,ref_code,dob;
+    EditText firstName_edit, lastname_edit, goal_edit, gender_edit,dietitian_code,ref_code,dob,city_edit;
     RadioGroup refRG;
     RadioButton yes,no;
     TextView save;
     ImageView femaleIcon,maleIcon;
     TextView femaleText,maleText;
-    String firstName,goal;
+    String firstName,goal,city;
     int female_flag = 0, male_flag = 0;
-    String gender = "";
+    String gender = "",stateName="";
+    int country_code = 101;
 
     LinearLayout male_view, female_view;
 
@@ -61,6 +65,7 @@ public class SignUpInfo extends AppCompatActivity implements View.OnClickListene
 
         firstName_edit = findViewById(R.id.editFirstName);
         lastname_edit = findViewById(R.id.editLastName);
+        city_edit = findViewById(R.id.city);
         male_view = findViewById(R.id.male);
         female_view = findViewById(R.id.female);findViewById(R.id.referCode).setVisibility(View.GONE);
         goal_edit = findViewById(R.id.goal_choose);
@@ -76,6 +81,7 @@ public class SignUpInfo extends AppCompatActivity implements View.OnClickListene
         yes = findViewById(R.id.yes);
         no = findViewById(R.id.no);
 
+        country_code = Tools.getGeneralSharedPref(this).getInt(Constants.COUNTRY_ID,101);
 
        /* refRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -104,8 +110,10 @@ public class SignUpInfo extends AppCompatActivity implements View.OnClickListene
         }
 
         goal_edit.setFocusable(false);
+        city_edit.setFocusable(false);
         dob.setFocusable(false);
         goal_edit.setOnClickListener(this);
+        city_edit.setOnClickListener(this);
         save.setOnClickListener(this);
         female_view.setOnClickListener(this);
         male_view.setOnClickListener(this);
@@ -126,9 +134,9 @@ public class SignUpInfo extends AppCompatActivity implements View.OnClickListene
 
              goal = goal_edit.getText().toString().toLowerCase();
             firstName= firstName_edit.getText().toString();
+            city = city_edit.getText().toString().trim();
 
-
-            if(goal.equalsIgnoreCase("")|| firstName.equalsIgnoreCase("")||Tools.getText(dob).isEmpty())
+            if(goal.equalsIgnoreCase("")|| firstName.equalsIgnoreCase("")||Tools.getText(dob).isEmpty()|| city.equalsIgnoreCase(""))
             {
                 Tools.initCustomToast(SignUpInfo.this,"Please Fill all the details to continue");
 
@@ -241,6 +249,29 @@ public class SignUpInfo extends AppCompatActivity implements View.OnClickListene
             datePickerDialog.getDatePicker().setCalendarViewShown(false);
             datePickerDialog.show();
         }
+        if (id ==R.id.city){
+            SqliteDbHelper helper = new SqliteDbHelper(SignUpInfo.this);
+            ArrayList<CountryModel> countryModel = helper.getCitites(country_code);
+            ArrayList<SingleSelectionModel> list = new ArrayList<>();
+            final ArrayList<String> state = new ArrayList<>();
+            for (int i = 0; i < countryModel.size(); i++) {
+                list.add(new SingleSelectionModel(countryModel.get(i).getId() + "", countryModel.get(i).getName().split(";")[0]+", "+countryModel.get(i).getName().split(";")[1]));
+                state.add(countryModel.get(i).getName().split(";")[1]);
+            }
+
+            DialogUtils.getSingleSearchDialog(this, list, new DialogUtils.OnSingleItemSelectedListener() {
+                @Override
+                public void onItemSelected(int position, SingleSelectionModel item) {
+                    city_edit.setText(item.getLabel().split(", ")[0].trim());
+                    /*SqliteDbHelper helper = new SqliteDbHelper(BasicInfoActivity.this);
+                    // Log.d("state",helper.getStateId(Integer.parseInt(item.getId()))  +"");
+
+                    stateName = helper.getStateName(helper.getStateId(Integer.parseInt(item.getId())));*/
+                    stateName = item.getLabel().split(", ")[1].trim();
+                    Log.d("state",stateName);
+                }
+            });
+        }
     }
 
 
@@ -311,13 +342,14 @@ public class SignUpInfo extends AppCompatActivity implements View.OnClickListene
         params.put("last_name",lastname_edit.getText().toString());
         params.put("gender",gender);
         params.put("goal",goal);
+        params.put("city",city);
+        params.put("state",stateName);
         params.put("dob",Tools.getText(dob));
         params.put("dietitianCode",dietitian_code.getText().toString());
         params.put("ref_code",ref_code.getText().toString());
         params.put("is_ref",flag);
         params.put("userId",Tools.getGeneralSharedPref(this).getString(Constants.USER_ID,"-1"));
-
-
+        Log.d("params",params.toString());
         NetworkManager.getInstance(this).sendPostRequest(Urls.save_signUp_info, params,listener, errorListener, this);
 
     }

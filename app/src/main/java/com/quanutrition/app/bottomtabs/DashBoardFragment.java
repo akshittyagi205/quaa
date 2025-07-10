@@ -410,7 +410,7 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener 
                             }
                             testimonialAdapter.notifyDataSetChanged();
                         } else {
-                            videoLabel.setVisibility(View.GONE);
+                            testimonialsLabel.setVisibility(View.GONE);
                         }
                         if (data.has("zocolabs")){
                             lab_banner.setVisibility(View.VISIBLE);

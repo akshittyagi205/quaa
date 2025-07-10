@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    >
+    android:background="@color/colorPrimaryDark">
 
     <!--<ImageView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="200dp"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@drawable/world_map"-->
-        <!--android:tint="@color/yellow_800" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="200dp"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:src="@drawable/world_map"-->
+    <!--android:tint="@color/yellow_800" />-->
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
@@ -33,68 +32,69 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/spacing_mxlarge"
-                android:paddingRight="@dimen/spacing_mxlarge"
                 android:paddingTop="@dimen/spacing_large"
-                >
+                android:paddingRight="@dimen/spacing_mxlarge">
 
                 <RelativeLayout
                     android:layout_width="85dp"
                     android:layout_height="85dp">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/image"
-                    android:layout_width="80dp"
-                    android:layout_centerInParent="true"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_no_image" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_no_image" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
                         android:background="@drawable/circle_purple"
                         android:padding="5dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_menu_camera"/>
+                        android:src="@drawable/ic_menu_camera"
+                        android:tint="@color/textColorLight" />
                 </RelativeLayout>
+
                 <View
                     android:layout_width="@dimen/spacing_large"
                     android:layout_height="0dp" />
 
                 <LinearLayout
+                    android:id="@+id/clientProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/clientProfile"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Akshit Tyagi"
-                        android:id="@+id/user_name"
-                        android:textStyle="bold"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
                         app:fontFamily="@font/defaultfont" />
 
                     <TextView
+                        android:id="@+id/user_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
-                        android:text="akshittyagi@gmail.com"
-                        android:textSize="@dimen/text_very_small"
-                        android:id="@+id/user_email"
                         android:fontFamily="@font/defaultfont"
-                        android:textColor="@color/grey_200" />
+                        android:text="akshittyagi@gmail.com"
+                        android:textColor="@color/grey_200"
+                        android:textSize="@dimen/text_very_small" />
 
                     <TextView
+                        android:id="@+id/user_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+919990105832"
-                        android:textSize="@dimen/text_very_small"
-                        android:id="@+id/user_number"
                         android:fontFamily="@font/defaultfont"
-                        android:textColor="@color/grey_200" />
+                        android:text="+919990105832"
+                        android:textColor="@color/grey_200"
+                        android:textSize="@dimen/text_very_small" />
 
                 </LinearLayout>
 
@@ -104,8 +104,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:visibility="invisible"
-                android:background="@color/grey_800"/>
+                android:background="@color/grey_800"
+                android:visibility="invisible" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,11 +114,11 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:id="@+id/basic_info_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -135,22 +136,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
-                        android:text="Basic\nInformation"
+                        android:fontFamily="@font/defaultfont"
                         android:gravity="center"
                         android:lines="2"
                         android:padding="2dp"
-                        android:fontFamily="@font/defaultfont"
-                        android:textSize="@dimen/text_tiny"
-                        android:textColor="@color/textColorLight"/>
+                        android:text="Basic\nInformation"
+                        android:textColor="@color/textColorLight"
+                        android:textSize="@dimen/text_tiny" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:id="@+id/food_info_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -168,20 +169,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
-                        android:text="Food\nSpecifications"
+                        android:fontFamily="@font/defaultfont"
                         android:gravity="center"
                         android:lines="2"
                         android:padding="2dp"
-                        android:fontFamily="@font/defaultfont"
-                        android:textSize="@dimen/text_tiny"
-                        android:textColor="@color/textColorLight"/>
+                        android:text="Food\nSpecifications"
+                        android:textColor="@color/textColorLight"
+                        android:textSize="@dimen/text_tiny" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:id="@+id/time_info_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -199,21 +201,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
-                        android:text="Time\nInformation"
+                        android:fontFamily="@font/defaultfont"
                         android:gravity="center"
                         android:lines="2"
                         android:padding="2dp"
-                        android:fontFamily="@font/defaultfont"
-                        android:textSize="@dimen/text_tiny"
-                        android:textColor="@color/textColorLight"/>
+                        android:text="Time\nInformation"
+                        android:textColor="@color/textColorLight"
+                        android:textSize="@dimen/text_tiny" />
 
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:id="@+id/general_data_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -231,936 +234,1190 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
-                        android:text="General\nActivity"
+                        android:fontFamily="@font/defaultfont"
                         android:gravity="center"
                         android:lines="2"
                         android:padding="2dp"
-                        android:fontFamily="@font/defaultfont"
-                        android:textSize="@dimen/text_tiny"
-                        android:textColor="@color/textColorLight"/>
+                        android:text="General\nActivity"
+                        android:textColor="@color/textColorLight"
+                        android:textSize="@dimen/text_tiny" />
                 </LinearLayout>
 
             </LinearLayout>
-
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:visibility="invisible"
-                android:background="@color/grey_800"/>
+                android:background="@color/grey_800"
+                android:visibility="invisible" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_small_margin"
                 android:background="@drawable/card_back"
                 app:cardCornerRadius="10dp"
-                android:layout_margin="@dimen/layout_small_margin"
                 app:cardElevation="5dp">
-            <LinearLayout
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/appointment_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_appointment"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Appointments"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:background="@color/grey_10" />
+
+                    <LinearLayout
+                        android:id="@+id/programs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_browse_plans"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Plans &amp; Packages"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:background="@color/grey_10" />
+
+                    <LinearLayout
+                        android:id="@+id/plan_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_card"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Payment History"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/notes_layout"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_diet_recall" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="User Notes"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/layout_small_margin"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:background="@color/grey_10" />
+                android:layout_margin="@dimen/layout_small_margin"
+                android:background="@drawable/card_back"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/appointment_layout"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_appointment" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Appointments"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/layout_small_margin"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:background="@color/grey_10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/diet_recall_layout"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_diet_recall" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="24 Hour Diet Recall"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/layout_small_margin"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:background="@color/grey_10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/weight_progress_layout"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_weight" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Weight Progress"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/layout_small_margin"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:background="@color/grey_10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/health_report"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_health_stats" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Food Diary"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/layout_small_margin"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:background="@color/grey_10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/feed_layout"
-                    android:visibility="gone"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_blog" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Health Feed"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:visibility="gone"
-                    android:layout_marginBottom="@dimen/layout_small_margin"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:background="@color/grey_10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/programs"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:padding="4dp"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_browse_plans" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Plans &amp; Packages"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/layout_small_margin"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:background="@color/grey_10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/plan_layout"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:padding="4dp"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_card" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Payment History"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/layout_small_margin"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:background="@color/grey_10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:id="@+id/questionnaire"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:padding="4dp"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_question" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Questionnaire"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/layout_small_margin"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:background="@color/grey_10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/workout_layout"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:padding="4dp"
-                        android:tint="@color/textColorLight"
-                        android:src="@drawable/ic_workout" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Exercise Recommendations"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/layout_small_margin"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:visibility="gone"
-                    android:background="@color/grey_10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/profile_layout"
-                    android:visibility="gone"
-                    android:gravity="center_vertical"
-                    android:minHeight="50dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/spacing_large"
-                    android:paddingRight="@dimen/spacing_large">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:padding="4dp"
-                        android:tint="@color/colorAccent"
-                        android:src="@drawable/ic_my_profile" />
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:text="My Profile"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_small"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/textColorLight" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:padding="4dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/grey_40"
-                        android:src="@drawable/ms_ic_chevron_right" />
-
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/profile_child_layout"
-                    android:visibility="gone"
-                    android:layout_marginLeft="@dimen/spacing_mlarge"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:gravity="center"
                     android:orientation="vertical">
+
+
                     <LinearLayout
+                        android:id="@+id/diet_recall_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/layout_very_small_margin"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@color/transparent"
-                                android:tint="@color/grey_200"
-                                android:alpha="0.8"
-                                android:layout_gravity="top"
-                                android:padding="@dimen/medium_padding"
-                                app:srcCompat="@drawable/ic_arrow_left" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="@dimen/text_small"
-                                android:fontFamily="sans-serif-light"
-                                android:text="Basic Information"
-                                android:textStyle="bold"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                android:textColor="@color/textColorLight" />
-                        </LinearLayout>
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/spacing_large"
-                            android:layout_marginRight="@dimen/spacing_large"
-                            android:text="Physical activity, blood group, diseases and reports"
-                            android:textSize="@dimen/text_very_small"
-                            android:visibility="gone"
-                            android:textColor="@color/grey_200"
-                            android:maxLines="1"
-                            android:minLines="1"
-                            app:fontFamily="@font/defaultfont"
-                            />
-
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:visibility="gone"
-                        android:layout_marginTop="@dimen/layout_very_small_margin"
-                        android:background="@color/grey_400"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/layout_very_small_margin"
-                    android:visibility="gone"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/medical_info_layout"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:background="@color/transparent"
-                            android:tint="@color/grey_200"
-                            android:alpha="0.8"
-                            android:layout_gravity="top"
-                            android:padding="@dimen/medium_padding"
-                            app:srcCompat="@drawable/ic_arrow_left" />
+                            android:padding="4dp"
+                            android:src="@drawable/ic_diet_recall"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="sans-serif-light"
-                            android:text="Medical History"
-                            android:textSize="@dimen/text_small"
-                            android:textStyle="bold"
+                            android:text="24 Hour Diet Recall"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="@color/textColorLight" />
-                    </LinearLayout>
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"
-                        android:text="Physical activity, blood group, diseases and reports"
-                        android:textSize="@dimen/text_very_small"
-                        android:visibility="gone"
-                        android:textColor="@color/grey_200"
-                        android:maxLines="1"
-                        android:minLines="1"
-                        app:fontFamily="@font/defaultfont"
-                        />
 
-                </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:visibility="gone"
-                        android:layout_marginTop="@dimen/layout_very_small_margin"
-                        android:background="@color/grey_400"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/layout_very_small_margin"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:background="@color/transparent"
-                            android:tint="@color/grey_200"
-                            android:alpha="0.8"
-                            android:layout_gravity="top"
-                            android:padding="@dimen/medium_padding"
-                            app:srcCompat="@drawable/ic_arrow_left" />
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:background="@color/grey_10" />
+
+                    <LinearLayout
+                        android:id="@+id/weight_progress_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_weight"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="sans-serif-light"
-                            android:textSize="@dimen/text_small"
-                            android:text="Food Specifications"
-                            android:textStyle="bold"
+                            android:text="Weight Progress"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="@color/textColorLight" />
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"
-                        android:text="Diet preferences, allergies and cuisine"
-                        android:textSize="@dimen/text_very_small"
-                        android:visibility="gone"
-                        android:textColor="@color/grey_200"
-                        android:maxLines="1"
-                        android:minLines="1"
-                        app:fontFamily="@font/defaultfont"
-                        />
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:visibility="gone"
-                        android:layout_marginTop="@dimen/layout_very_small_margin"
-                        android:background="@color/grey_400"/>
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:background="@color/grey_10" />
+
+                    <LinearLayout
+                        android:id="@+id/health_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_compliance"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Food Diary"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:background="@color/grey_10" />
+
+                    <LinearLayout
+                        android:id="@+id/feed_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large"
+                        android:visibility="gone">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_blog"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Health Feed"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:background="@color/grey_10"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/questionnaire"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_question"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Questionnaire"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:background="@color/grey_10" />
+
+                    <LinearLayout
+                        android:id="@+id/profile_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large"
+                        android:visibility="gone">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_my_profile"
+                            android:tint="@color/colorAccent" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:text="My Profile"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/profile_child_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_mlarge"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/layout_very_small_margin">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="top"
+                                    android:alpha="0.8"
+                                    android:background="@color/transparent"
+                                    android:padding="@dimen/medium_padding"
+                                    android:tint="@color/grey_200"
+                                    app:srcCompat="@drawable/ic_arrow_left" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-light"
+                                    android:text="Basic Information"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/textColorLight"
+                                    android:textSize="@dimen/text_small"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/spacing_large"
+                                android:layout_marginRight="@dimen/spacing_large"
+                                android:maxLines="1"
+                                android:minLines="1"
+                                android:text="Physical activity, blood group, diseases and reports"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_very_small"
+                                android:visibility="gone"
+                                app:fontFamily="@font/defaultfont" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/layout_very_small_margin"
+                            android:background="@color/grey_400"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:id="@+id/medical_info_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/layout_very_small_margin"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="top"
+                                    android:alpha="0.8"
+                                    android:background="@color/transparent"
+                                    android:padding="@dimen/medium_padding"
+                                    android:tint="@color/grey_200"
+                                    app:srcCompat="@drawable/ic_arrow_left" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-light"
+                                    android:text="Medical History"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/textColorLight"
+                                    android:textSize="@dimen/text_small"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/spacing_large"
+                                android:layout_marginRight="@dimen/spacing_large"
+                                android:maxLines="1"
+                                android:minLines="1"
+                                android:text="Physical activity, blood group, diseases and reports"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_very_small"
+                                android:visibility="gone"
+                                app:fontFamily="@font/defaultfont" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/layout_very_small_margin"
+                            android:background="@color/grey_400"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/layout_very_small_margin">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="top"
+                                    android:alpha="0.8"
+                                    android:background="@color/transparent"
+                                    android:padding="@dimen/medium_padding"
+                                    android:tint="@color/grey_200"
+                                    app:srcCompat="@drawable/ic_arrow_left" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-light"
+                                    android:text="Food Specifications"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/textColorLight"
+                                    android:textSize="@dimen/text_small"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/spacing_large"
+                                android:layout_marginRight="@dimen/spacing_large"
+                                android:maxLines="1"
+                                android:minLines="1"
+                                android:text="Diet preferences, allergies and cuisine"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_very_small"
+                                android:visibility="gone"
+                                app:fontFamily="@font/defaultfont" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="@dimen/layout_very_small_margin"
+                                android:background="@color/grey_400"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/layout_very_small_margin">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="top"
+                                    android:alpha="0.8"
+                                    android:background="@color/transparent"
+                                    android:padding="@dimen/medium_padding"
+                                    android:tint="@color/grey_200"
+                                    app:srcCompat="@drawable/ic_arrow_left" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-light"
+                                    android:text="General Activity"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/textColorLight"
+                                    android:textSize="@dimen/text_small"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/spacing_large"
+                                android:layout_marginRight="@dimen/spacing_large"
+                                android:maxLines="1"
+                                android:minLines="1"
+                                android:text="Diet preferences, allergies and cuisine"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_very_small"
+                                android:visibility="gone"
+                                app:fontFamily="@font/defaultfont" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="@dimen/layout_very_small_margin"
+                                android:background="@color/grey_400"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/layout_very_small_margin">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="top"
+                                    android:alpha="0.8"
+                                    android:background="@color/transparent"
+                                    android:padding="@dimen/medium_padding"
+                                    android:tint="@color/grey_200"
+                                    app:srcCompat="@drawable/ic_arrow_left" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-light"
+                                    android:text="Time Information"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/textColorLight"
+                                    android:textSize="@dimen/text_small"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/spacing_large"
+                                android:layout_marginRight="@dimen/spacing_large"
+                                android:maxLines="1"
+                                android:minLines="1"
+                                android:text="Diet preferences, allergies and cuisine"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_very_small"
+                                android:visibility="gone"
+                                app:fontFamily="@font/defaultfont" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="@dimen/layout_very_small_margin"
+                                android:background="@color/grey_400"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/layout_very_small_margin">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="top"
+                                    android:alpha="0.8"
+                                    android:background="@color/transparent"
+                                    android:padding="@dimen/medium_padding"
+                                    android:tint="@color/grey_200"
+                                    app:srcCompat="@drawable/ic_arrow_left" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-light"
+                                    android:text="24 Hour Diet Recall"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/textColorLight"
+                                    android:textSize="@dimen/text_small"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/spacing_large"
+                                android:layout_marginRight="@dimen/spacing_large"
+                                android:maxLines="1"
+                                android:minLines="1"
+                                android:text="Diet preferences, allergies and cuisine"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_very_small"
+                                android:visibility="gone"
+                                app:fontFamily="@font/defaultfont" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="@dimen/layout_very_small_margin"
+                                android:background="@color/grey_400"
+                                android:visibility="gone" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/report_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large"
+                        android:visibility="visible">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_health_stats"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Reports"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/report_child_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_mlarge"
+                        android:layout_marginEnd="18dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:id="@+id/blood_progress_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/layout_very_small_margin">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:alpha="0.8"
+                                    android:background="@color/transparent"
+                                    android:padding="@dimen/medium_padding"
+                                    android:tint="@color/grey_200"
+                                    app:srcCompat="@drawable/ic_arrow_left" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-light"
+                                    android:text="Blood Progress Report"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/textColorLight"
+                                    android:textSize="@dimen/text_small"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/layout_very_small_margin"
+                            android:background="@color/grey_400"
+                            android:visibility="visible" />
+
+                        <LinearLayout
+                            android:id="@+id/genetic_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/layout_very_small_margin">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:alpha="0.8"
+                                    android:background="@color/transparent"
+                                    android:padding="@dimen/medium_padding"
+                                    android:tint="@color/grey_200"
+                                    app:srcCompat="@drawable/ic_arrow_left" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-light"
+                                    android:text="Genetic Report"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/textColorLight"
+                                    android:textSize="@dimen/text_small"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/layout_very_small_margin"
+                            android:background="@color/grey_400"
+                            android:visibility="visible" />
+
+                        <LinearLayout
+                            android:id="@+id/microbiome_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/layout_very_small_margin">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/layout_very_small_margin"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:alpha="0.8"
+                                    android:background="@color/transparent"
+                                    android:padding="@dimen/medium_padding"
+                                    android:tint="@color/grey_200"
+                                    app:srcCompat="@drawable/ic_arrow_left" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-light"
+                                    android:text="Microbiome Report"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/textColorLight"
+                                    android:textSize="@dimen/text_small"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/spacing_large"
+                                android:layout_marginRight="@dimen/spacing_large"
+                                android:maxLines="1"
+                                android:minLines="1"
+                                android:text="Diet preferences, allergies and cuisine"
+                                android:textColor="@color/grey_200"
+                                android:textSize="@dimen/text_very_small"
+                                android:visibility="gone"
+                                app:fontFamily="@font/defaultfont" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="@dimen/layout_very_small_margin"
+                                android:background="@color/grey_400"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/layout_very_small_margin"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@color/transparent"
-                                android:tint="@color/grey_200"
-                                android:alpha="0.8"
-                                android:layout_gravity="top"
-                                android:padding="@dimen/medium_padding"
-                                app:srcCompat="@drawable/ic_arrow_left" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="@dimen/text_small"
-                                android:fontFamily="sans-serif-light"
-                                android:text="General Activity"
-                                android:textStyle="bold"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                android:textColor="@color/textColorLight" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/spacing_large"
-                            android:layout_marginRight="@dimen/spacing_large"
-                            android:text="Diet preferences, allergies and cuisine"
-                            android:textSize="@dimen/text_very_small"
-                            android:visibility="gone"
-                            android:textColor="@color/grey_200"
-                            android:maxLines="1"
-                            android:minLines="1"
-                            app:fontFamily="@font/defaultfont"
-                            />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:visibility="gone"
-                            android:layout_marginTop="@dimen/layout_very_small_margin"
-                            android:background="@color/grey_400"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/layout_very_small_margin"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@color/transparent"
-                                android:tint="@color/grey_200"
-                                android:alpha="0.8"
-                                android:layout_gravity="top"
-                                android:padding="@dimen/medium_padding"
-                                app:srcCompat="@drawable/ic_arrow_left" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="sans-serif-light"
-                                android:text="Time Information"
-                                android:textSize="@dimen/text_small"
-                                android:textStyle="bold"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                android:textColor="@color/textColorLight" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/spacing_large"
-                            android:layout_marginRight="@dimen/spacing_large"
-                            android:text="Diet preferences, allergies and cuisine"
-                            android:textSize="@dimen/text_very_small"
-                            android:visibility="gone"
-                            android:textColor="@color/grey_200"
-                            android:maxLines="1"
-                            android:minLines="1"
-                            app:fontFamily="@font/defaultfont"
-                            />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:visibility="gone"
-                            android:layout_marginTop="@dimen/layout_very_small_margin"
-                            android:background="@color/grey_400"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/layout_very_small_margin"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@color/transparent"
-                                android:tint="@color/grey_200"
-                                android:alpha="0.8"
-                                android:layout_gravity="top"
-                                android:padding="@dimen/medium_padding"
-                                app:srcCompat="@drawable/ic_arrow_left" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="sans-serif-light"
-                                android:text="24 Hour Diet Recall"
-                                android:textSize="@dimen/text_small"
-                                android:textStyle="bold"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                android:textColor="@color/textColorLight" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/spacing_large"
-                            android:layout_marginRight="@dimen/spacing_large"
-                            android:text="Diet preferences, allergies and cuisine"
-                            android:textSize="@dimen/text_very_small"
-                            android:visibility="gone"
-                            android:textColor="@color/grey_200"
-                            android:maxLines="1"
-                            android:minLines="1"
-                            app:fontFamily="@font/defaultfont"
-                            />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:visibility="gone"
-                            android:layout_marginTop="@dimen/layout_very_small_margin"
-                            android:background="@color/grey_400"/>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:visibility="gone"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:background="@color/grey_10" />
-            </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_small_margin"
+                android:background="@drawable/card_back"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/notes_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_diet_recall"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Notes"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginBottom="@dimen/layout_small_margin"
+                        android:background="@color/grey_10" />
+
+                    <LinearLayout
+                        android:id="@+id/workout_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_workout"
+                            android:tint="@color/textColorLight" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Exercise Recommendations"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorLight"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ms_ic_chevron_right"
+                            android:tint="@color/grey_40" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_mlarge" />

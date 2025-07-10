@@ -91,6 +91,13 @@ public class Tools {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 
+    public static void loadSquareImage(String url, ImageView img) {
+        if(url.trim().isEmpty())
+            img.setImageResource(R.drawable.ic_no_image);
+        else
+            Picasso.get().load(url).resize(400,400).onlyScaleDown().centerCrop().placeholder(R.drawable.ic_no_image).error(R.drawable.ic_no_image).into(img);
+    }
+
     public static boolean validatePassword(EditText ed){
         if(TextUtils.isEmpty(ed.getText().toString().trim())){
             return false;

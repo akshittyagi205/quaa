@@ -21,19 +21,18 @@ import com.android.volley.VolleyError;
 import com.quanutrition.app.R;
 import com.quanutrition.app.Utils.NetworkManager;
 import com.quanutrition.app.Utils.Tools;
+import com.quanutrition.app.customviews.HorizontalCalendarView;
+import com.quanutrition.app.diet.DietPlanViewActivity;
 import com.quanutrition.app.firebaseUtils.FirebaseUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import devs.mulham.horizontalcalendar.HorizontalCalendar;
-import devs.mulham.horizontalcalendar.HorizontalCalendarView;
-import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 public class DailyDiaryActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -516,31 +515,23 @@ public class DailyDiaryActivity extends AppCompatActivity implements View.OnClic
         Calendar setDate = Calendar.getInstance();
         setDate.add(Calendar.DATE, -6);
 
-        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView)
-                .range(startDate, endDate)
-                .datesNumberOnScreen(7)
-                .defaultSelectedDate(setDate)
-                .build();
-
-
-        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
-            @Override
-            public void onDateSelected(Calendar date, int position) {
-                //do something
-                dateTxt = Tools.getFormattedDate(date.getTimeInMillis());
-
-                toolbar_text.setText("Diet Diary (" + dateTxt + ")");
-                findViewById(R.id.calendarView).setVisibility(View.GONE);
-                requestFetch();
-                setUpTrackers(dateTxt);
-
-            }
-
-            @Override
-            public void onCalendarScroll(HorizontalCalendarView calendarView, int dx, int dy) {
-
-            }
-        });
+        ArrayList<String> datesToBeColored = new ArrayList<>();
+        HorizontalCalendarView horizontalcalendarView = new HorizontalCalendarView(DailyDiaryActivity.this);
+        horizontalcalendarView.setUpCalendar(startDate.getTimeInMillis(),
+                endDate.getTimeInMillis(),
+                datesToBeColored, new HorizontalCalendarView.OnCalendarListener() {
+                    @Override
+                    public void onDateSelected(String date) {
+                        dateTxt = date;
+                        toolbar_text.setText("Diet Plan (" + dateTxt + ")");
+                        findViewById(R.id.calendarView).setVisibility(View.GONE);
+                        toolbar_text.setText("Diet Diary (" + dateTxt + ")");
+                        findViewById(R.id.calendarView).setVisibility(View.GONE);
+                        requestFetch();
+                        setUpTrackers(dateTxt);
+                    }
+                }
+        );
     }
 
 

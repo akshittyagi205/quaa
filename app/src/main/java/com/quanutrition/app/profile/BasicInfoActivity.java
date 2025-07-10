@@ -165,19 +165,19 @@ public class BasicInfoActivity extends AppCompatActivity implements View.OnClick
                 ArrayList<SingleSelectionModel> list = new ArrayList<>();
                 final ArrayList<String> state = new ArrayList<>();
                 for (int i = 0; i < countryModel.size(); i++) {
-                    list.add(new SingleSelectionModel(countryModel.get(i).getId() + "", countryModel.get(i).getName().split(";")[0]));
+                    list.add(new SingleSelectionModel(countryModel.get(i).getId() + "", countryModel.get(i).getName().split(";")[0]+", "+countryModel.get(i).getName().split(";")[1]));
                     state.add(countryModel.get(i).getName().split(";")[1]);
                 }
 
                 DialogUtils.getSingleSearchDialog(this, list, new DialogUtils.OnSingleItemSelectedListener() {
                     @Override
                     public void onItemSelected(int position, SingleSelectionModel item) {
-                        city.setText(item.getLabel());
+                        city.setText(item.getLabel().split(", ")[0].trim());
                     /*SqliteDbHelper helper = new SqliteDbHelper(BasicInfoActivity.this);
                     // Log.d("state",helper.getStateId(Integer.parseInt(item.getId()))  +"");
 
                     stateName = helper.getStateName(helper.getStateId(Integer.parseInt(item.getId())));*/
-                        stateName = state.get(position);
+                        stateName = item.getLabel().split(", ")[1].trim();
 
                         Log.d("state", stateName);
 

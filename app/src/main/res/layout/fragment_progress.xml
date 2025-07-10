@@ -75,25 +75,25 @@
                     android:paddingTop="@dimen/medium_padding"
                     android:paddingBottom="@dimen/medium_padding"
                     android:layout_height="wrap_content">
-        <com.budiyev.android.circularprogressbar.CircularProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:animateProgress="true"
-            app:backgroundStrokeColor="@color/grey_10"
-            app:backgroundStrokeWidth="8dp"
-            app:drawBackgroundStroke="true"
-            app:foregroundStrokeCap="round"
-            app:foregroundStrokeColor="@color/green_400"
-            app:foregroundStrokeWidth="10dp"
-            app:indeterminate="false"
-            app:indeterminateRotationAnimationDuration="1200"
-            app:indeterminateSweepAnimationDuration="600"
-            app:indeterminateMinimumAngle="45"
-            app:maximum="100"
-            app:progress="0"
-            app:progressAnimationDuration="1000"
-            app:startAngle="270"/>
+<!--        <com.budiyev.android.circularprogressbar.CircularProgressBar-->
+<!--            android:id="@+id/progress_bar"-->
+<!--            android:layout_width="120dp"-->
+<!--            android:layout_height="120dp"-->
+<!--            app:animateProgress="true"-->
+<!--            app:backgroundStrokeColor="@color/grey_10"-->
+<!--            app:backgroundStrokeWidth="8dp"-->
+<!--            app:drawBackgroundStroke="true"-->
+<!--            app:foregroundStrokeCap="round"-->
+<!--            app:foregroundStrokeColor="@color/green_400"-->
+<!--            app:foregroundStrokeWidth="10dp"-->
+<!--            app:indeterminate="false"-->
+<!--            app:indeterminateRotationAnimationDuration="1200"-->
+<!--            app:indeterminateSweepAnimationDuration="600"-->
+<!--            app:indeterminateMinimumAngle="45"-->
+<!--            app:maximum="100"-->
+<!--            app:progress="0"-->
+<!--            app:progressAnimationDuration="1000"-->
+<!--            app:startAngle="270"/>-->
 
                     <TextView
                         android:layout_width="120dp"
@@ -138,25 +138,25 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="@dimen/medium_padding"
                         android:paddingBottom="@dimen/medium_padding">
-                        <com.budiyev.android.circularprogressbar.CircularProgressBar
-                            android:id="@+id/progress_bar_bmi"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            app:animateProgress="true"
-                            app:backgroundStrokeColor="@color/grey_10"
-                            app:backgroundStrokeWidth="8dp"
-                            app:drawBackgroundStroke="true"
-                            app:foregroundStrokeCap="round"
-                            app:foregroundStrokeColor="@color/yellow_500"
-                            app:foregroundStrokeWidth="10dp"
-                            app:indeterminate="false"
-                            app:indeterminateRotationAnimationDuration="1200"
-                            app:indeterminateSweepAnimationDuration="600"
-                            app:indeterminateMinimumAngle="45"
-                            app:maximum="100"
-                            app:progress="0"
-                            app:progressAnimationDuration="1000"
-                            app:startAngle="270"/>
+<!--                        <com.budiyev.android.circularprogressbar.CircularProgressBar-->
+<!--                            android:id="@+id/progress_bar_bmi"-->
+<!--                            android:layout_width="120dp"-->
+<!--                            android:layout_height="120dp"-->
+<!--                            app:animateProgress="true"-->
+<!--                            app:backgroundStrokeColor="@color/grey_10"-->
+<!--                            app:backgroundStrokeWidth="8dp"-->
+<!--                            app:drawBackgroundStroke="true"-->
+<!--                            app:foregroundStrokeCap="round"-->
+<!--                            app:foregroundStrokeColor="@color/yellow_500"-->
+<!--                            app:foregroundStrokeWidth="10dp"-->
+<!--                            app:indeterminate="false"-->
+<!--                            app:indeterminateRotationAnimationDuration="1200"-->
+<!--                            app:indeterminateSweepAnimationDuration="600"-->
+<!--                            app:indeterminateMinimumAngle="45"-->
+<!--                            app:maximum="100"-->
+<!--                            app:progress="0"-->
+<!--                            app:progressAnimationDuration="1000"-->
+<!--                            app:startAngle="270"/>-->
 
                         <TextView
                             android:layout_width="120dp"
